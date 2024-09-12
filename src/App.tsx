@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/home";
 import About from "./pages/about";
-import Service from "./pages/service";
+import Service from "./pages/services";
 import Pricing from "./pages/pricing";
-import Reservation from "./pages/reservation";
+import Reservation from "./pages/booking";
 import Contact from "./pages/contact";
 const router = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <About />,
   },
   {
-    path: "/service",
+    path: "/services",
     element: <Service />,
   },
   {
@@ -23,11 +23,11 @@ const router = createBrowserRouter([
     element: <Pricing />,
   },
   {
-    path: "/reservation",
+    path: "/booking",
     element: <Reservation />,
   },
   {
-    path: "/",
+    path: "/contact-us",
     element: <Contact />,
   },
 ]);

@@ -1,7 +1,8 @@
 import React from "react";
+import PageTemplate from "../../templates/pageTemplate";
 
 const Contact: React.FC = () => {
-  return <div>Comming soon</div>;
+  return <PageTemplate>Comming soon</PageTemplate>;
 };
 
 export default Contact;
