@@ -1,8 +1,8 @@
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar: React.FC = () => {
@@ -23,18 +23,27 @@ const Navbar: React.FC = () => {
     { label: "English", href: "/english" },
   ];
 
+  const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsFixed(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="flex flex-col justify-between items-center px-4 py-4 lg:px-10 lg:py-4 lg:border-b">
-      <nav className="w-full flex items-center justify-between text-black my-6">
-        <div className="flex items-center">
-          <div className="flex items-center mr-6">
-            <FontAwesomeIcon icon={faPhone} className="mr-3" />
+      <nav className="w-full flex items-center justify-between text-black lg:my-6">
+        <div className="flex items-center order-last lg:order-first">
+          <div className="flex items-center lg:mr-6">
+            <FontAwesomeIcon icon={faPhone} className="lg:mr-3 mr-2" />
             <div className="">
               <h4 className="text-grey-700 text-sm font-medium">Contact Us</h4>
               <p className="text-grey-500 text-xs">+1 (340) 555 4567</p>
             </div>
           </div>
-          <div className="flex items-center">
+          <div className="lg:flex items-center hidden">
             <FontAwesomeIcon icon={faClock} className="mr-3 h-5 w-5" />
             <div className="">
               <h4 className="text-grey-700 text-sm font-medium">Everyday</h4>
@@ -42,12 +51,15 @@ const Navbar: React.FC = () => {
             </div>
           </div>
         </div>
-        <Link to="/" className="text-blue-500 font-bold text-5xl">
+        <Link
+          to="/"
+          className="text-blue-500 font-bold text-xl lg:text-5xl order-first lg:order-2"
+        >
           EVCharging
         </Link>
 
-        {/* Button Section */}
-        <div className="flex items-center gap-6 max-md:hidden">
+        {/* Contact buttons */}
+        <div className="flex items-center gap-6 max-md:hidden lg:order-last">
           <Link to="/" className="hover:text-primary-500 mr-4">
             <FontAwesomeIcon icon={faFacebookF} className="h-5" />
           </Link>
@@ -58,8 +70,17 @@ const Navbar: React.FC = () => {
             BOOK NOW!
           </Link>
         </div>
+      </nav>
 
-        {/* Menu Toggle Button for Mobile */}
+      {/* Menu Toggle Button for Mobile */}
+      <div
+        className={`flex lg:hidden justify-between items-center w-full mt-4 ${
+          isFixed && !isMenuOpen
+            ? "bg-white p-4 border-b fixed -top-5 left-0 z-50"
+            : "relative"
+        }`}
+      >
+        <FontAwesomeIcon icon={faSearch} className="text-2xl" />
         <button
           onClick={toggleMenu}
           className="md:hidden text-black focus:outline-none"
@@ -79,10 +100,16 @@ const Navbar: React.FC = () => {
             ></path>
           </svg>
         </button>
-      </nav>
+      </div>
 
       {/* Navigation Links */}
-      <div className="items-center hidden w-full lg:flex justify-center h-6">
+      <div
+        className={`items-center hidden w-full lg:flex justify-center h-6 ${
+          isFixed
+            ? "bg-white lg:px-10 lg:py-10 lg:border-b fixed top-0 left-0 z-50"
+            : "relative"
+        }`}
+      >
         {navlinks.map((item, index) => (
           <Link
             key={index}
@@ -98,7 +125,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full z-10 h-3/5 bg-white text-black transition-transform duration-300 transform ${
+        className={`fixed top-0 left-0 w-full z-10 h- bg-white text-black transition-transform duration-300 transform ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         } md:hidden`}
       >
@@ -125,32 +152,15 @@ const Navbar: React.FC = () => {
 
           <div className="flex flex-col gap-y-10 p-4">
             <div className="flex flex-col gap-y-6">
-              {["Buy", "Sell", "Exclusive", "Development", "Agent"].map(
-                (item) => (
-                  <a
-                    key={item}
-                    href={`/${item.toLowerCase()}`}
-                    className="hover:bg-gray-700 rounded-lg transition-all cursor-pointer text-base"
-                  >
-                    {item}
-                  </a>
-                )
-              )}
-            </div>
-
-            <div className="flex w-full gap-6">
-              <Link
-                to="/signin"
-                className="w-full border border-primary-500 rounded-lg text-primary-500 hover:bg-primary-100 transition-all whitespace-nowrap flex items-center justify-center px-6 py-3.5 font-medium"
-              >
-                Sign in
-              </Link>
-              <Link
-                to="/signup"
-                className="w-full rounded-lg text-white whitespace-nowrap bg-primary-500 hover:bg-primary-700 transition-all flex items-center justify-center px-6 py-3.5 font-medium"
-              >
-                Sign up
-              </Link>
+              {navlinks.map((item, index) => (
+                <Link
+                  to={item.href}
+                  key={index}
+                  className="hover:bg-gray-700 rounded-lg transition-all cursor-pointer text-base"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

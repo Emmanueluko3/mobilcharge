@@ -55,6 +55,79 @@ const About: React.FC = () => {
     </Button> */}
         </div>
       </div>
+      <div className="flex flex-col items-center justify-center px-4 lg:px-36 py-20">
+        <h2 className="text-xl lg:text-4xl font-bold mb-8 text-center">
+          FREE YOURSELF WITH MOBILE CHARGING
+        </h2>
+        <h2 className="text-primary-500 text-lg lg:text-xl font-bold mb-10 lg:mb-16 text-center">
+          Transform the way you charge your electric vehicle, at home, at work,
+          or anywhere in Montreal.
+        </h2>
+
+        <div className="grid grid-flow-row grid-cols-2 gap-10">
+          <div className="">
+            <p className="text-sm font-medium">
+              In a constantly evolving world, electric mobility is becoming the
+              norm, but challenges remain. MobilCharge is the pioneer of at-home
+              or workplace electric vehicle charging services in Montreal. Our
+              mission is simple: eliminate the barriers preventing you from
+              fully enjoying your electric car
+            </p>
+            <blockquote className="p-20 border my-4">
+              <p className="text-xl text-gray-500 leading-8">
+                TELL US WHEN AND WHERE YOU NEED US, AND MOBILCHARGE WILL BE
+                THERE FOR YOU.
+              </p>
+            </blockquote>
+            <p className="text-sm font-medium">
+              Our qualified team will come to the location that suits you best,
+              at a time that works for you ensuring a stress-free charging
+              experience.
+            </p>
+          </div>
+          <div className="">
+            <p className="text-sm font-medium mb-4">
+              The unbeatable benefits of mobile charging with MobilCharge
+            </p>
+            <ul className="list-disc ml-10 mb-4">
+              <li className="text-sm leading-6">
+                <span className="font-bold">Charging freedom</span> : No more
+                fixed charging station constraints. MobilCharge offers the
+                flexibility to charge your electric vehicle wherever you are.
+                Whether you’re at home, at work, or elsewhere, we come to you.
+              </li>
+              <li className="text-sm leading-6">
+                <span className="font-bold">Time-saving</span> : Modern life is
+                hectic, and every minute counts. With MobilCharge, say goodbye
+                to time-consuming stops at charging stations. We bring charging
+                to your door, reducing unnecessary time loss. Goodbye
+                installation hassle : For those who can’t install a home
+                charging station, MobilCharge offers mobile charging. No need
+                for costly modifications or complicated permits. We’re here to
+                make your life easier. On-demand service : We adapt to your busy
+                schedule. Tell us where and when, and we’ll be there.
+              </li>
+              <li className="text-sm leading-6">
+                <span className="font-bold">Goodbye installation hassle</span> :
+                For those who can’t install a home charging station, MobilCharge
+                offers mobile charging. No need for costly modifications or
+                complicated permits. We’re here to make your life easier.
+              </li>
+              <li className="text-sm leading-6">
+                <span className="font-bold">On-demand service</span> : We adapt
+                to your busy schedule. Tell us where and when, and we’ll be
+                there.
+              </li>
+            </ul>
+            <p className="text-sm font-medium">
+              MobilCharge represents the future of electric mobility, a future
+              without constraints or compromises. Join us to embrace the freedom
+              of mobile charging at home or at work. Redefine your electric
+              driving experience with MobilCharge today!
+            </p>
+          </div>
+        </div>
+      </div>
     </PageTemplate>
   );
 };
