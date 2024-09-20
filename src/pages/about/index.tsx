@@ -257,7 +257,7 @@ const About: React.FC = () => {
               convenient charging right to your doorstep, workplace, or wherever
               your adventures take you.
             </p>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-6``">
               {[
                 "Condos, Apartments, or Houses",
                 "Trucks, Vans, or Buses",
@@ -268,7 +268,7 @@ const About: React.FC = () => {
                 "Hotels",
                 "Car Dealerships",
               ].map((item, index) => (
-                <h3 key={index} className="flex items-center mb-5">
+                <h3 key={index} className="flex items-center mb-3">
                   <FontAwesomeIcon
                     icon={faSquareCheck}
                     className="mr-4 text-primary-500"
