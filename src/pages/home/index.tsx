@@ -3,12 +3,31 @@ import PageTemplate from "../../templates/pageTemplate";
 import { Button } from "../../components/common/button";
 import CarIcon from "../../assets/icons/carIcon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBolt, faPlug, faTablet } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBolt,
+  faCar,
+  faEnvelope,
+  faPhone,
+  faPlug,
+  faTablet,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faCalendar,
   faCalendarDays,
 } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import Hotelevs from "../../assets/images/hotelevs.jpeg";
+import Privateevs from "../../assets/images/privateevs.webp";
+import Publicevs from "../../assets/images/publicevs.jpg";
+import Businessevs from "../../assets/images/businessevs.webp";
+import Transportevs from "../../assets/images/transportevs.jpg";
+import Homeevs from "../../assets/images/homeevs.jpg";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionGroup,
+  AccordionSummary,
+} from "@mui/joy";
 
 const Home: React.FC = () => {
   return (
@@ -158,6 +177,170 @@ const Home: React.FC = () => {
           ensures a fast, secure, and hassle-free recharge. Join the electric
           lifestyle by reserving your recharge now!
         </p>
+      </div>
+
+      <div className="grid grid-cols-12 gap-4 px-36 py-6 items-center w-full">
+        {[
+          { image: Hotelevs, text: "HOTELS AND ACCOMMODATIONS" },
+          { image: Privateevs, text: "INDIVIDUAL ELECTRIC VEHICLE OWNERS" },
+          { image: Businessevs, text: "BUSINESS WITH ELECTRIC VEHICLE FLEETS" },
+          {
+            image: Publicevs,
+            text: "PUBLIC INTITUTION AND GOVERNMENT AGENCIES",
+          },
+          {
+            image: Transportevs,
+            text: "DELIVERY AND TRANSPORTATION COMPANIES",
+          },
+          { image: Homeevs, text: "RESIDENTIAL BUILDINGS AND CONDOMINIUMS" },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className={`relative group h-full overflow-hidden cursor-pointer ${
+              index === 0
+                ? "col-span-7"
+                : index === 1
+                ? "col-span-5"
+                : index === 2
+                ? "col-span-5"
+                : index === 3
+                ? "col-span-7"
+                : index === 4
+                ? "col-span-9"
+                : index === 5
+                ? "col-span-3"
+                : ""
+            }`}
+          >
+            <img
+              src={item.image}
+              alt=""
+              className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+            />
+
+            {/* Text that appears smoothly from the bottom on hover */}
+            <div className="absolute inset-0 bg-primary-500 bg-opacity-70 flex items-start justify-start opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-10">
+              <span className="text-white text-2xl font-semibold mb-4 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                {item.text}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-2 gap-8 px-36 py-16">
+        {[
+          {
+            icon: faPhone,
+            text: "Phone",
+            link: "tel:+1234567890",
+          },
+          {
+            icon: faEnvelope,
+            text: "Email",
+            link: "mailto:example@example.com",
+          },
+        ].map((item, index) => (
+          <Link
+            to={item.link}
+            key={index}
+            className="border p-20 flex flex-col justify-center items-center hover:border-primary-500 transition-all"
+          >
+            <FontAwesomeIcon
+              icon={item.icon}
+              className="text-primary-500 text-5xl"
+            />
+            <span className="my-6 font-bold text-2xl">{item.text}</span>
+            <span className="font-medium">{item.link.split(":")[1]}</span>
+          </Link>
+        ))}
+      </div>
+
+      <div className="py-24 px-36 bg-black text-white text-center flex flex-col items-center justify-center w-full">
+        <FontAwesomeIcon
+          icon={faCar}
+          className="mb-8 text-primary-500 text-7xl"
+        />
+
+        <h3 className="text-5xl font-bold text-center">
+          The Charge You Need, When You Need It.
+        </h3>
+        <p className="text-lg text-center py-8">
+          Join the revolution and enjoy the convenience of on-demand EV charging
+          throughout Greater Montreal. Say goodbye to range anxiety and hello to
+          hassle-free driving!
+        </p>
+        <div className="flex items-center gap-4">
+          <Link
+            to="/booking"
+            className="font-bold text-base flex items-center w-fit text-white transition-all mb-16 py-3 px-20 rounded-lg bg-primary-500 hover:bg-primary-600"
+          >
+            <svg
+              aria-hidden="true"
+              className="h-5 mr-2"
+              viewBox="0 0 576 512"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+            >
+              <path d="M336 448H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h320c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zm208-320V80c0-8.84-7.16-16-16-16s-16 7.16-16 16v48h-32V80c0-8.84-7.16-16-16-16s-16 7.16-16 16v48h-16c-8.84 0-16 7.16-16 16v32c0 35.76 23.62 65.69 56 75.93v118.49c0 13.95-9.5 26.92-23.26 29.19C431.22 402.5 416 388.99 416 372v-28c0-48.6-39.4-88-88-88h-8V64c0-35.35-28.65-64-64-64H96C60.65 0 32 28.65 32 64v352h288V304h8c22.09 0 40 17.91 40 40v24.61c0 39.67 28.92 75.16 68.41 79.01C481.71 452.05 520 416.41 520 372V251.93c32.38-10.24 56-40.17 56-75.93v-32c0-8.84-7.16-16-16-16h-16zm-283.91 47.76l-93.7 139c-2.2 3.33-6.21 5.24-10.39 5.24-7.67 0-13.47-6.28-11.67-12.92L167.35 224H108c-7.25 0-12.85-5.59-11.89-11.89l16-107C112.9 99.9 117.98 96 124 96h68c7.88 0 13.62 6.54 11.6 13.21L192 160h57.7c9.24 0 15.01 8.78 10.39 15.76z"></path>
+            </svg>
+            BOOK NOW | Limited Availability
+          </Link>
+          <Link
+            to="/contact"
+            className="font-bold text-base flex items-center w-fit text-white hover:text-primary-500 transition-all mb-16 py-3 px-20 rounded-lg hover:bg-white border-2"
+          >
+            Subscribe Now
+          </Link>
+        </div>
+      </div>
+
+      {/* FAQs */}
+      <div className="px-36 py-16 flex flex-col justify-center items-center">
+        <h2 className="font-bold text-4xl mb-8">Frequently Asked Questions</h2>
+        <AccordionGroup size="lg" sx={{ maxWidth: "100%", width: "100%" }}>
+          {[
+            {
+              title:
+                "How does the mobile electric vehicle charging service work?",
+              text: "Our mobile EV charging service sends a technician to your location to charge your electric vehicle on-site, providing convenience and peace of mind.",
+            },
+            {
+              title: "What types of electric vehicles do you support?",
+              text: "We support all types of electric vehicles, including plug-in hybrids and fully electric models from various manufacturers.",
+            },
+            {
+              title: "Is the charging process safe for my electric vehicle?",
+              text: "Yes, our technicians are trained to handle EV charging safely, following industry standards to ensure your vehicle’s protection during the charging process.",
+            },
+            {
+              title:
+                "How long does it take to charge an electric vehicle with your service?",
+              text: "Charging time varies depending on your vehicle’s battery capacity and current charge level. Our technicians can provide an estimate based on your specific situation.",
+            },
+            {
+              title: "Do I need to create an account to use MobilCharge?",
+              text: "Yes, and it’s a simple and secure user registration process.",
+            },
+            {
+              title:
+                "Isn't it counterproductive to charge my electric vehicle with a mobile service?",
+              text: "MobilCharge uses existing charging stations to power EVs. We understand and share our customers’ concerns, which is why we prioritize renewable energy. Overall, we believe that the benefits of providing a mobile EV charging solution outweigh not having these electric vehicles on the road.",
+            },
+            {
+              title:
+                "What areas do you cover for your mobile electric vehicle charging service?",
+              text: "We currently offer our mobile EV charging service in the Greater Montreal area.",
+            },
+          ].map((item, index) => (
+            <Accordion key={index}>
+              <AccordionSummary>
+                <span className="font-light text-lg py-2">{item.title}</span>
+              </AccordionSummary>
+              <AccordionDetails>{item.text}</AccordionDetails>
+            </Accordion>
+          ))}
+        </AccordionGroup>
       </div>
     </PageTemplate>
   );
