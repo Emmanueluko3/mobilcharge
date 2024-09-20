@@ -32,7 +32,8 @@ import {
 const Home: React.FC = () => {
   return (
     <PageTemplate>
-      <div className="w-full relative h-[80vh]">
+      {/* Hero section */}
+      <div className="w-full relative h-screen lg:h-[80vh]">
         <video
           className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover"
           autoPlay
@@ -45,12 +46,12 @@ const Home: React.FC = () => {
           />
         </video>
 
-        <div className="p-32 bg-[#0000007A] bg-opacity-90 text-gray-200 z-50 h-full flex flex-col justify-center">
+        <div className="lg:p-32 p-4 bg-[#0000007A] bg-opacity-90 text-gray-200 z-50 h-full flex flex-col justify-center">
           <img src={CarIcon} alt="" className="mb-5 h-12 w-fit" />
-          <h3 className="text-6xl w-3/5 font-bold">
+          <h3 className="text-4xl lg:text-6xl lg:w-3/5 font-bold">
             Free Your EV. MTL Mobile Charging.
           </h3>
-          <p className="w-3/5 my-5 text-lg">
+          <p className="lg:w-3/5 my-5 text-base lg:text-lg">
             Say goodbye to the hassles of EV charging with MobilCharge,
             available throughout Montreal. Whether you're at the office or at
             home, we'll come to you, providing a stress-free charging
@@ -59,7 +60,7 @@ const Home: React.FC = () => {
 
           <Button
             size="sm"
-            className="font-bold text-xl flex items-center w-fit"
+            className="font-bold text-lg lg:text-xl flex items-center w-fit"
           >
             <svg
               aria-hidden="true"
@@ -75,7 +76,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="px-20 py-16 grid grid-flow-row grid-cols-4 pt-24">
+      <div className="px-4 lg:px-20 py-16 grid grid-flow-row grid-cols-1 lg:grid-cols-4 gap-10 lg:gap-0 pt-24">
         {[
           {
             icon: faPlug,
@@ -100,32 +101,34 @@ const Home: React.FC = () => {
         ].map((item, index) => (
           <div
             key={index}
-            className="border text-center flex flex-col items-center justify-center py-20 px-10 hover:text-primary-500 relative"
+            className="border text-center flex flex-col items-center justify-center p-10 lg:py-20 lg:px-10 hover:text-primary-500 relative"
           >
             <div className="absolute -top-5 bg-white px-3">
               <FontAwesomeIcon
-                className="text-primary-500 text-5xl"
+                className="text-primary-500 text-3xl lg:text-5xl"
                 icon={item.icon}
               ></FontAwesomeIcon>
             </div>
-            <h3 className="text-center mb-6 text-xl font-bold">{item.title}</h3>
-            <p className="text-center font-medium text-black hover:text-black">
+            <h3 className="text-center mb-4 lg:mb-6 text-lg lg:text-xl font-bold">
+              {item.title}
+            </h3>
+            <p className="text-center text-sm lg:text-base font-medium text-black hover:text-black">
               {item.text}
             </p>
           </div>
         ))}
       </div>
 
-      <div className="bg-primary-500 h-screen mt-56 p-0">
-        <div className="h-3/5 w-full relative flex justify-center items-end py-10">
+      <div className="bg-primary-500 lg:h-screen mt-14 lg:mt-56 p-0">
+        <div className="lg:h-3/5 h-[40vh] w-full relative flex justify-center items-end py-10">
           <img
             src="https://mobilcharge.ca/wp-content/uploads/2024/05/LettrageTransit_MobilCharge_sans-ombre-1024x799.png"
-            className="absolute -top-96 rounded-lg z-10"
+            className="absolute -top-10 lg:-top-96 rounded-lg z-10"
             alt=""
           />
           <Link
             to="/booking"
-            className="font-bold text-base flex items-center w-fit text-white hover:text-primary-500 transition-all mb-16 py-3 px-20 rounded-lg border-2 border-white hover:bg-white z-20"
+            className="font-bold text-sm lg:text-base flex items-center w-fit text-white hover:text-primary-500 transition-all lg:mb-10 p-4 lg:py-3 lg:px-20 rounded-lg border-2 border-white hover:bg-white z-20"
           >
             <svg
               aria-hidden="true"
@@ -140,7 +143,7 @@ const Home: React.FC = () => {
           </Link>
         </div>
         <video
-          className="h-2/5 w-full  overflow-hidden object-cover"
+          className="lg:h-2/5 w-full  overflow-hidden object-cover"
           autoPlay
           muted
           loop
@@ -152,23 +155,26 @@ const Home: React.FC = () => {
         </video>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 px-36 py-28 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-10 py-16 lg:px-36 lg:py-28 items-center">
         <div className="">
-          <h2 className="font-bold text-5xl leading-[60px] mb-10">
+          <h2 className="font-bold text-2xl lg:text-5xl leading-9 lg:leading-[60px] mb-10">
             Reserve your electric recharge{" "}
             <span className="text-primary-500">today</span> with MobilCharge!
           </h2>
-          <div className="flex items-center">
-            <FontAwesomeIcon icon={faCalendarDays} className="mr-4 text-4xl" />
+          <div className="flex items-center mb-6 lg:mb-0">
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              className="mr-2 lg:mr-4 text-2xl lg:text-4xl"
+            />
             <Link
               to="/contact"
-              className="border-b-2 border-black font-semibold text-xl"
+              className="border-b-2 border-black font-semibold text-lg lg:text-xl"
             >
               Subscribe Now
             </Link>
           </div>
         </div>
-        <p className="text-base font-medium">
+        <p className="text-sm lg:text-base font-medium">
           Discover a new, eco-friendly, and convenient way to recharge your
           electric vehicle in Greater Montreal. At MobilCharge, we offer you the
           freedom to move safely and in harmony with the environment. Simplify
@@ -179,7 +185,7 @@ const Home: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-12 gap-4 px-36 py-6 items-center w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 px-4 lg:px-36 py-6 items-center w-full">
         {[
           { image: Hotelevs, text: "HOTELS AND ACCOMMODATIONS" },
           { image: Privateevs, text: "INDIVIDUAL ELECTRIC VEHICLE OWNERS" },
@@ -198,17 +204,17 @@ const Home: React.FC = () => {
             key={index}
             className={`relative group h-full overflow-hidden cursor-pointer ${
               index === 0
-                ? "col-span-7"
+                ? "lg:col-span-7"
                 : index === 1
-                ? "col-span-5"
+                ? "lg:col-span-5"
                 : index === 2
-                ? "col-span-5"
+                ? "lg:col-span-5"
                 : index === 3
-                ? "col-span-7"
+                ? "lg:col-span-7"
                 : index === 4
-                ? "col-span-9"
+                ? "lg:col-span-9"
                 : index === 5
-                ? "col-span-3"
+                ? "lg:col-span-3"
                 : ""
             }`}
           >
@@ -228,7 +234,8 @@ const Home: React.FC = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-8 px-36 py-16">
+      {/* Contact info */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 lg:px-36 py-16">
         {[
           {
             icon: faPhone,
@@ -244,13 +251,13 @@ const Home: React.FC = () => {
           <Link
             to={item.link}
             key={index}
-            className="border p-20 flex flex-col justify-center items-center hover:border-primary-500 transition-all"
+            className="border p-16 lg:p-20 flex flex-col justify-center items-center hover:border-primary-500 transition-all"
           >
             <FontAwesomeIcon
               icon={item.icon}
-              className="text-primary-500 text-5xl"
+              className="text-primary-500 text-2xl lg:text-5xl"
             />
-            <span className="my-6 font-bold text-2xl">{item.text}</span>
+            <span className="lg:my-6 my-4 font-bold text-2xl">{item.text}</span>
             <span className="font-medium">{item.link.split(":")[1]}</span>
           </Link>
         ))}
@@ -268,24 +275,24 @@ const Home: React.FC = () => {
             type="video/mp4"
           />
         </video>
-        <div className="py-24 px-36 bg-[#0000007A] bg-opacity-90text-center flex flex-col items-center justify-center w-full text-gray-200 z-50 h-full">
+        <div className="lg:py-24 py-16 px-4 lg:px-36 bg-[#0000007A] bg-opacity-90 text-center flex flex-col items-center justify-center w-full text-gray-200 z-50 h-full">
           <FontAwesomeIcon
             icon={faCar}
-            className="mb-8 text-primary-500 text-7xl"
+            className="mb-8 text-primary-500 text-5xl lg:text-7xl"
           />
 
-          <h3 className="text-5xl font-bold text-center">
+          <h3 className="text-3xl lg:text-5xl font-bold text-center">
             The Charge You Need, When You Need It.
           </h3>
-          <p className="text-lg text-center py-8">
+          <p className="text-base lg:text-lg font-semibold text-center py-8">
             Join the revolution and enjoy the convenience of on-demand EV
             charging throughout Greater Montreal. Say goodbye to range anxiety
             and hello to hassle-free driving!
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center flex-col lg:flex-row gap-4">
             <Link
               to="/booking"
-              className="font-bold text-base flex items-center w-fit text-white transition-all mb-16 py-3 px-20 rounded-lg bg-primary-500 hover:bg-primary-600"
+              className="font-bold text-base flex items-center w-fit text-white transition-all lg:mb-16 py-3 px-20 rounded-lg bg-primary-500 hover:bg-primary-600"
             >
               <svg
                 aria-hidden="true"
@@ -300,7 +307,7 @@ const Home: React.FC = () => {
             </Link>
             <Link
               to="/contact"
-              className="font-bold text-base flex items-center w-fit text-white hover:text-primary-500 transition-all mb-16 py-3 px-20 rounded-lg hover:bg-white border-2"
+              className="font-bold text-base flex items-center w-fit text-white hover:text-primary-500 transition-all lg:mb-16 py-3 px-20 rounded-lg hover:bg-white border-2"
             >
               Subscribe Now
             </Link>
@@ -309,8 +316,10 @@ const Home: React.FC = () => {
       </div>
 
       {/* FAQs */}
-      <div className="px-36 py-16 flex flex-col justify-center items-center">
-        <h2 className="font-bold text-4xl mb-8">Frequently Asked Questions</h2>
+      <div className="px-4 lg:px-36 py-16 flex flex-col justify-center items-center">
+        <h2 className="font-bold text-2xl lg:text-4xl mb-8 text-center w-4/5 lg:w-auto">
+          Frequently Asked Questions
+        </h2>
         <AccordionGroup size="lg" sx={{ maxWidth: "100%", width: "100%" }}>
           {[
             {
@@ -348,7 +357,7 @@ const Home: React.FC = () => {
           ].map((item, index) => (
             <Accordion key={index}>
               <AccordionSummary>
-                <span className="font-light text-lg py-2">{item.title}</span>
+                <span className="font-light lg:text-lg py-2">{item.title}</span>
               </AccordionSummary>
               <AccordionDetails>{item.text}</AccordionDetails>
             </Accordion>
