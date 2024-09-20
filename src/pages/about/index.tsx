@@ -1,16 +1,13 @@
 import React from "react";
 import PageTemplate from "../../templates/pageTemplate";
-import { Button } from "../../components/common/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const About: React.FC = () => {
   return (
     <PageTemplate>
       {/* Hero section */}
-      <div className="w-full relative h-[70vh] lg:h-[65vh]">
+      <div className="w-full relative h-[65vh]">
         <video
           className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover"
           autoPlay

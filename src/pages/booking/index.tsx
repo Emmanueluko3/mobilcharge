@@ -11,7 +11,7 @@ const Reservation: React.FC = () => {
   return (
     <PageTemplate>
       {/* Hero section */}
-      <div className="w-full relative h-[70vh] lg:h-[65vh]">
+      <div className="w-full relative h-[65vh]">
         <video
           className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover"
           autoPlay
