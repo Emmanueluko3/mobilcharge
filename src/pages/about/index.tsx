@@ -34,14 +34,17 @@ const About: React.FC = () => {
           </h3>
 
           <div className="flex items-center mt-auto text-base lg:text-lg font-medium">
-            <span className="pb-2">
+            <Link to="/" className="pb-2">
               Home
-              <FontAwesomeIcon icon={faArrowRight} className="mx-4" />
-            </span>
+            </Link>
+            <FontAwesomeIcon icon={faArrowRight} className="mx-4 pb-2" />
 
-            <span className="text-primary-500 border-b-2 border-primary-500 pb-2 px-2">
+            <Link
+              to="/about"
+              className="text-primary-500 border-b-2 border-primary-500 pb-2 px-2"
+            >
               About Us
-            </span>
+            </Link>
           </div>
         </div>
       </div>

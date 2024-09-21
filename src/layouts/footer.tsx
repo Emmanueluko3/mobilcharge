@@ -2,6 +2,7 @@ import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
+import LogoFooter from "../assets/images/logo-footer.png";
 
 const Footer: React.FC = () => {
   const navlinks = [
@@ -17,11 +18,8 @@ const Footer: React.FC = () => {
     <div className="flex flex-col bg-[#1D1D1BFF] text-gray-400 py-16 lg:py-24">
       <div className="grid grid-flow-row grid-cols-1 lg:grid-cols-2 gap-10 px-4 lg:px-24 lg:mb-24 mb-10">
         <div className="">
-          <Link
-            to="/"
-            className="text-blue-500 font-bold text-3xl lg:text-5xl mb-6 flex"
-          >
-            EVCharging
+          <Link to="/" className="mb-6 flex">
+            <img src={LogoFooter} alt="Logo" className="h-10 lg:h-16" />
           </Link>
           <p className="text-gray-400 text-sm lg:text-base font-medium">
             Mobilcharge représente le futur de la mobilité électrique, un futur
