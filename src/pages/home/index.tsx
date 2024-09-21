@@ -101,7 +101,7 @@ const Home: React.FC = () => {
         ].map((item, index) => (
           <div
             key={index}
-            className="border text-center flex flex-col items-center justify-center p-10 lg:py-20 lg:px-10 hover:text-primary-500 relative"
+            className="border text-center flex flex-col items-center justify-center p-10 lg:py-20 lg:px-10 hover:text-primary-500 transition-all relative"
           >
             <div className="absolute -top-5 bg-white px-3">
               <FontAwesomeIcon
@@ -112,7 +112,7 @@ const Home: React.FC = () => {
             <h3 className="text-center mb-4 lg:mb-6 text-lg lg:text-xl font-bold">
               {item.title}
             </h3>
-            <p className="text-center text-sm lg:text-base font-medium text-black hover:text-black">
+            <p className="text-center text-sm lg:text-base font-medium text-black hover:text-black transition-all">
               {item.text}
             </p>
           </div>

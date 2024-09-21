@@ -174,7 +174,7 @@ const About: React.FC = () => {
                   {item.icon}
                 </span>
 
-                <p className="text-center text-sm lg:text-base font-medium text-black hover:text-black leading-8">
+                <p className="text-center text-sm lg:text-base font-medium text-black transition-all hover:text-black leading-8">
                   <span className="font-bold mr-1">{item.title}</span>:{" "}
                   {item.text}
                 </p>
@@ -195,7 +195,7 @@ const About: React.FC = () => {
             Charge Your Future.
           </h3>
 
-          <p className="text-center text-sm lg:text-base font-medium text-black hover:text-black leading-8 my-6 lg:my-10 w-4/5">
+          <p className="text-center text-sm lg:text-base font-medium text-black transition-all hover:text-black leading-8 my-6 lg:my-10 w-4/5">
             Join the revolution and enjoy the convenience of on-demand mobile
             charging throughout Greater Montreal. Say goodbye to range anxiety
             and hello to hassle-free driving!
@@ -288,7 +288,7 @@ const About: React.FC = () => {
         <div className="flex justify-center items-center w-full py-20">
           <Link
             to="/booking"
-            className="border-2 border-white text-white hover:bg-white hover:text-primary-500 text-sm lg:text-base transition-all px-5 py-3 font-bold flex items-center"
+            className="border-2 border-white text-white  hover:bg-white hover:text-primary-500 text-sm lg:text-base transition-all px-5 py-3 font-bold flex items-center"
           >
             <svg
               aria-hidden="true"

@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
               <Link
                 to={item.href}
                 key={index}
-                className="border-b border-gray-600 p-4 hover:text-primary-500 font-bold"
+                className="border-b border-gray-600 p-4 transition-all hover:text-primary-500 font-bold"
               >
                 {item.label.toLocaleUpperCase()}
               </Link>

@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={clx(
-        "bg-primary-500 flex justify-center rounded-md bg-primary text-sm font-semibold text-white shadow-sm hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+        "bg-primary-500 flex justify-center rounded-md bg-primary text-sm font-semibold text-white transition-all shadow-sm hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
         {
           "border-green": color === "primary",
           "hover:border-green-light": color === "primary",

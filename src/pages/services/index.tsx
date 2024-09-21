@@ -177,7 +177,7 @@ const Service: React.FC = () => {
                   {item.icon}
                 </span>
 
-                <p className="text-center text-sm lg:text-base font-medium text-black hover:text-black leading-8">
+                <p className="text-center text-sm lg:text-base font-medium text-black transition-all hover:text-black leading-8">
                   <span className="font-bold mr-1">{item.title}</span>:{" "}
                   {item.text}
                 </p>
@@ -250,7 +250,7 @@ const Service: React.FC = () => {
                   {item.title}
                 </h2>
 
-                <p className="text-center text-sm lg:text-base font-medium text-black hover:text-black leading-8">
+                <p className="text-center text-sm lg:text-base font-medium text-black transition-all hover:text-black leading-8">
                   {item.text}
                 </p>
               </div>
