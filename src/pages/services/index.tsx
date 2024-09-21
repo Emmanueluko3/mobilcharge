@@ -20,7 +20,7 @@ const Service: React.FC = () => {
       {/* Hero section */}
       <div className="w-full relative h-[65vh]">
         <video
-          className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover"
+          className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover pointer-events-none"
           autoPlay
           muted
           loop
@@ -195,7 +195,7 @@ const Service: React.FC = () => {
         </div>
         <div className="lg:h-72">
           <video
-            className="h-full w-full  overflow-hidden object-cover"
+            className="h-full w-full  overflow-hidden object-cover pointer-events-none"
             autoPlay
             muted
             loop
@@ -378,7 +378,12 @@ const Service: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 grid-flow-row">
           <div className="order-1 lg:order-1">
-            <video className="h-full w-full object-cover" autoPlay muted loop>
+            <video
+              className="h-full w-full object-cover pointer-events-none"
+              autoPlay
+              muted
+              loop
+            >
               <source
                 src="https://mobilcharge.ca/wp-content/uploads/2024/05/Recharge_Rapide_MobilCharge.mp4"
                 type="video/mp4"

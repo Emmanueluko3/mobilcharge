@@ -35,7 +35,7 @@ const Home: React.FC = () => {
       {/* Hero section */}
       <div className="w-full relative h-screen lg:h-[80vh]">
         <video
-          className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover"
+          className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover pointer-events-none"
           autoPlay
           muted
           loop
@@ -143,7 +143,7 @@ const Home: React.FC = () => {
           </Link>
         </div>
         <video
-          className="lg:h-2/5 w-full  overflow-hidden object-cover"
+          className="lg:h-2/5 w-full  overflow-hidden object-cover pointer-events-none"
           autoPlay
           muted
           loop
@@ -265,7 +265,7 @@ const Home: React.FC = () => {
 
       <div className="relative">
         <video
-          className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover"
+          className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover pointer-events-none"
           autoPlay
           muted
           loop

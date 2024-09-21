@@ -13,7 +13,7 @@ const Reservation: React.FC = () => {
       {/* Hero section */}
       <div className="w-full relative h-[65vh]">
         <video
-          className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover"
+          className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover pointer-events-none"
           autoPlay
           muted
           loop
