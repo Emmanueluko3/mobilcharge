@@ -214,8 +214,8 @@ const About: React.FC = () => {
             BOOK NOW | Limited Availability{" "}
           </Link>
         </div>
-        <div className="grid grid-cols-2 grid-flow-row">
-          <div className="">
+        <div className="grid grid-cols-1 lg:grid-cols-2 grid-flow-row">
+          <div className="order-1 lg:order-1">
             <video className="h-full w-full object-cover" autoPlay muted loop>
               <source
                 src="https://mobilcharge.ca/wp-content/uploads/2024/05/Recharge_Rapide_MobilCharge.mp4"
@@ -223,8 +223,8 @@ const About: React.FC = () => {
               />
             </video>
           </div>
-          <div className="bg-gray-100 p-20 flex flex-col items-center justify-center">
-            <h2 className="text-5xl font-bold">Our Vision</h2>
+          <div className="order-2 lg:order-2 bg-gray-100 px-8 py-12 lg:p-20 flex flex-col items-center justify-center">
+            <h2 className="text-2xl lg:text-5xl font-bold">Our Vision</h2>
             <p className="font-medium text-center text-sm lg:text-base my-10">
               At MobilCharge, we are passionate engineers, inventors, skilled
               builders, and enthusiasts of all things electric and sustainable.
@@ -242,8 +242,8 @@ const About: React.FC = () => {
               JOIN THE TEAM
             </Link>
           </div>
-          <div className="bg-gray-100 p-20 flex flex-col items-center justify-center">
-            <h2 className="text-5xl font-bold">
+          <div className="order-4 lg:order-3 bg-gray-100 px-8 py-12 lg:p-20 flex flex-col items-center justify-center">
+            <h2 className="text-2xl lg:text-5xl text-center font-bold">
               Revolutionize EV charging with MobilCharge!
             </h2>
             <p className="font-medium text-center text-sm lg:text-base my-10">
@@ -257,7 +257,7 @@ const About: React.FC = () => {
               convenient charging right to your doorstep, workplace, or wherever
               your adventures take you.
             </p>
-            <div className="grid grid-cols-2 gap-6``">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
               {[
                 "Condos, Apartments, or Houses",
                 "Trucks, Vans, or Buses",
@@ -268,7 +268,7 @@ const About: React.FC = () => {
                 "Hotels",
                 "Car Dealerships",
               ].map((item, index) => (
-                <h3 key={index} className="flex items-center mb-3">
+                <h3 key={index} className="flex items-center">
                   <FontAwesomeIcon
                     icon={faSquareCheck}
                     className="mr-4 text-primary-500"
@@ -278,7 +278,7 @@ const About: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className="">
+          <div className="order-3 lg:order-4">
             <img src={CarForest} alt="" className="h-full w-full" />
           </div>
         </div>
