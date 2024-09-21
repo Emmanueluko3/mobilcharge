@@ -24,6 +24,7 @@ const Service: React.FC = () => {
           autoPlay
           muted
           loop
+          playsInline
         >
           <source
             src="https://mobilcharge.ca/wp-content/uploads/2024/05/MobilCharge_ServiceClient_RechargeVehicule.mp4"
@@ -199,6 +200,7 @@ const Service: React.FC = () => {
             autoPlay
             muted
             loop
+            playsInline
           >
             <source
               src="https://mobilcharge.ca/wp-content/uploads/2024/05/MobilCharge_Electric_Vehicle_On_Road_Forest.mp4"
@@ -383,6 +385,7 @@ const Service: React.FC = () => {
               autoPlay
               muted
               loop
+              playsInline
             >
               <source
                 src="https://mobilcharge.ca/wp-content/uploads/2024/05/Recharge_Rapide_MobilCharge.mp4"

@@ -17,6 +17,7 @@ const Contact: React.FC = () => {
           autoPlay
           muted
           loop
+          playsInline
         >
           <source
             src="https://mobilcharge.ca/wp-content/uploads/2024/05/MobilCharge_Electric_Vehicle_On_Road_Forest.mp4"

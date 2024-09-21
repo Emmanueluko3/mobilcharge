@@ -21,6 +21,7 @@ const About: React.FC = () => {
           autoPlay
           muted
           loop
+          playsInline
         >
           <source
             src="https://mobilcharge.ca/wp-content/uploads/2024/05/MobilCharge_Recharge_Mobile_EV.mp4"
