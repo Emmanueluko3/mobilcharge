@@ -287,9 +287,10 @@ const About: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className="order-3 lg:order-4">
-            <img src={CarForest} alt="" className="h-full w-full" />
-          </div>
+          <div
+            style={{ background: `url(${CarForest})` }}
+            className="order-3 lg:order-4 h-full w-full bg-no-repeat bg-cover"
+          ></div>
         </div>
         <div className="flex justify-center items-center w-full py-20">
           <Link
