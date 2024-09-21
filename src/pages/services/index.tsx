@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import CarForest from "../../assets/images/car-forest.jpg";
 import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
+import pricingBg from "../../assets/images/pricingBg.jpg";
 
 const Service: React.FC = () => {
   return (
@@ -272,6 +273,87 @@ const Service: React.FC = () => {
             </Link>
           </div>
         </div>
+
+        <section
+          id="pricing"
+          className="flex flex-col py-10 lg:py-24 items-center relative bg-white"
+        >
+          <div
+            style={{
+              backgroundImage: `url(${pricingBg})`,
+              backgroundBlendMode: "overlay",
+            }}
+            className={`absolute top-0 w-full bg-cover bg-no-repeat inset-0 bg-black bg-opacity-50 h-[55vh] z-10`}
+          ></div>
+          <h2 className="font-bold text-2xl lg:text-5xl text-white z-20">
+            Pricing
+          </h2>
+          <p className="w-4/5 lg:w-3/5 text-center font-medium my-10 lg:my-16 text-white z-20">
+            Choose the plan that fits your charging needs and enjoy the
+            convenience of our mobile EV charging service. Join today to benefit
+            from the convenience and security of reliable emergency charging for
+            your EV, available whenever you need it.
+          </p>
+          <div className="grid grid-flow-row grid-cols-1 px-8 lg:px-0 lg:grid-cols-2 gap-10 z-20">
+            {[
+              {
+                plan: "BASIC",
+                description:
+                  "Electric vehicle owners seeking a quick charging solution",
+                features: [
+                  "$X per 20-minute charge (20-40-60 min)",
+                  "Limited charging time per session",
+                  "Extended charging time per session",
+                  "Basic customer support",
+                  "No monthly subscription fee",
+                ],
+              },
+              {
+                plan: "BUSINESS",
+                description:
+                  "Hotels, event centers, fleets, dealerships, businesses, events, etc.",
+                features: [
+                  "All features of the BASIC plan",
+                  "Extended charging time per session",
+                  "Priority customer support",
+                  "Monthly subscription fee",
+                  "Discounts on additional services",
+                ],
+              },
+            ].map((item, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="w-full bg-primary-500 text-white flex flex-col items-center py-8 lg:py-10">
+                  <h3 className="font-medium text-3xl lg:text-4xl text-center mb-3 lg:mb-4 px-4">
+                    {item.plan}
+                  </h3>
+                  <p className="text-sm lg:text-base text-center px-4">
+                    {item.description}
+                  </p>
+                </div>
+                <div className="border-x-2 border-b-2 border-gray-300 w-full bg-white flex flex-col items-center justify-center pb-4">
+                  <div className="w-full flex flex-col items-center justify-center">
+                    {item.features.map((item, index) => (
+                      <p
+                        key={index}
+                        className={`w-full font-medium text-center py-4 text-sm ${
+                          index % 2 !== 0 ? "bg-gray-100" : ""
+                        }`}
+                      >
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                  <Link
+                    to="/contact"
+                    className="border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white text-sm lg:text-base transition-all px-5 py-2 font-bold flex items-center w-fit my-8"
+                  >
+                    JOIN US
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <div className="flex justify-center items-center w-full py-20">
           <Link

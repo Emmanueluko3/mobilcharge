@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
     { label: "Home", href: "/" },
     { label: "About Us", href: "/about" },
     { label: "Services", href: "/services" },
-    { label: "Pricing", href: "/pricing" },
+    { label: "Pricing", href: "/services#pricing" },
     { label: "Booking", href: "/booking" },
     { label: "Contact Us", href: "/contact-us" },
     { label: "English", href: "/english" },
