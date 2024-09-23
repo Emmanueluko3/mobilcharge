@@ -233,6 +233,7 @@ const About: React.FC = () => {
               autoPlay
               muted
               loop
+              playsInline
             >
               <source
                 src="https://mobilcharge.ca/wp-content/uploads/2024/05/Recharge_Rapide_MobilCharge.mp4"
