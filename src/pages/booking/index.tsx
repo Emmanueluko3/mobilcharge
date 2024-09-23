@@ -6,8 +6,11 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faArrowRight, faPhone } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../components/common/input";
 import { Button } from "../../components/common/button";
+import { useTranslation } from "react-i18next";
 
 const Reservation: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <PageTemplate>
       {/* Hero section */}
@@ -27,12 +30,12 @@ const Reservation: React.FC = () => {
 
         <div className="bg-[#0000007A] bg-opacity-90 text-gray-200 z-50 h-full flex flex-col justify-center items-center">
           <h3 className="text-xl lg:text-6xl font-bold mt-auto text-center">
-            Booking
+            {t("Booking")}
           </h3>
 
           <div className="flex items-center mt-auto text-base lg:text-lg font-medium">
             <Link to="/" className="pb-2">
-              Home
+              {t("Home")}
             </Link>
             <FontAwesomeIcon icon={faArrowRight} className="mx-4 pb-2" />
 
@@ -40,7 +43,7 @@ const Reservation: React.FC = () => {
               to="/booking"
               className="text-primary-500 border-b-2 border-primary-500 pb-2 px-2"
             >
-              Booking
+              {t("Booking")}
             </Link>
           </div>
         </div>
@@ -49,62 +52,66 @@ const Reservation: React.FC = () => {
       {/* Contact form */}
       <div className="flex flex-col items-center justify-center px-4 lg:px-36 py-16">
         <h2 className="text-xl lg:text-4xl font-bold mb-10 lg:mb-16 text-center">
-          Choose sustainable and convenient mobility by booking your charging
-          service with MobilCharge now using the form below.
+          {t(
+            "Choose sustainable and convenient mobility by booking your charging service with MobilCharge now using the form below."
+          )}
         </h2>
         <div className="grid grid-cols-12 grid-flow-row gap-4 lg:gap-8 w-full">
           <div className="col-span-full lg:col-span-4">
-            <Input type="text" placeholder="Name" name="Name" />
+            <Input type="text" placeholder={t("Name")} name="Name" />
           </div>
           <div className="col-span-full lg:col-span-4">
-            <Input type="email" placeholder="Name" name="Email" />
+            <Input type="email" placeholder={t("Email")} name="Email" />
           </div>
           <div className="col-span-full lg:col-span-4">
-            <Input type="text" placeholder="Phone" name="Phone" />
+            <Input type="text" placeholder={t("Phone")} name="Phone" />
+          </div>
+          <div className="col-span-full">
+            <Input type="text" placeholder={t("Car Model")} name="carModel" />
           </div>
           <div className="col-span-full lg:col-span-6">
             <Input type="date" placeholder="dd/mm/yyy" name="date" />
           </div>
           <div className="col-span-full lg:col-span-6">
-            <Input type="text" placeholder="Reservation Time" />
+            <Input type="text" placeholder={t("Reservation Time")} />
           </div>
+
           <div className="col-span-full">
-            <Input type="text" placeholder="Car Model" name="carModel" />
-          </div>
-          <div className="col-span-full">
-            <Input type="Text" placeholder="Recharge Address" />
+            <Input type="Text" placeholder={t("Recharge Address")} />
           </div>
           <div className="col-span-full">
             <textarea
               name="comments"
-              placeholder="Comments"
+              placeholder={t("Comments")}
               id=""
               className="block min-h-44 w-full border-0 p-4 bg-gray-100 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
             ></textarea>
           </div>
           <div className="col-span-full">
-            <Input type="Text" placeholder="Charging Time (Estimate)" />
+            <Input type="Text" placeholder={t("Charging Time (Estimate)")} />
           </div>
           <div className="col-span-full">
-            <Button className="w-full">SUBMIT</Button>
+            <Button className="w-full">
+              {t("SUBMIT").toLocaleUpperCase()}
+            </Button>
           </div>
         </div>
       </div>
       {/* Contact info */}
       <div className="flex flex-col items-center justify-center px-4 lg:px-36 py-16 mb-16">
         <h2 className="text-xl lg:text-4xl font-bold mb-10 lg:mb-16">
-          Contact Information
+          {t("Contact Information")}
         </h2>
         <div className="grid grid-cols-2 gap-6 lg:gap-8 w-full">
           {[
             {
               icon: faPhone,
-              text: "Phone",
+              text: t("Phone"),
               link: "tel:+1234567890",
             },
             {
               icon: faEnvelope,
-              text: "Email",
+              text: t("Email"),
               link: "mailto:example@example.com",
             },
           ].map((item, index) => (

@@ -6,23 +6,31 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import ScrollToTop from "../utils/scrollToTop";
+import { useTranslation } from "react-i18next";
 
 const Navbar: React.FC = () => {
   const location = useLocation().pathname;
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Translate
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem("i18nextLng", lng);
+  };
 
+  const [hoveredTab, setHoveredTab] = useState<boolean | null>(null);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
   const navlinks = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Pricing", href: "/services#pricing" },
-    { label: "Booking", href: "/booking" },
-    { label: "Contact Us", href: "/contact-us" },
-    { label: "English", href: "/english" },
+    { label: t("Home"), href: "/" },
+    { label: t("About Us"), href: "/about" },
+    { label: t("Services"), href: "/services" },
+    { label: t("Pricing"), href: "/services#pricing" },
+    { label: t("Booking"), href: "/booking" },
+    { label: t("Contact Us"), href: "/contact-us" },
   ];
 
   const [isFixed, setIsFixed] = useState(false);
@@ -44,7 +52,7 @@ const Navbar: React.FC = () => {
               <FontAwesomeIcon icon={faPhone} className="lg:mr-3 mr-2" />
               <div className="">
                 <h4 className="text-grey-700 text-sm font-medium">
-                  Contact Us
+                  {t("Call us")}
                 </h4>
                 <p className="text-grey-500 text-xs">+1 (340) 555 4567</p>
               </div>
@@ -52,7 +60,9 @@ const Navbar: React.FC = () => {
             <div className="lg:flex items-center hidden">
               <FontAwesomeIcon icon={faClock} className="mr-3 h-5 w-5" />
               <div className="">
-                <h4 className="text-grey-700 text-sm font-medium">Everyday</h4>
+                <h4 className="text-grey-700 text-sm font-medium">
+                  {t("Everyday")}
+                </h4>
                 <p className="text-grey-500 text-xs">24h 7d</p>
               </div>
             </div>
@@ -70,7 +80,7 @@ const Navbar: React.FC = () => {
               to="/booking"
               className="rounded-md text-sm text-white whitespace-nowrap bg-[#B22222] transition-all flex items-center justify-center px-2 py-1 font-medium"
             >
-              BOOK NOW!
+              {t("BOOK NOW!")}
             </Link>
           </div>
         </nav>
@@ -126,6 +136,30 @@ const Navbar: React.FC = () => {
               {item.label}
             </Link>
           ))}
+          <div className="relative">
+            <button
+              onMouseEnter={() => setHoveredTab(true)}
+              onMouseLeave={() => setHoveredTab(null)}
+              onClick={() =>
+                changeLanguage(i18n.language == "fr" ? "en" : "fr")
+              }
+              className="hover:text-primary-500 transition-all cursor-pointer text-grey-900 text-base font-bold px-2"
+            >
+              {i18n.language == "fr" ? "Français" : "English"}
+            </button>
+            <div
+              onMouseEnter={() => setHoveredTab(true)}
+              onMouseLeave={() => setTimeout(() => setHoveredTab(null), 500)}
+              onClick={() =>
+                changeLanguage(i18n.language == "fr" ? "en" : "fr")
+              }
+              className={`cursor-pointer absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-56 p-4 bg-white text-gray-800 text-sm shadow-lg transition-opacity duration-300 ease-in-out hover:border-l-4 border-primary-500 z-50 font-medium ${
+                hoveredTab ? "opacity-100 visible" : "opacity-0 invisible"
+              }`}
+            >
+              {i18n.language == "fr" ? "English" : "Français"}
+            </div>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -161,11 +195,30 @@ const Navbar: React.FC = () => {
                   <Link
                     to={item.href}
                     key={index}
-                    className="hover:bg-gray-700 rounded-lg transition-all cursor-pointer text-base"
+                    className="transition-all cursor-pointer text-base"
                   >
                     {item.label}
                   </Link>
                 ))}
+                <div className="relative w-full">
+                  <button
+                    onClick={() => setHoveredTab(!hoveredTab)}
+                    className="transition-all cursor-pointer text-base w-full text-start flex items-start justify-start"
+                  >
+                    {i18n.language == "fr" ? "Français" : "English"}
+                  </button>
+                  <div
+                    onClick={() => {
+                      changeLanguage(i18n.language == "fr" ? "en" : "fr");
+                      setHoveredTab(null);
+                    }}
+                    className={`cursor-pointer absolute lg:-bottom-12 -left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-screen lg:w-56 p-4 bg-white text-gray-800 text-sm shadow-lg transition-opacity duration-300 ease-in-out border-l-4 border-primary-500 z-50 font-medium ${
+                      hoveredTab ? "opacity-100 visible" : "opacity-0 invisible"
+                    }`}
+                  >
+                    {i18n.language == "fr" ? "English" : "Français"}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
