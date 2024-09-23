@@ -53,7 +53,7 @@ const Home: React.FC = () => {
         <div className="lg:p-32 p-4 bg-[#0000007A] bg-opacity-90 text-gray-200 z-50 h-full flex flex-col justify-center">
           <img src={CarIcon} alt="" className="mb-5 w-48 lg:h-12 lg:w-fit" />
           <h3 className="text-4xl lg:text-6xl lg:w-3/5 font-bold">
-            {t("Free Your EV. MTL Mobile Charging.")}"
+            {t("Free Your EV. MTL Mobile Charging.")}
           </h3>
           <p className="lg:w-3/5 my-5 text-base lg:text-lg">
             {t(
