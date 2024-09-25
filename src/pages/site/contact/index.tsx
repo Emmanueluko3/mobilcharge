@@ -1,11 +1,11 @@
 import React from "react";
-import PageTemplate from "../../templates/pageTemplate";
+import PageTemplate from "../../../templates/pageTemplate";
 import { faArrowRight, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Input from "../../components/common/input";
-import { Button } from "../../components/common/button";
+import Input from "../../../components/common/input";
+import { Button } from "../../../components/common/button";
 import { useTranslation } from "react-i18next";
 
 const Contact: React.FC = () => {

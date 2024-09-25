@@ -1,7 +1,7 @@
 import React from "react";
-import PageTemplate from "../../templates/pageTemplate";
-import { Button } from "../../components/common/button";
-import CarIcon from "../../assets/icons/carIcon.png";
+import PageTemplate from "../../../templates/pageTemplate";
+import { Button } from "../../../components/common/button";
+import CarIcon from "../../../assets/icons/carIcon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBolt,
@@ -16,12 +16,12 @@ import {
   faCalendarDays,
 } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
-import Hotelevs from "../../assets/images/hotelevs.jpeg";
-import Privateevs from "../../assets/images/privateevs.webp";
-import Publicevs from "../../assets/images/publicevs.jpg";
-import Businessevs from "../../assets/images/businessevs.webp";
-import Transportevs from "../../assets/images/transportevs.jpg";
-import Homeevs from "../../assets/images/homeevs.jpg";
+import Hotelevs from "../../../assets/images/hotelevs.jpeg";
+import Privateevs from "../../../assets/images/privateevs.webp";
+import Publicevs from "../../../assets/images/publicevs.jpg";
+import Businessevs from "../../../assets/images/businessevs.webp";
+import Transportevs from "../../../assets/images/transportevs.jpg";
+import Homeevs from "../../../assets/images/homeevs.jpg";
 import {
   Accordion,
   AccordionDetails,

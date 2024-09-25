@@ -1,11 +1,11 @@
 import React from "react";
-import PageTemplate from "../../templates/pageTemplate";
+import PageTemplate from "../../../templates/pageTemplate";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faArrowRight, faPhone } from "@fortawesome/free-solid-svg-icons";
-import Input from "../../components/common/input";
-import { Button } from "../../components/common/button";
+import Input from "../../../components/common/input";
+import { Button } from "../../../components/common/button";
 import { useTranslation } from "react-i18next";
 
 const Reservation: React.FC = () => {

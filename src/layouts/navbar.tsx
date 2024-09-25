@@ -71,6 +71,22 @@ const Navbar: React.FC = () => {
             <img src={Logo} alt="Logo" className="h-10 lg:h-16" />
           </Link>
 
+          {/* Auth Buttons */}
+          <div className="flex items-center gap-6 max-md:hidden ms-32 lg:order-last">
+            <Link
+              to="/login"
+              className="font-semibold rounded-md py-1.5 px-4 text-base text-primary-500 hover:text-white border border-primary-500 hover:bg-primary-500 transition-all"
+            >
+              {t("Log in")}
+            </Link>
+            <Link
+              to="/signup"
+              className="rounded-md text-base text-white whitespace-nowrap bg-primary-500 transition-all flex items-center justify-center py-1.5 px-4 font-semibold border border-primary-500 hover:bg-primary-700"
+            >
+              {t("Sign up")}
+            </Link>
+          </div>
+
           {/* Contact buttons */}
           <div className="flex items-center gap-6 max-md:hidden lg:order-last">
             <Link to="/" className="hover:text-primary-500 mr-4">
@@ -141,23 +157,23 @@ const Navbar: React.FC = () => {
               onMouseEnter={() => setHoveredTab(true)}
               onMouseLeave={() => setHoveredTab(null)}
               onClick={() =>
-                changeLanguage(i18n.language == "fr" ? "en" : "fr")
+                changeLanguage(i18n.language === "fr" ? "en" : "fr")
               }
               className="hover:text-primary-500 transition-all cursor-pointer text-grey-900 text-base font-bold px-2"
             >
-              {i18n.language == "fr" ? "Français" : "English"}
+              {i18n.language === "fr" ? "Français" : "English"}
             </button>
             <div
               onMouseEnter={() => setHoveredTab(true)}
               onMouseLeave={() => setTimeout(() => setHoveredTab(null), 500)}
               onClick={() =>
-                changeLanguage(i18n.language == "fr" ? "en" : "fr")
+                changeLanguage(i18n.language === "fr" ? "en" : "fr")
               }
               className={`cursor-pointer absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-56 p-4 bg-white text-gray-800 text-sm shadow-lg transition-opacity duration-300 ease-in-out hover:border-l-4 border-primary-500 z-50 font-medium ${
                 hoveredTab ? "opacity-100 visible" : "opacity-0 invisible"
               }`}
             >
-              {i18n.language == "fr" ? "English" : "Français"}
+              {i18n.language === "fr" ? "English" : "Français"}
             </div>
           </div>
         </div>
@@ -205,18 +221,18 @@ const Navbar: React.FC = () => {
                     onClick={() => setHoveredTab(!hoveredTab)}
                     className="transition-all cursor-pointer text-base w-full text-start flex items-start justify-start"
                   >
-                    {i18n.language == "fr" ? "Français" : "English"}
+                    {i18n.language === "fr" ? "Français" : "English"}
                   </button>
                   <div
                     onClick={() => {
-                      changeLanguage(i18n.language == "fr" ? "en" : "fr");
+                      changeLanguage(i18n.language === "fr" ? "en" : "fr");
                       setHoveredTab(null);
                     }}
                     className={`cursor-pointer absolute lg:-bottom-12 -left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-screen lg:w-56 p-4 bg-white text-gray-800 text-sm shadow-lg transition-opacity duration-300 ease-in-out border-l-4 border-primary-500 z-50 font-medium ${
                       hoveredTab ? "opacity-100 visible" : "opacity-0 invisible"
                     }`}
                   >
-                    {i18n.language == "fr" ? "English" : "Français"}
+                    {i18n.language === "fr" ? "English" : "Français"}
                   </div>
                 </div>
               </div>

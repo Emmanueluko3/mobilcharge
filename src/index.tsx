@@ -4,17 +4,16 @@ import "./index.css";
 import Routes from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { I18nextProvider } from "react-i18next";
-import i18n from "./i18n/i18n";
+import { Providers } from "./utils/providers";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <I18nextProvider i18n={i18n}>
+    <Providers>
       <Routes />
-    </I18nextProvider>
+    </Providers>
   </React.StrictMode>
 );
 

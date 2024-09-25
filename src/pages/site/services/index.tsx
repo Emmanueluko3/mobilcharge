@@ -1,5 +1,5 @@
 import React from "react";
-import PageTemplate from "../../templates/pageTemplate";
+import PageTemplate from "../../../templates/pageTemplate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -10,9 +10,9 @@ import {
   faLeaf,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import CarForest from "../../assets/images/car-forest.jpg";
+import CarForest from "../../../assets/images/car-forest.jpg";
 import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
-import pricingBg from "../../assets/images/pricingBg.jpg";
+import pricingBg from "../../../assets/images/pricingBg.jpg";
 import { useTranslation } from "react-i18next";
 
 const Service: React.FC = () => {
