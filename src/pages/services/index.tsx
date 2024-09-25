@@ -389,7 +389,7 @@ const Service: React.FC = () => {
             ].map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center lg:w-[600px]"
+                className="flex flex-col items-center lg:h-[660px] lg:w-[600px]"
               >
                 <div className="w-full bg-primary-500 text-white flex flex-col items-center py-8 lg:py-10">
                   <h3 className="font-medium text-3xl lg:text-4xl text-center mb-3 lg:mb-4 px-4">
@@ -399,7 +399,7 @@ const Service: React.FC = () => {
                     {item.description}
                   </p>
                 </div>
-                <div className="border-x-2 border-b-2 border-gray-300 w-full bg-white flex flex-col items-center justify-center pb-4">
+                <div className="border-x-2 border-b-2 border-gray-300 h-full w-full bg-white flex flex-col items-center justify-between pb-4">
                   <div className="w-full flex flex-col items-center justify-center">
                     {item.features.map((item, index) => (
                       <p
