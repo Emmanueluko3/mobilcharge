@@ -326,32 +326,64 @@ const Service: React.FC = () => {
               "Choose the plan that fits your charging needs and enjoy the convenience of our mobile EV charging service. Join today to benefit from the convenience and security of reliable emergency charging for your EV, available whenever you need it."
             }
           </p>
-          <div className="grid grid-flow-row grid-cols-1 px-8 lg:px-0 lg:grid-cols-2 gap-10 z-20">
+          <div className="flex flex-row flex-wrap px-8 lg:px-0 justify-center gap-10 z-20">
             {[
               {
-                plan: t("BASIC"),
+                plan: t("VISITOR").toLocaleUpperCase(),
                 description: t(
                   "Electric vehicle owners seeking a quick charging solution"
                 ),
                 features: [
-                  t("$X per 20-minute charge (20-40-60 min)"),
-                  t("Limited charging time per session"),
-                  t("Extended charging time per session"),
-                  t("Basic customer support"),
-                  t("No monthly subscription fee"),
+                  t("Individuals price list"),
+                  t("Price per 20 min charge (max 20kWh) with membership $32"),
+                  t(
+                    "Price per 20 min charge (max 20kWh) without membership $40"
+                  ),
+                  t("Emergency charge (max 50km) $200"),
+
+                  t(
+                    "Note : Vehicules must be accessible and unlocked to receive a charge"
+                  ),
                 ],
               },
+
               {
-                plan: t("BUSINESS"),
+                plan: t("Membership"),
                 description: t(
-                  "Hotels, event centers, fleets, dealerships, businesses, events, etc."
+                  "Electric vehicle owners seeking a recurring charging solution"
                 ),
                 features: [
-                  t("All features of the BASIC plan"),
+                  t("All features of the VISITOR plan"),
                   t("Extended charging time per session"),
                   t("Priority customer support"),
                   t("Monthly subscription fee"),
                   t("Discounts on additional services"),
+                  t("Price per 20 min charge (max 20kWh) with membership $32"),
+                  t(
+                    "Note : Vehicules must be accessible and unlocked to receive a charge"
+                  ),
+                ],
+              },
+
+              {
+                plan: t("Tailored Plan"),
+                description: t(
+                  "Hotels, event centers, fleets, dealerships, businesses, events, etc."
+                ),
+                features: [
+                  t("Corporate price list"),
+                  t(
+                    "Price per day (6 hrs) (max 18 charges - total 320kWh) $500"
+                  ),
+                  t(
+                    "Price per half day (3 hrs) (max 9 charges - total 160kWh) $250"
+                  ),
+                  t("Price per hour (max 3 charges - total 60kWh) $90"),
+                  t("No membership for corporate clients $0"),
+
+                  t(
+                    "Note : Vehicules must be accessible and unlocked to receive a charge"
+                  ),
                 ],
               },
             ].map((item, index) => (

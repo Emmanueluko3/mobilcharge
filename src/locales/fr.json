@@ -146,20 +146,28 @@
 
   "Choose the plan that fits your charging needs and enjoy the convenience of our mobile EV charging service. Join today to benefit from the convenience and security of reliable emergency charging for your EV, available whenever you need it.": "Choisissez le plan qui répond à vos besoins de recharge et profitez de la commodité de notre service de recharge EV mobile. Rejoignez dès aujourd’hui pour bénéficier de la commodité et de la sécurité d’une recharge d’urgence fiable pour votre VE, disponible à tout moment où vous en avez besoin.",
 
-  "BASIC": "Basique",
+  "VISITOR": "Visiteur",
   "Electric vehicle owners seeking a quick charging solution": "Propriétaires de véhicules électriques à la recherche d'une solution de recharge rapide",
-  "$X per 20-minute charge (20-40-60 min)": "$X par recharge de 20 minutes (20-40-60 min)",
-  "Limited charging time per session": "Temps de charge limité par session",
-  "Extended charging time per session": "Temps de charge étendu par session",
-  "Basic customer support": "Support client de base",
-  "No monthly subscription fee": "Aucun frais d'abonnement mensuel",
+  "Individuals price list": "Liste de prix clients particuliers",
+  "Price per 20 min charge (max 20kWh) with membership $32": "Prix par 20 minutes de charge (max 20 klm) avec abonnement 32$",
+  "Price per 20 min charge (max 20kWh) without membership $40": "Prix par 20 min de charge (max 20 klm) sans abonnement 40$",
+  "Emergency charge (max 50km) $200": "Frais d'urgence (max 50 km) 200$",
+  "Note : Vehicules must be accessible and unlocked to receive a charge": "Note : Les véhicules doivent être accessibles et débarrés affin de recevoir une charge",
 
-  "BUSINESS": "Entreprise",
-  "Hotels, event centers, fleets, dealerships, businesses, events, etc.": "Hôtels, centres événementiels, flottes, concessionnaires, entreprises, événements, etc.",
-  "All features of the BASIC plan": "Toutes les fonctionnalités du plan BASIQUE",
-  "Priority customer support": "Temps de charge étendu par session",
-  "Monthly subscription fee": "Support client prioritaire",
+  "Membership": "Adhésion",
+
+  "All features of the VISITOR plan": "Toutes les fonctionnalités du plan VISITEUR",
+  "Extended charging time per session": "Temps de recharge prolongé par session",
+  "Priority customer support": "Support client prioritaire",
   "Discounts on additional services": "Frais d'abonnement mensuel",
+
+  "Tailored Plan": "Plan Sur Mesure",
+  "Hotels, event centers, fleets, dealerships, businesses, events, etc.": "Hôtels, centres événementiels, flottes, concessionnaires, entreprises, événements, etc.",
+  "Corporate price list": "Liste de prix pour clients commerciaux",
+  "Price per day (6 hrs) (max 18 charges - total 320kWh) $500": "Prix par jour (6 heures) (max 18 charges - total 320 kWh) : 500 $",
+  "Price per half day (3 hrs) (max 9 charges - total 160kWh) $250": "Prix par demi-journée (3 heures) (max 9 charges - total 160 kWh) : 250 $",
+  "Price per hour (max 3 charges - total 60kWh) $90": "Prix par heure (max 3 charges - total 60 kWh) : 90 $",
+  "No membership for corporate clients $0": "Pas d'adhésion pour les clients commerciaux : 0 $",
 
   "Choose sustainable and convenient mobility by booking your charging service with MobilCharge now using the form below.": "Optez pour une mobilité durable et pratique en réservant dès maintenant votre service de recharge avec MobilCharge via le formulaire ci-dessous.",
 
