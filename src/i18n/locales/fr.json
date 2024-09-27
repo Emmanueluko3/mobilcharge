@@ -183,5 +183,17 @@
 
   "To request more information, please fill out the form below or send us an email directly.": "Pour demander plus d’informations, veuillez remplir le formulaire ci-dessous ou nous envoyer un e-mail directement.",
   "Subject": "Sujet",
-  "Message": "Message"
+  "Message": "Message",
+
+  "Log in": "Se connecter",
+  "Sign up": "S'inscrire",
+  "Password": "Mot de passe",
+  "Remember me": "Souviens-toi de moi",
+  "Forgot password": "Mot de passe oublié",
+  "Create an account": "Créer un compte",
+  "Create Account": "Créer un compte",
+  "Don’t have an account": "Je n'ai pas de compte",
+  "Already have an account": "Vous avez déjà un compte",
+  "Upload profile picture": "Télécharger une photo de profil",
+  "drag or browse from device": "faire glisser ou parcourir depuis l'appareil"
 }

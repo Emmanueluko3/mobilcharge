@@ -4,8 +4,10 @@ import MobileChargeBus from "../../../assets/images/MobileChargebus.png";
 import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
+import { useTranslation } from "react-i18next";
 
 const Signup: React.FC = () => {
+  const { t } = useTranslation();
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   const [signupData, setSignupData] = useState<any>({
@@ -49,13 +51,13 @@ const Signup: React.FC = () => {
         </Link>
 
         <h2 className="font-semibold text-3xl mb-3 text-center">
-          Create an account
+          {t("Create an account")}
         </h2>
 
         <p className="text-grey-700 font-medium text-sm text-center">
-          Already have an account?{" "}
+          {t("Already have an account")}?{" "}
           <Link to="/login" className="text-primary-500 font-semibold">
-            Login
+            {t("Log in")}
           </Link>
         </p>
 
@@ -75,8 +77,8 @@ const Signup: React.FC = () => {
               )}
             </div>
             <p className="text-primary-500 text-xs">
-              Upload profile picture <br />
-              *drag or browse from device
+              {t("Upload profile picture")} <br />*
+              {t("drag or browse from device")}
             </p>
             <input
               type="file"
@@ -160,7 +162,7 @@ const Signup: React.FC = () => {
             </span>
           </div>
 
-          <Button className="w-full">Create Account</Button>
+          <Button className="w-full">{t("Create Account")}</Button>
         </form>
       </div>
     </div>
