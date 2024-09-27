@@ -153,7 +153,7 @@ const Signup: React.FC = () => {
           </div>
 
           {/* terms and condition */}
-          <div className="flex items-center mb-8">
+          <div className="flex items-center mb-8 w-full">
             <input type="checkbox" className="h-4 w-4 border-0 mr-3" />
             <span className="text-sm font-medium">
               I accept all terms & conditions
