@@ -195,5 +195,10 @@
   "Don’t have an account": "Je n'ai pas de compte",
   "Already have an account": "Vous avez déjà un compte",
   "Upload profile picture": "Télécharger une photo de profil",
-  "drag or browse from device": "faire glisser ou parcourir depuis l'appareil"
+  "drag or browse from device": "faire glisser ou parcourir depuis l'appareil",
+  "First name": "Prénom",
+  "Last name": "Nom de famille",
+  "Phone number": "Numéro de téléphone",
+  "Confirm password": "Confirmez le mot de passe",
+  "I accept all terms & conditions": "J'accepte tous les termes et conditions"
 }

@@ -97,7 +97,7 @@ const Signup: React.FC = () => {
               value={signupData.firstName}
               onChange={handleChange}
               required
-              placeholder="First name"
+              placeholder={t("First name")}
             />
           </div>
           <div className="w-full mb-5">
@@ -107,7 +107,7 @@ const Signup: React.FC = () => {
               value={signupData.lastName}
               onChange={handleChange}
               required
-              placeholder="Last name"
+              placeholder={t("Last name")}
             />
           </div>
           <div className="w-full mb-5">
@@ -117,7 +117,7 @@ const Signup: React.FC = () => {
               value={signupData.phone}
               onChange={handleChange}
               required
-              placeholder="Phone number"
+              placeholder={t("Phone number")}
             />
           </div>
           {/* Email */}
@@ -129,7 +129,7 @@ const Signup: React.FC = () => {
               onChange={handleChange}
               autoComplete="email"
               required
-              placeholder="Email"
+              placeholder={t("Email")}
             />
           </div>
           {/* Passwords */}
@@ -140,7 +140,7 @@ const Signup: React.FC = () => {
               value={signupData.password}
               onChange={handleChange}
               required
-              placeholder="Password"
+              placeholder={t("Password")}
             />
           </div>
           <div className="w-full mb-5">
@@ -150,7 +150,7 @@ const Signup: React.FC = () => {
               value={signupData.confirmPassword}
               onChange={handleChange}
               required
-              placeholder="Confirm Password"
+              placeholder={t("Confirm password")}
             />
           </div>
 
@@ -158,7 +158,7 @@ const Signup: React.FC = () => {
           <div className="flex items-center mb-8 w-full">
             <input type="checkbox" className="h-4 w-4 border-0 mr-3" />
             <span className="text-sm font-medium">
-              I accept all terms & conditions
+              {t("I accept all terms & conditions")}
             </span>
           </div>
 
