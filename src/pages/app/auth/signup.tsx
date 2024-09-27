@@ -61,10 +61,10 @@ const Signup: React.FC = () => {
 
         <form className="w-full flex flex-col items-center justify-center">
           {/* Profile Image */}
-          <div className="w-fit my-3">
+          <div className="w-fit my-3 flex flex-col items-center justify-center">
             <div
               onClick={() => imageInputRef?.current?.click()}
-              className="w-14 h-14 lg:h-20 lg:w-20 border-2 border-dashed lg:hover:border-solid transition-all border-primary-500 rounded-full cursor-pointer"
+              className="w-14 h-14 lg:h-20 lg:w-20 border-2 border-dashed lg:hover:border-solid transition-all border-primary-500 rounded-full cursor-pointer mb-2"
             >
               {signupData.profileImage && (
                 <img
@@ -74,6 +74,10 @@ const Signup: React.FC = () => {
                 />
               )}
             </div>
+            <p className="text-primary-500 text-xs">
+              Upload profile picture <br />
+              *drag or browse from device
+            </p>
             <input
               type="file"
               className="hidden"
