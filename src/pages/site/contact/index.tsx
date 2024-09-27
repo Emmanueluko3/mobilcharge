@@ -1,5 +1,4 @@
 import React from "react";
-import PageTemplate from "../../../templates/pageTemplate";
 import { faArrowRight, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
@@ -11,7 +10,8 @@ import { useTranslation } from "react-i18next";
 const Contact: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <PageTemplate>
+    <>
+      {" "}
       {/* Hero section */}
       <div className="w-full relative h-[65vh]">
         <video
@@ -116,7 +116,7 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-    </PageTemplate>
+    </>
   );
 };
 

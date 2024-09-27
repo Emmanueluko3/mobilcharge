@@ -1,5 +1,4 @@
 import React from "react";
-import PageTemplate from "../../../templates/pageTemplate";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -12,7 +11,8 @@ const Reservation: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <PageTemplate>
+    <>
+      {" "}
       {/* Hero section */}
       <div className="w-full relative h-[65vh]">
         <video
@@ -48,7 +48,6 @@ const Reservation: React.FC = () => {
           </div>
         </div>
       </div>
-
       {/* Contact form */}
       <div className="flex flex-col items-center justify-center px-4 lg:px-36 py-16">
         <h2 className="text-xl lg:text-4xl font-bold mb-10 lg:mb-16 text-center">
@@ -132,7 +131,7 @@ const Reservation: React.FC = () => {
           ))}
         </div>
       </div>
-    </PageTemplate>
+    </>
   );
 };
 

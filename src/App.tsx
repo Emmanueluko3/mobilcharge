@@ -5,30 +5,38 @@ import Service from "./pages/site/services";
 import Reservation from "./pages/site/booking";
 import Contact from "./pages/site/contact";
 import Login from "./pages/app/auth/login";
+import PageTemplate from "./templates/pageTemplate";
+import AppTemplate from "./templates/appTemplate";
+import Signup from "./pages/app/auth/signup";
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    path: "/", // Site Layout for public pages
+    element: <PageTemplate />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "about", element: <About /> },
+      { path: "services", element: <Service /> },
+      { path: "booking", element: <Reservation /> },
+      { path: "contact-us", element: <Contact /> },
+    ],
   },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/services",
-    element: <Service />,
-  },
-  {
-    path: "/booking",
-    element: <Reservation />,
-  },
-  {
-    path: "/contact-us",
-    element: <Contact />,
-  },
+
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/app", // App Layout for logged-in users
+    element: <AppTemplate />,
+    children: [
+      { path: "book", element: <div>Book</div> },
+      { path: "trucks", element: <div>Trucks</div> },
+      { path: "message", element: <div>Message</div> },
+    ],
   },
 ]);
 

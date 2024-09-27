@@ -1,5 +1,4 @@
 import React from "react";
-import PageTemplate from "../../../templates/pageTemplate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -18,7 +17,7 @@ import { useTranslation } from "react-i18next";
 const Service: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <PageTemplate>
+    <>
       {/* Hero section */}
       <div className="w-full relative h-[65vh]">
         <video
@@ -508,7 +507,7 @@ const Service: React.FC = () => {
           ></div>
         </div>
       </div>
-    </PageTemplate>
+    </>
   );
 };
 

@@ -1,7 +1,12 @@
 // import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
-import { faEye, faEyeSlash, faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faEyeSlash,
+  faLock,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clx from "classnames";
 import React, { useState, type ReactNode } from "react";
@@ -66,6 +71,68 @@ const Input: React.FC<InputProps> = ({ label, className, ...rest }) => {
           )}
         />
       </div>
+    </div>
+  );
+};
+
+export const InputIcon: React.FC<InputProps> = ({ className, ...rest }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <div className="relative">
+      {(rest.name === "firstName" || rest.name === "lastName") && (
+        <FontAwesomeIcon
+          icon={faUser}
+          className="absolute h-5 w-5 font-bold left-2 top-1/2 transform -translate-y-1/2 text-gray-400"
+        />
+      )}
+      {rest.name === "email" && (
+        <FontAwesomeIcon
+          icon={faEnvelope}
+          className="absolute h-5 w-5 font-bold left-2 top-1/2 transform -translate-y-1/2 text-gray-400"
+        />
+      )}
+
+      {rest.name === "phone" && (
+        <FontAwesomeIcon
+          icon={faPhone}
+          className="absolute h-5 w-5 font-bold left-2 top-1/2 transform -translate-y-1/2 text-gray-400"
+        />
+      )}
+
+      {(rest.name === "password" || rest.name === "confirmPassword") && (
+        <FontAwesomeIcon
+          icon={faLock}
+          className="absolute h-5 w-5 font-bold left-2 top-1/2 transform -translate-y-1/2 text-gray-400"
+        />
+      )}
+
+      {rest.type === "password" && (
+        <button
+          type="button"
+          className="absolute right-4 top-2"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          <FontAwesomeIcon
+            className="text-gray-400"
+            icon={showPassword ? faEyeSlash : faEye}
+          />
+        </button>
+      )}
+      <input
+        {...rest}
+        type={
+          rest.type === "password"
+            ? showPassword
+              ? "text"
+              : "password"
+            : rest.type
+        }
+        className={clx(
+          "w-full pl-10 pr-4 py-2 border-b-2 text-sm placeholder:font-medium focus:outline-none focus:border-primary-500",
+          className
+        )}
+      />
     </div>
   );
 };

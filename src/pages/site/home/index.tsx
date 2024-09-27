@@ -1,5 +1,4 @@
 import React from "react";
-import PageTemplate from "../../../templates/pageTemplate";
 import { Button } from "../../../components/common/button";
 import CarIcon from "../../../assets/icons/carIcon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,7 +33,8 @@ const Home: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <PageTemplate>
+    <>
+      {" "}
       {/* Hero section */}
       <div className="w-full relative h-screen lg:h-[80vh]">
         <video
@@ -78,7 +78,6 @@ const Home: React.FC = () => {
           </Button>
         </div>
       </div>
-
       <div className="px-4 lg:px-20 py-16 grid grid-flow-row grid-cols-1 lg:grid-cols-4 gap-10 lg:gap-0 pt-24">
         {[
           {
@@ -129,7 +128,6 @@ const Home: React.FC = () => {
           </div>
         ))}
       </div>
-
       <div className="bg-primary-500 lg:h-screen mt-14 lg:mt-56 p-0">
         <div className="lg:h-3/5 h-[40vh] w-full relative flex justify-center items-end py-10">
           <img
@@ -166,7 +164,6 @@ const Home: React.FC = () => {
           />
         </video>
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-10 py-16 lg:px-36 lg:py-28 items-center">
         <div className="">
           <h2 className="font-bold text-2xl lg:text-5xl leading-9 lg:leading-[60px] mb-10">
@@ -193,7 +190,6 @@ const Home: React.FC = () => {
           )}
         </p>
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 px-4 lg:px-36 py-6 items-center w-full">
         {[
           { image: Hotelevs, text: t("HOTELS AND ACCOMMODATIONS") },
@@ -245,7 +241,6 @@ const Home: React.FC = () => {
           </div>
         ))}
       </div>
-
       {/* Contact info */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 lg:px-36 py-16">
         {[
@@ -274,7 +269,6 @@ const Home: React.FC = () => {
           </Link>
         ))}
       </div>
-
       <div className="relative">
         <video
           className="h-full w-full absolute overflow-hidden top-0 left-0 -z-10 object-cover pointer-events-none"
@@ -328,7 +322,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-
       {/* FAQs */}
       <div className="px-4 lg:px-36 py-16 flex flex-col justify-center items-center">
         <h2 className="font-bold text-2xl lg:text-4xl mb-8 text-center w-4/5 lg:w-auto">
@@ -396,7 +389,7 @@ const Home: React.FC = () => {
           ))}
         </AccordionGroup>
       </div>
-    </PageTemplate>
+    </>
   );
 };
 
