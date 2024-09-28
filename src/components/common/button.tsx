@@ -45,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
           "text-white": variant === "solid" && color !== "white",
           "text-green": color === "white",
           "px-8 py-4 text-2xl": size === "lg",
-          "px-8 py-4 text-xl": size === "md",
+          "px-8 py-2 text-xl": size === "md",
           "px-5 py-2 text-xl": size === "sm",
         },
         className

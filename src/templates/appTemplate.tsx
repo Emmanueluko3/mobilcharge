@@ -13,13 +13,15 @@ const AppTemplate: React.FC = () => {
   // }
 
   return (
-    <div className="min-h-screen grid grid-flow-row grid-cols-12">
+    <div className="min-h-screen bg-gray-100 grid grid-flow-row grid-cols-12">
       <div className="col-span-3 bg-[#fff] hidden lg:block">
         <Sidebar />
       </div>
-      <div className="col-span-12 lg:col-span-9 mt-6 overflow-y-auto no-scrollbar max-h-[85vh] w-full p-4 lg:p-0 mb-20 lg:mb-auto">
+      <div className="col-span-12 lg:col-span-9 w-full">
         <AppHeader />
-        <Outlet />
+        <div className="overflow-y-auto no-scrollbar max-h-[85vh] p-4 lg:p-8 mb-20 lg:mb-auto ">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

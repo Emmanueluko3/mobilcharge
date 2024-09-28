@@ -200,5 +200,25 @@
   "Last name": "Nom de famille",
   "Phone number": "Numéro de téléphone",
   "Confirm password": "Confirmez le mot de passe",
-  "I accept all terms & conditions": "J'accepte tous les termes et conditions"
+  "I accept all terms & conditions": "J'accepte tous les termes et conditions",
+
+  "Book": "Livre",
+  "Trucks": "Camions",
+  "Settings": "Paramètres",
+  "Emergency": "Urgence",
+
+  "Request a charge for now or later": "Demander une charge pour maintenant ou plus tard",
+  "Add your car details, book,  and go": "Ajoutez les détails de votre voiture, réservez et partez",
+  "Car details": "Détails de la voiture",
+  "Enter location": "Entrez l'emplacement",
+  "See Prices": "Voir les tarifs",
+  "Available Trucks": "Camions disponibles",
+  "Optional": "Facultative",
+  "Battery level": "Niveau de batterie",
+  "Kilometres left": "Kilomètres restants",
+  "Description": "Description",
+  "Picture of your vehicle": "Photo de votre véhicule",
+  "Submit": "Soumettre",
+  "Car make": "Marque de voiture",
+  "Battery type": "Type de batterie"
 }

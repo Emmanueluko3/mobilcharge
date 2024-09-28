@@ -8,6 +8,7 @@ import Login from "./pages/app/auth/login";
 import PageTemplate from "./templates/pageTemplate";
 import AppTemplate from "./templates/appTemplate";
 import Signup from "./pages/app/auth/signup";
+import Book from "./pages/app/book";
 const router = createBrowserRouter([
   {
     path: "/", // Site Layout for public pages
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     path: "/app", // App Layout for logged-in users
     element: <AppTemplate />,
     children: [
-      { path: "book", element: <div>Book</div> },
+      { path: "book", element: <Book /> },
       { path: "trucks", element: <div>Trucks</div> },
       { path: "message", element: <div>Message</div> },
     ],

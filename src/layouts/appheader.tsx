@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import ScrollToTop from "../utils/scrollToTop";
 import { useTranslation } from "react-i18next";
@@ -23,12 +23,12 @@ const AppHeader: React.FC = () => {
     <>
       <ScrollToTop />
 
-      <nav className="w-full flex flex-row items-center justify-between text-black px-4 py-4 lg:px-10 lg:py-4">
+      <nav className="w-full flex flex-row items-center justify-between bg-white text-black lg:pt-8 px-4 py-4 lg:px-10 lg:py-4">
         <h2 className="text-2xl font-medium">{t(location.split("/")[1])}</h2>
 
         <div className="flex items-center">
           {/* Language Switch */}
-          <Dropdown size="sm">
+          <Dropdown>
             <MenuButton
               endDecorator={<FontAwesomeIcon icon={faCaretDown} />}
               className="!border-none !ring-0 focus:ring-0 transition-all"
