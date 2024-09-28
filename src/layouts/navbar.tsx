@@ -235,6 +235,21 @@ const Navbar: React.FC = () => {
                     {i18n.language === "fr" ? "English" : "Français"}
                   </div>
                 </div>
+
+                <div className="flex items-center gap-6 lg:order-last">
+                  <Link
+                    to="/login"
+                    className="font-semibold w-full flex justify-center items-center text-center rounded-md py-1.5 px-4 text-base text-primary-500 lg:hover:text-white border border-primary-500 hover:bg-primary-500 transition-all"
+                  >
+                    {t("Log in")}
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="rounded-md w-full text-center text-base text-white whitespace-nowrap bg-primary-500 transition-all flex items-center justify-center py-1.5 px-4 font-semibold border border-primary-500 lg:hover:bg-primary-700"
+                  >
+                    {t("Sign up")}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

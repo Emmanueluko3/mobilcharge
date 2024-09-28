@@ -15,7 +15,7 @@ import {
 import { faRocketchat } from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar: React.FC = () => {
-  const location = useLocation().pathname;
+  const location = useLocation().pathname.split("/").pop();
   const { t } = useTranslation();
 
   const navLinks = [
@@ -27,27 +27,27 @@ const Sidebar: React.FC = () => {
     {
       icon: <FontAwesomeIcon icon={faTruck} />,
       label: t("Trucks"),
-      href: "/trucks",
+      href: "trucks",
     },
     {
       icon: <FontAwesomeIcon icon={faRocketchat} />,
       label: t("Message"),
-      href: "/message",
+      href: "message",
     },
     {
       icon: <FontAwesomeIcon icon={faDollarSign} />,
       label: t("Pricing"),
-      href: "/pricing",
+      href: "pricing",
     },
     {
       icon: <FontAwesomeIcon icon={faGear} />,
       label: t("Settings"),
-      href: "/settings",
+      href: "settings",
     },
     {
       icon: <FontAwesomeIcon icon={faTruckMedical} />,
       label: t("Emergency"),
-      href: "/emergency",
+      href: "emergency",
     },
   ];
 

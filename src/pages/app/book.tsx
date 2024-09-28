@@ -151,6 +151,7 @@ const Book: React.FC = () => {
 
         <Button className="w-full">{t("Submit")}</Button>
       </div>
+      <div className="lg:col-span-7"></div>
     </div>
   );
 };

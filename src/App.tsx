@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: "/app", // App Layout for logged-in users
+    path: "/dashboard",
     element: <AppTemplate />,
     children: [
       { path: "book", element: <Book /> },
