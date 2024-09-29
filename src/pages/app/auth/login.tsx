@@ -63,8 +63,8 @@ const Login: React.FC = () => {
 
         dispatch(loginSuccess(response.data));
       } catch (error: any) {
-        if (error.response.data.error) {
-          return toast.error(error.response.data.error);
+        if (error?.response?.data?.error) {
+          return toast.error(error?.response?.data?.error);
         }
         toast.error("Unknown error occurred");
         console.log("error message", error);
