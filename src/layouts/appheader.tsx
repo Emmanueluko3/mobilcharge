@@ -8,9 +8,11 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import EnglishUS from "../assets/images/englishUS.png";
 import French from "../assets/images/french.png";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { useAppSelector } from "../store/hooks";
 
 const AppHeader: React.FC = () => {
   const location: any = useLocation().pathname.split("/").pop();
+  const user: any = useAppSelector((state) => state.auth.user);
 
   // Translate
   const { t, i18n } = useTranslation();
@@ -72,7 +74,7 @@ const AppHeader: React.FC = () => {
           </div>
           <Link to="settings">
             <img
-              src="https://avatars.githubusercontent.com/u/101985715?v=4"
+              src={user?.profile_image}
               className="h-12 w-12 rounded-full"
               alt=""
             />

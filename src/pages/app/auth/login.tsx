@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import MobileChargeBus from "../../../assets/images/MobileChargebus.png";
 import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
@@ -7,11 +7,12 @@ import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
 import apiService from "../../../api/apiServices";
 import { loginSuccess } from "../../../store/features/auth/authSlice";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [loginError, setLoginError] = useState({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +23,13 @@ const Login: React.FC = () => {
       [name]: value,
     });
   };
+
+  const user = useAppSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    setLoginData({ email: "", password: "" });
+    setLoginError({ email: "", password: "" });
+  }, [location, user]);
 
   const validateForm = () => {
     const errors = {
@@ -52,9 +60,8 @@ const Login: React.FC = () => {
           "POST",
           loginData
         );
-        console.log(response);
 
-        // dispatch(loginSuccess(response.data.data));
+        dispatch(loginSuccess(response.data));
       } catch (error: any) {
         if (error) {
           console.log("error", error);
@@ -65,6 +72,9 @@ const Login: React.FC = () => {
       }
     }
   };
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
   return (
     <div
       style={{

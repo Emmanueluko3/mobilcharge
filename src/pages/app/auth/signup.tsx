@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import MobileChargeBus from "../../../assets/images/MobileChargebus.png";
 import Logo from "../../../assets/images/logo.png";
@@ -107,7 +107,7 @@ const Signup: React.FC = () => {
           "POST",
           signupData
         );
-        console.log(response);
+        console.log(response?.data);
 
         // dispatch(loginSuccess(response.data.data));
       } catch (error: any) {

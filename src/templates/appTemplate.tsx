@@ -1,16 +1,22 @@
 import React from "react";
-// import { useAppSelector } from "../store/hooks";
-// import { Navigate } from "react-router-dom";
+import { useAppSelector } from "../store/hooks";
+import { Navigate } from "react-router-dom";
 import Sidebar from "../layouts/sidebar";
 import { Outlet } from "react-router-dom";
 import AppHeader from "../layouts/appheader";
 
 const AppTemplate: React.FC = () => {
-  // const user: any = useAppSelector((state) => state.auth.user);
+  const user: any = useAppSelector((state) => state.auth.user);
+  const isAuthenticated = localStorage.getItem("accessToken");
 
-  // if (user.creator_status !== "ACTIVE") {
-  //   return <Navigate to="/profile-setup" replace />;
-  // }
+  if (!user && !isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!user && !isAuthenticated) {
+    localStorage.removeItem("accessToken");
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 grid grid-flow-row grid-cols-12">
