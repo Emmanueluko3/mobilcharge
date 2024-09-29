@@ -18,7 +18,9 @@ const authSlice = createSlice({
   reducers: {
     loginSuccess(state, action) {
       state.isLoggedIn = true;
-      state.user = action.payload;
+      localStorage.setItem("accessToken", action.payload.access);
+      localStorage.setItem("refreshToken", action.payload.refresh);
+      state.user = action.payload.user;
       state.error = undefined;
     },
 

@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/joy";
 import clx from "classnames";
 import React, { type ReactNode } from "react";
 
@@ -22,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={clx(
-        "bg-primary-500 flex justify-center rounded-md bg-primary text-sm font-semibold text-white transition-all shadow-sm hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+        "bg-primary-500 flex justify-center items-center rounded-md bg-primary text-sm font-semibold text-white transition-all shadow-sm hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
         {
           "border-green": color === "primary",
           "hover:border-green-light": color === "primary",
@@ -52,7 +53,14 @@ const Button: React.FC<ButtonProps> = ({
       )}
       {...rest}
     >
-      {isLoading ? <p className="font-semibold">Loading...</p> : children}
+      {isLoading ? (
+        <p className="font-semibold flex items-center">
+          <CircularProgress size="sm" />
+          <span className="ml-2">Loading...</span>
+        </p>
+      ) : (
+        children
+      )}
     </button>
   );
 };

@@ -143,7 +143,7 @@ export const InputIcon: React.FC<InputProps> = ({ className, ...rest }) => {
 
   return (
     <div className="relative">
-      {(rest.name === "firstName" || rest.name === "lastName") && (
+      {(rest.name === "first_name" || rest.name === "last_name") && (
         <FontAwesomeIcon
           icon={faUser}
           className="absolute h-5 w-5 font-bold left-2 top-1/2 transform -translate-y-1/2 text-gray-400"
@@ -163,7 +163,7 @@ export const InputIcon: React.FC<InputProps> = ({ className, ...rest }) => {
         />
       )}
 
-      {(rest.name === "password" || rest.name === "confirmPassword") && (
+      {(rest.name === "password" || rest.name === "confirm_password") && (
         <FontAwesomeIcon
           icon={faLock}
           className="absolute h-5 w-5 font-bold left-2 top-1/2 transform -translate-y-1/2 text-gray-400"

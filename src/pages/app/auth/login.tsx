@@ -5,16 +5,65 @@ import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
+import apiService from "../../../api/apiServices";
+import { loginSuccess } from "../../../store/features/auth/authSlice";
+import { useAppDispatch } from "../../../store/hooks";
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [loginError, setLoginError] = useState({ email: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setLoginData({
       ...loginData,
       [name]: value,
     });
+  };
+
+  const validateForm = () => {
+    const errors = {
+      email: !loginData.email
+        ? "Email is required"
+        : !/\S+@\S+\.\S+/.test(loginData.email)
+        ? "Email is invalid"
+        : "",
+      password: !loginData.password
+        ? "Password is required"
+        : loginData.password.length < 6
+        ? "Password must be at least 6 characters"
+        : "",
+    };
+
+    setLoginError(errors);
+    return !errors.email && !errors.password;
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log("Form submitted successfully", loginData);
+      try {
+        setIsLoading(true);
+        const response: any = await apiService(
+          "/api/auth/token/",
+          "POST",
+          loginData
+        );
+        console.log(response);
+
+        // dispatch(loginSuccess(response.data.data));
+      } catch (error: any) {
+        if (error) {
+          console.log("error", error);
+        }
+        console.log("error message", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
   return (
     <div
@@ -41,27 +90,33 @@ const Login: React.FC = () => {
           </Link>
         </p>
 
-        <div className="my-5 w-full">
-          <div className="w-full mb-6">
+        <form onSubmit={handleLogin} className="my-5 w-full">
+          <div className="w-full mb-6 text-start">
             <InputIcon
               name="email"
               type="email"
               value={loginData.email}
               onChange={handleChange}
               autoComplete="email"
-              required
               placeholder={t("Email")}
+              maxLength={32}
             />
+            {loginError.email && (
+              <p className="text-red-500 text-sm">{loginError.email}</p>
+            )}
           </div>
-          <div className="w-full mb-6">
+          <div className="w-full mb-6 text-start">
             <InputIcon
               name="password"
               type="password"
-              value={loginData.email}
+              value={loginData.password}
               onChange={handleChange}
-              required
               placeholder={t("Password")}
+              maxLength={10}
             />
+            {loginError.password && (
+              <p className="text-red-500 text-sm">{loginError.password}</p>
+            )}
           </div>
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center">
@@ -75,8 +130,15 @@ const Login: React.FC = () => {
               {t("Forgot password")}?
             </Link>
           </div>
-          <Button className="w-full">{t("Log in")}</Button>
-        </div>
+          <Button
+            type="submit"
+            isLoading={isLoading}
+            disabled={isLoading}
+            className="w-full"
+          >
+            {t("Log in")}
+          </Button>
+        </form>
       </div>
     </div>
   );
