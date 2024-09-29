@@ -103,7 +103,6 @@ const Signup: React.FC = () => {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted successfully", signupData);
       try {
         setIsLoading(true);
         const response: any = await apiService(

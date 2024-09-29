@@ -53,7 +53,6 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted successfully", loginData);
       try {
         setIsLoading(true);
         const response: any = await apiService(
