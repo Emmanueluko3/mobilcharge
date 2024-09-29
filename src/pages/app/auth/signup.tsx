@@ -6,9 +6,13 @@ import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
 import apiService from "../../../api/apiServices";
+import { useAppDispatch } from "../../../store/hooks";
+import { loginSuccess } from "../../../store/features/auth/authSlice";
+import toast from "react-hot-toast";
 
 const Signup: React.FC = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   const [signupData, setSignupData] = useState<any>({
@@ -107,13 +111,13 @@ const Signup: React.FC = () => {
           "POST",
           signupData
         );
-        console.log(response?.data);
 
-        // dispatch(loginSuccess(response.data.data));
+        dispatch(loginSuccess(response.data));
       } catch (error: any) {
-        if (error) {
-          console.log("error", error);
+        if (error.response.data.error) {
+          return toast.error(error.response.data.error);
         }
+        toast.error("Unknown error occurred");
         console.log("error message", error);
       } finally {
         setIsLoading(false);

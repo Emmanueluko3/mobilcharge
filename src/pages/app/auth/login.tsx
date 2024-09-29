@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import apiService from "../../../api/apiServices";
 import { loginSuccess } from "../../../store/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import toast from "react-hot-toast";
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
@@ -63,15 +64,17 @@ const Login: React.FC = () => {
 
         dispatch(loginSuccess(response.data));
       } catch (error: any) {
-        if (error) {
-          console.log("error", error);
+        if (error.response.data.error) {
+          return toast.error(error.response.data.error);
         }
+        toast.error("Unknown error occurred");
         console.log("error message", error);
       } finally {
         setIsLoading(false);
       }
     }
   };
+
   if (user) {
     return <Navigate to="/dashboard" replace />;
   }
