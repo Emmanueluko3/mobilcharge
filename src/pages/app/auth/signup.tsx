@@ -103,7 +103,7 @@ const Signup: React.FC = () => {
       try {
         setIsLoading(true);
         const response: any = await apiService(
-          "/api/auth/signup",
+          "/api/auth/signup/",
           "POST",
           signupData
         );
