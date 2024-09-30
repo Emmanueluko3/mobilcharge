@@ -7,13 +7,14 @@ import AppHeader from "../layouts/appheader";
 
 const AppTemplate: React.FC = () => {
   const user: any = useAppSelector((state) => state.auth.user);
-  const isAuthenticated = localStorage.getItem("accessToken");
+  const isAuthenticated: any = localStorage.getItem("accessToken");
 
-  if (!user && !isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if (!user && !isAuthenticated) {
+  if (
+    !user ||
+    !isAuthenticated ||
+    (typeof isAuthenticated === "string" &&
+      isAuthenticated.trim() === "undefined")
+  ) {
     localStorage.removeItem("accessToken");
     return <Navigate to="/login" replace />;
   }

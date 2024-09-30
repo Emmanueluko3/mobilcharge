@@ -26,6 +26,7 @@ const Login: React.FC = () => {
   };
 
   const user = useAppSelector((state) => state.auth.user);
+  const isAuthenticated = localStorage.getItem("accessToken");
 
   useEffect(() => {
     setLoginData({ email: "", password: "" });
@@ -73,10 +74,10 @@ const Login: React.FC = () => {
       }
     }
   };
-
-  if (user) {
+  if (user && isAuthenticated && isAuthenticated.trim() !== "undefined") {
     return <Navigate to="/dashboard" replace />;
   }
+
   return (
     <div
       style={{

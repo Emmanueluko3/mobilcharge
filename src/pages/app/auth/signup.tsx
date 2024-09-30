@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import MobileChargeBus from "../../../assets/images/MobileChargebus.png";
 import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
 import apiService from "../../../api/apiServices";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginSuccess } from "../../../store/features/auth/authSlice";
 import toast from "react-hot-toast";
 
@@ -112,6 +112,7 @@ const Signup: React.FC = () => {
         );
 
         dispatch(loginSuccess(response.data));
+        toast.success(response?.data?.success);
       } catch (error: any) {
         if (error?.response?.data?.error) {
           return toast.error(error?.response?.data?.error);
@@ -123,6 +124,13 @@ const Signup: React.FC = () => {
       }
     }
   };
+
+  const user = useAppSelector((state) => state.auth.user);
+  const isAuthenticated: any = localStorage.getItem("accessToken");
+
+  if (user && isAuthenticated && isAuthenticated.trim() !== "undefined") {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div
