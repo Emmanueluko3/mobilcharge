@@ -10,6 +10,7 @@ import AppTemplate from "./templates/appTemplate";
 import Signup from "./pages/app/auth/signup";
 import Book from "./pages/app/book";
 import Trucks from "./pages/app/trucks";
+import Pricing from "./pages/app/pricing";
 const router = createBrowserRouter([
   {
     path: "/", // Site Layout for public pages
@@ -38,6 +39,9 @@ const router = createBrowserRouter([
       { path: "book", element: <Book /> },
       { path: "trucks", element: <Trucks /> },
       { path: "message", element: <div>Message</div> },
+      { path: "pricing", element: <Pricing /> },
+      { path: "settings", element: <div>Settings</div> },
+      { path: "emergency", element: <div>Emergency</div> },
     ],
   },
 ]);

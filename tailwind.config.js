@@ -29,6 +29,7 @@ module.exports = {
           900: "#30394A",
           950: "#202531",
         },
+        customPurple: "#231D4F",
       },
       fontFamily: {
         archivo: ["Archivo", "sans-serif"],
