@@ -9,6 +9,7 @@ import PageTemplate from "./templates/pageTemplate";
 import AppTemplate from "./templates/appTemplate";
 import Signup from "./pages/app/auth/signup";
 import Book from "./pages/app/book";
+import Trucks from "./pages/app/trucks";
 const router = createBrowserRouter([
   {
     path: "/", // Site Layout for public pages
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
     element: <AppTemplate />,
     children: [
       { path: "book", element: <Book /> },
-      { path: "trucks", element: <div>Trucks</div> },
+      { path: "trucks", element: <Trucks /> },
       { path: "message", element: <div>Message</div> },
     ],
   },

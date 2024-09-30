@@ -220,5 +220,19 @@
   "Picture of your vehicle": "Photo de votre véhicule",
   "Submit": "Soumettre",
   "Car make": "Marque de voiture",
-  "Battery type": "Type de batterie"
+  "Battery type": "Type de batterie",
+
+  "You are submitting a request for a charge": "Vous soumettez une demande de frais",
+  "See details below!": "Voir les détails ci-dessous !",
+  "Truck": "Camion",
+  "Truck Details": "Détails du camion",
+  "Nom du conducteur": "Nom du conducteur",
+  "Charging speed": "Vitesse de chargement",
+  "per second": "par seconde",
+  "Leave a note for driver": "Laissez une note au conducteur",
+  "Book now": "Réservez maintenant",
+
+  "Active Drivers": "Conducteurs actifs",
+  "All Drivers": "Tous les conducteurs",
+  "Truck Driver": "Conducteur de camion"
 }
