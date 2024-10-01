@@ -204,6 +204,7 @@
 
   "Book": "Livre",
   "Trucks": "Camions",
+  "Drivers": "Conductrices",
   "Settings": "Paramètres",
   "Emergency": "Urgence",
 
@@ -255,5 +256,14 @@
   "Price per day (6hrs) 18 charges": "Prix ​​par jour (6h) 18 charges",
   "18 charges - Total 320km $500": "18 charges - Total 320 km 500 $",
   "Price per hour (3 charges) 60km $90": "Prix ​​par heure (3 charges) 60km 90$",
-  "No membership for corporates $0": "Pas d'adhésion pour les entreprises 0$"
+  "No membership for corporates $0": "Pas d'adhésion pour les entreprises 0$",
+
+  "Thank you for your purchase with MobilCharge": "Merci pour votre achat avec MobilCharge",
+  "Driver Name": "Nom du conducteur",
+  "Invoice": "Facture",
+  "Invoice number": "Numéro de facture",
+  "Subtotal": "Subtotal",
+  "Tax": "Impôt",
+  "Total": "Total",
+  "You are submitting a request for an emergency charge": "Vous soumettez une demande de frais d'urgence"
 }

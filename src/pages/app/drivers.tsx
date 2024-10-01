@@ -1,7 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
-const Trucks: React.FC = () => {
+const Drivers: React.FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -23,11 +24,14 @@ const Trucks: React.FC = () => {
               <p className="text-xs font-medium text-gray-500">
                 {t("Truck Driver")} #1
               </p>
+              <Link
+                to="tel:+1234567890"
+                className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold"
+              >
+                +1234567890
+              </Link>
             </div>
-            <button className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold">
-              Message
-            </button>
-          </div>{" "}
+          </div>
           <div className="flex justify-between items-center bg-white rounded-lg p-4">
             <img
               src="https://avatars.githubusercontent.com/u/101985715?v=4"
@@ -39,11 +43,14 @@ const Trucks: React.FC = () => {
               <p className="text-xs font-medium text-gray-500">
                 {t("Truck Driver")} #1
               </p>
+              <Link
+                to="tel:+1234567890"
+                className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold"
+              >
+                +1234567890
+              </Link>
             </div>
-            <button className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold">
-              Message
-            </button>
-          </div>{" "}
+          </div>
           <div className="flex justify-between items-center bg-white rounded-lg p-4">
             <img
               src="https://avatars.githubusercontent.com/u/101985715?v=4"
@@ -55,10 +62,13 @@ const Trucks: React.FC = () => {
               <p className="text-xs font-medium text-gray-500">
                 {t("Truck Driver")} #1
               </p>
+              <Link
+                to="tel:+1234567890"
+                className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold"
+              >
+                +1234567890
+              </Link>
             </div>
-            <button className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold">
-              Message
-            </button>
           </div>
         </div>
       </div>
@@ -79,11 +89,14 @@ const Trucks: React.FC = () => {
               <p className="text-xs font-medium text-gray-500">
                 {t("Truck Driver")} #1
               </p>
+              <Link
+                to="tel:+1234567890"
+                className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold"
+              >
+                +1234567890
+              </Link>
             </div>
-            <button className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold">
-              Message
-            </button>
-          </div>{" "}
+          </div>
           <div className="flex justify-between items-center bg-white rounded-lg p-4">
             <img
               src="https://avatars.githubusercontent.com/u/101985715?v=4"
@@ -95,11 +108,14 @@ const Trucks: React.FC = () => {
               <p className="text-xs font-medium text-gray-500">
                 {t("Truck Driver")} #1
               </p>
+              <Link
+                to="tel:+1234567890"
+                className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold"
+              >
+                +1234567890
+              </Link>
             </div>
-            <button className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold">
-              Message
-            </button>
-          </div>{" "}
+          </div>
           <div className="flex justify-between items-center bg-white rounded-lg p-4">
             <img
               src="https://avatars.githubusercontent.com/u/101985715?v=4"
@@ -111,10 +127,13 @@ const Trucks: React.FC = () => {
               <p className="text-xs font-medium text-gray-500">
                 {t("Truck Driver")} #1
               </p>
+              <Link
+                to="tel:+1234567890"
+                className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold"
+              >
+                +1234567890
+              </Link>
             </div>
-            <button className="text-primary-500 hover:text-primary-700 transition-all text-sm font-bold">
-              Message
-            </button>
           </div>
         </div>
       </div>
@@ -122,4 +141,4 @@ const Trucks: React.FC = () => {
   );
 };
 
-export default Trucks;
+export default Drivers;

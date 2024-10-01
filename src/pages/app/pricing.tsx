@@ -104,7 +104,7 @@ const Pricing: React.FC = () => {
                 {item.description}
               </p>
 
-              <div className="flex flex-col mb-10">
+              <div className="flex flex-col mb-10 lg:h-[30vh]">
                 {item.features.map((text, index) => (
                   <div key={index} className="flex mb-1">
                     <span

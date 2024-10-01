@@ -63,7 +63,7 @@ interface bookDataProps {
   booking_type: string;
 }
 
-const Book: React.FC = () => {
+const Emergency: React.FC = () => {
   const { t } = useTranslation();
   const imageInputRef = useRef<HTMLInputElement>(null);
   const [step, setStep] = useState(1);
@@ -79,7 +79,7 @@ const Book: React.FC = () => {
     kilometers_left: "",
     vehicle_image: null,
     description: "",
-    booking_type: "Normal",
+    booking_type: "Emergency",
     drivers_note: "",
   });
   const [bookError, setBookError] = useState<
@@ -420,4 +420,4 @@ const Book: React.FC = () => {
   );
 };
 
-export default Book;
+export default Emergency;

@@ -12,7 +12,7 @@ import {
   faTruck,
   faTruckMedical,
 } from "@fortawesome/free-solid-svg-icons";
-import { faRocketchat } from "@fortawesome/free-brands-svg-icons";
+// import { faRocketchat } from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar: React.FC = () => {
   const location = useLocation().pathname.split("/").pop();
@@ -26,14 +26,14 @@ const Sidebar: React.FC = () => {
     },
     {
       icon: <FontAwesomeIcon icon={faTruck} />,
-      label: t("Trucks"),
-      href: "trucks",
+      label: t("Drivers"),
+      href: "drivers",
     },
-    {
-      icon: <FontAwesomeIcon icon={faRocketchat} />,
-      label: t("Message"),
-      href: "message",
-    },
+    // {
+    //   icon: <FontAwesomeIcon icon={faRocketchat} />,
+    //   label: t("Message"),
+    //   href: "message",
+    // },
     {
       icon: <FontAwesomeIcon icon={faDollarSign} />,
       label: t("Pricing"),
@@ -63,9 +63,17 @@ const Sidebar: React.FC = () => {
               <h3
                 className={`px-6 py-2.5 rounded-lg ${
                   location === link.href
-                    ? "text-black bg-gray-100 border"
+                    ? link.href === "emergency"
+                      ? "text-red-500 bg-red-50"
+                      : "text-black bg-gray-100 border"
+                    : link.href === "emergency"
+                    ? "text-red-500"
                     : "text-gray-500"
-                } flex items-center font-medium hover:bg-gray-100 hover:text-black text-base`}
+                } flex items-center font-medium ${
+                  link.href === "emergency"
+                    ? "hover:text-red-500 hover:bg-red-50"
+                    : "hover:bg-gray-100 hover:text-black"
+                } text-base`}
               >
                 <span className="mr-3">{link.icon}</span> {link.label}
               </h3>
