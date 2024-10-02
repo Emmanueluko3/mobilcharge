@@ -9,6 +9,7 @@ import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import {
   faDollarSign,
   faGear,
+  faQuestion,
   faTruck,
   faTruckMedical,
 } from "@fortawesome/free-solid-svg-icons";
@@ -79,6 +80,32 @@ const Sidebar: React.FC = () => {
               </h3>
             </Link>
           ))}
+        </div>
+
+        <div className="flex mt-32 flex-col w-4/5 h-[34vh] justify-between items-center rounded-xl bg-gray-900 text-white p-5 relative">
+          <div className="absolute -mt-12 drop-shadow-2xl shadow-slate-600 rounded-full h-12 w-12 bg-white flex items-center justify-center">
+            <div className="h-10 w-10 bg-gray-900 flex items-center justify-center rounded-full">
+              <FontAwesomeIcon
+                icon={faQuestion}
+                className="font-bold text-white text-2xl"
+              />
+            </div>
+          </div>
+          <h3 className="text-base text-center text-white font-bold mt-10">
+            {t("Help Center")}
+          </h3>
+          <p className="text-xs text-center text-white">
+            {t(
+              "Having Trouble in Learning. Please contact us for more questions."
+            )}
+          </p>
+
+          <Link
+            to="/contact-us"
+            className="text-sm font-bold text-center text-gray-900 bg-white hover:bg-gray-200 transition-all rounded-xl px-4 py-2"
+          >
+            {t("Go To Help Center")}
+          </Link>
         </div>
       </div>
     </>
