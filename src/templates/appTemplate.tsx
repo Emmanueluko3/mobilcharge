@@ -26,7 +26,7 @@ const AppTemplate: React.FC = () => {
       </div>
       <div className="col-span-12 lg:col-span-9 w-full">
         <AppHeader />
-        <div className="overflow-y-auto no-scrollbar max-h-[85vh] p-4 lg:p-8 mb-20 lg:mb-auto ">
+        <div className="overflow-y-auto no-scrollbar max-h-[88vh] p-4 lg:p-8 mb-20 lg:mb-auto ">
           <Outlet />
         </div>
       </div>
