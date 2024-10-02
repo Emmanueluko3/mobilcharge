@@ -216,7 +216,7 @@ const Book: React.FC = () => {
                   name="car_make"
                   value={bookData.car_make}
                   onChange={handleChange}
-                  className="block w-full border-0 p-4 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  className="block w-full border-0 p-2.5 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                 >
                   <option value="" disabled hidden>
                     {t("Car make")}
@@ -234,7 +234,7 @@ const Book: React.FC = () => {
                   name="battery_type"
                   value={bookData.battery_type}
                   onChange={handleChange}
-                  className="block w-full border-0 p-4 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  className="block w-full border-0 p-2.5 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                 >
                   <option value="" disabled hidden>
                     {t("Battery type")}

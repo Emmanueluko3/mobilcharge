@@ -265,5 +265,9 @@
   "Subtotal": "Subtotal",
   "Tax": "Impôt",
   "Total": "Total",
-  "You are submitting a request for an emergency charge": "Vous soumettez une demande de frais d'urgence"
+  "You are submitting a request for an emergency charge": "Vous soumettez une demande de frais d'urgence",
+
+  "Save Changes": "Enregistrer les modifications",
+  "Profile Details": "Détails du profil",
+  "Password Settings": "Paramètres du mot de passe"
 }

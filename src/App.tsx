@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Home from "./pages/site/home";
 import About from "./pages/site/about";
 import Service from "./pages/site/services";
@@ -12,6 +16,7 @@ import Book from "./pages/app/book";
 import Drivers from "./pages/app/drivers";
 import Pricing from "./pages/app/pricing";
 import Emergency from "./pages/app/emergency";
+import Settings from "./pages/app/settings";
 const router = createBrowserRouter([
   {
     path: "/", // Site Layout for public pages
@@ -37,11 +42,12 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <AppTemplate />,
     children: [
+      { path: "", element: <Navigate to="book" /> },
       { path: "book", element: <Book /> },
       { path: "drivers", element: <Drivers /> },
       // { path: "message", element: <div>Message</div> },
       { path: "pricing", element: <Pricing /> },
-      { path: "settings", element: <div>Settings</div> },
+      { path: "settings", element: <Settings /> },
       { path: "emergency", element: <Emergency /> },
     ],
   },

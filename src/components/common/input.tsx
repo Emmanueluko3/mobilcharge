@@ -129,7 +129,7 @@ export const AppInput: React.FC<InputProps> = ({
               : rest.type
           }
           className={clx(
-            "block w-full border-0 p-3 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6",
+            "block w-full border-0 p-2 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-sm placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6",
             className
           )}
         />
