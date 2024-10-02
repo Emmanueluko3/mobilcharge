@@ -7,9 +7,10 @@ import { Button } from "../../components/common/button";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import MapImage from "../../assets/images/map_image.png";
 import MobileChargeBus from "../../assets/images/MobileChargebus.png";
-import apiService from "../../api/apiServices";
+// import apiService from "../../api/apiServices";
 import toast from "react-hot-toast";
 import BookingInvoice from "../../components/bookingInvoice";
+import { globalAxios } from "../../api/globalAxios";
 
 const electricVehicleMakes = [
   "Tesla Model S",
@@ -57,7 +58,7 @@ interface bookDataProps {
   battery_type: string;
   battery_level: string;
   kilometers_left: string;
-  vehicle_image: null | File;
+  vehicle_image: any;
   description: string;
   drivers_note: string;
   booking_type: string;
@@ -155,16 +156,54 @@ const Book: React.FC = () => {
   };
 
   const handleBooking = async () => {
+    const {
+      vehicle_image,
+      location,
+      car_make,
+      battery_type,
+      battery_level,
+      kilometers_left,
+
+      description,
+      booking_type,
+      drivers_note,
+    } = bookData;
+
+    const formData = new FormData();
+    formData.append("location", location);
+    formData.append("car_make", car_make);
+    formData.append("battery_type", battery_type);
+    formData.append("booking_type", booking_type);
+    formData.append("description", description);
+    formData.append("kilometers_left", kilometers_left);
+    formData.append("battery_level", battery_level);
+    formData.append("vehicle_image", vehicle_image);
+    formData.append("drivers_note", drivers_note);
+
     try {
       setIsLoading(true);
-      const response: any = await apiService(
-        "/api/booking/create-booking/",
-        "POST",
-        bookData
-      );
-      nextStep();
+      // const response: any = await apiService(
+      //   "/api/booking/create-booking/",
+      //   "POST",
+      //   bookData
+      // );
 
-      toast.success(response?.data?.message);
+      const response: any = await globalAxios.post(
+        "/api/booking/create-booking/",
+        formData,
+        {
+          headers: {
+            ...globalAxios.defaults.headers.common,
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json",
+          },
+        }
+      );
+      if (response.status) {
+        nextStep();
+
+        toast.success(response?.data?.message);
+      }
     } catch (error: any) {
       if (error?.response?.data?.error) {
         return toast.error(error?.response?.data?.error);

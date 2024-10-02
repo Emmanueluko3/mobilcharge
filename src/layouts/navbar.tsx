@@ -7,9 +7,12 @@ import { Link, useLocation } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import ScrollToTop from "../utils/scrollToTop";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../store/hooks";
 
 const Navbar: React.FC = () => {
   const location = useLocation().pathname;
+  const user: any = useAppSelector((state) => state.auth.user);
+  const isAuthenticated: any = localStorage.getItem("accessToken");
 
   // Translate
   const { t, i18n } = useTranslation();
@@ -73,18 +76,34 @@ const Navbar: React.FC = () => {
 
           {/* Auth Buttons */}
           <div className="flex items-center gap-6 max-md:hidden ms-32 lg:order-last">
-            <Link
-              to="/login"
-              className="font-semibold rounded-md py-1.5 px-4 text-base text-primary-500 hover:text-white border border-primary-500 hover:bg-primary-500 transition-all"
-            >
-              {t("Log in")}
-            </Link>
-            <Link
-              to="/signup"
-              className="rounded-md text-base text-white whitespace-nowrap bg-primary-500 transition-all flex items-center justify-center py-1.5 px-4 font-semibold border border-primary-500 hover:bg-primary-700"
-            >
-              {t("Sign up")}
-            </Link>
+            {user ||
+            isAuthenticated ||
+            (typeof isAuthenticated &&
+              isAuthenticated.trim() !== "undefined") ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="rounded-md text-base text-white whitespace-nowrap bg-primary-500 transition-all flex items-center justify-center py-1.5 px-4 font-semibold border border-primary-500 hover:bg-primary-700"
+                >
+                  {t("Go to Dashboard")}
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="font-semibold rounded-md py-1.5 px-4 text-base text-primary-500 hover:text-white border border-primary-500 hover:bg-primary-500 transition-all"
+                >
+                  {t("Log in")}
+                </Link>
+                <Link
+                  to="/signup"
+                  className="rounded-md text-base text-white whitespace-nowrap bg-primary-500 transition-all flex items-center justify-center py-1.5 px-4 font-semibold border border-primary-500 hover:bg-primary-700"
+                >
+                  {t("Sign up")}
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Contact buttons */}
