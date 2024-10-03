@@ -87,6 +87,13 @@ const Navbar: React.FC = () => {
                 >
                   {t("Go to Dashboard")}
                 </Link>
+                <Link to="/dashboard/settings">
+                  <img
+                    src={user?.profile_image}
+                    className="h-12 w-12 rounded-full"
+                    alt=""
+                  />
+                </Link>
               </>
             ) : (
               <>
