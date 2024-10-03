@@ -11,7 +11,7 @@ import { useAppSelector } from "../store/hooks";
 
 const Navbar: React.FC = () => {
   const location = useLocation().pathname;
-  const user: any = useAppSelector((state) => state.auth.user);
+  const user: any = useAppSelector((state) => state?.auth?.user);
   const isAuthenticated: any = localStorage.getItem("accessToken");
 
   // Translate
@@ -76,10 +76,7 @@ const Navbar: React.FC = () => {
 
           {/* Auth Buttons */}
           <div className="flex items-center gap-6 max-md:hidden ms-32 lg:order-last">
-            {user ||
-            isAuthenticated ||
-            (typeof isAuthenticated &&
-              isAuthenticated.trim() !== "undefined") ? (
+            {user || isAuthenticated ? (
               <>
                 <Link
                   to="/dashboard"
@@ -114,17 +111,19 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Contact buttons */}
-          <div className="flex items-center gap-6 max-md:hidden lg:order-last">
-            <Link to="/" className="hover:text-primary-500 mr-4">
-              <FontAwesomeIcon icon={faFacebookF} className="h-5" />
-            </Link>
-            <Link
-              to="/booking"
-              className="rounded-md text-sm text-white whitespace-nowrap bg-[#B22222] transition-all flex items-center justify-center px-2 py-1 font-medium"
-            >
-              {t("BOOK NOW!")}
-            </Link>
-          </div>
+          {(!user || !isAuthenticated) && (
+            <div className="flex items-center gap-6 max-md:hidden lg:order-last">
+              <Link to="/" className="hover:text-primary-500 mr-4">
+                <FontAwesomeIcon icon={faFacebookF} className="h-5" />
+              </Link>
+              <Link
+                to="/booking"
+                className="rounded-md text-sm text-white whitespace-nowrap bg-[#B22222] transition-all flex items-center justify-center px-2 py-1 font-medium"
+              >
+                {t("BOOK NOW!")}
+              </Link>
+            </div>
+          )}
         </nav>
 
         {/* Menu Toggle Button for Mobile */}
