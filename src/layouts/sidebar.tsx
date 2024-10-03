@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import { useTranslation } from "react-i18next";
@@ -10,14 +10,25 @@ import {
   faDollarSign,
   faGear,
   faQuestion,
+  faRightFromBracket,
   faTruck,
   faTruckMedical,
 } from "@fortawesome/free-solid-svg-icons";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContentText from "@mui/material/DialogContentText";
+import { useAppDispatch } from "../store/hooks";
+import { logout } from "../store/features/auth/authSlice";
+// import apiService from "../api/apiServices";
+import toast from "react-hot-toast";
+import { Button } from "../components/common/button";
 // import { faRocketchat } from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar: React.FC = () => {
   const location = useLocation().pathname.split("/").pop();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const navLinks = [
     {
@@ -52,6 +63,36 @@ const Sidebar: React.FC = () => {
     },
   ];
 
+  const [openLogout, setOpenLogout] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // const getRefreshToken = () => {
+  //   return localStorage.getItem("refreshToken");
+  // };
+
+  const handleLogout = async () => {
+    console.log("logout", isLoading);
+    try {
+      setIsLoading(true);
+      // const response: any = await apiService("/api/auth/logout/", "POST", {
+      //   refresh: getRefreshToken(),
+      // });
+
+      // if (response) {
+      dispatch(logout());
+      setOpenLogout(false);
+      // }
+    } catch (error: any) {
+      if (error?.response?.data?.error) {
+        return toast.error(error?.response?.data?.error);
+      }
+      toast.error("Unknown error occurred");
+      console.log("error message", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="w-full bg-[#fff] h-fit p-10">
@@ -80,6 +121,15 @@ const Sidebar: React.FC = () => {
               </h3>
             </Link>
           ))}
+          <button
+            onClick={() => setOpenLogout(true)}
+            className="flex items-center font-bold text-gray-500 hover:text-red-500 px-5 py-2 mt-20"
+          >
+            <span className="mr-3">
+              <FontAwesomeIcon icon={faRightFromBracket} />
+            </span>
+            Log Out
+          </button>
         </div>
 
         <div className="flex mt-32 flex-col w-4/5 h-[34vh] justify-between items-center rounded-xl bg-gray-900 text-white p-5 relative">
@@ -108,6 +158,28 @@ const Sidebar: React.FC = () => {
           </Link>
         </div>
       </div>
+
+      <Dialog open={openLogout} onClose={() => setOpenLogout(false)}>
+        <div className="flex items-center flex-col">
+          <DialogTitle>Confirm</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to log out?
+            </DialogContentText>
+          </DialogContent>
+          <div className="flex items-center justify-between w-4/5 mx-auto mb-4">
+            <Button
+              className="bg-transparent border-2 border-primary-500"
+              onClick={() => setOpenLogout(false)}
+            >
+              <span className="text-primary-500">Cancel</span>
+            </Button>
+            <Button className="bg-red-700" onClick={handleLogout}>
+              Confirm
+            </Button>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 };

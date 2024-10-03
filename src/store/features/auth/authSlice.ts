@@ -34,7 +34,7 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.user = undefined;
 
-      window.location.replace("/signin");
+      window.location.replace("/login");
     },
   },
 });

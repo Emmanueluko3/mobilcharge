@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "../../../components/common/button";
 import CarIcon from "../../../assets/icons/carIcon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
