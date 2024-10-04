@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isTokenExpired, refreshToken } from "../utils/api-utils";
 
 const getAccessToken = () => {
   return localStorage.getItem("accessToken");
@@ -12,9 +13,15 @@ export const globalAxios = axios.create({
   },
 });
 
-globalAxios.interceptors.request.use((config) => {
+globalAxios.interceptors.request.use(async (config) => {
+  if (config?.url?.includes("/api/auth/token/refresh/")) {
+    return config;
+  }
   const accessToken = getAccessToken();
   if (accessToken) {
+    if (isTokenExpired(accessToken)) {
+      await refreshToken();
+    }
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
   return config;

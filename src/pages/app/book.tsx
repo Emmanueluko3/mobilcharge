@@ -199,7 +199,7 @@ const Book: React.FC = () => {
           },
         }
       );
-      if (response.status) {
+      if (response) {
         nextStep();
 
         toast.success(response?.data?.message);
