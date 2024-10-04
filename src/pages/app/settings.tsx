@@ -3,6 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../../components/common/button";
 import { AppInput } from "../../components/common/input";
 import { useAppSelector } from "../../store/hooks";
+import toast from "react-hot-toast";
+import { globalAxios } from "../../api/globalAxios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 const Settings: React.FC = () => {
   const user: any = useAppSelector((state) => state.auth.user);
@@ -16,9 +20,11 @@ const Settings: React.FC = () => {
     last_name: "",
     phone: "",
     email: "",
-    password: "",
-    confirm_password: "",
+    old_password: "",
+    new_password: "",
+    confirm_new_password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -29,7 +35,50 @@ const Settings: React.FC = () => {
     }
   }, [user]);
 
-  console.log(profileData);
+  const handleUpdateProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setIsLoading(true);
+      const {
+        profile_image,
+        first_name,
+        last_name,
+        phone,
+        email,
+        old_password,
+        new_password,
+        confirm_new_password,
+      } = profileData;
+      const formData = new FormData();
+      formData.append("profile_image", profile_image);
+      formData.append("first_name", first_name);
+      formData.append("last_name", last_name);
+      formData.append("phone", phone);
+      formData.append("email", email);
+      formData.append("old_password", old_password);
+      formData.append("new_password", new_password);
+      formData.append("confirm_new_password", confirm_new_password);
+
+      const response: any = await globalAxios.post(
+        "/api/auth/update-profile/",
+        formData,
+        {
+          headers: {
+            ...globalAxios.defaults.headers.common,
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json",
+          },
+        }
+      );
+
+      toast.success(response?.data?.success);
+    } catch (error: any) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
@@ -61,7 +110,10 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="p-4 lg:p-6 bg-white rounded-lg flex flex-col items-center lg:items-start w-full">
+    <form
+      onSubmit={handleUpdateProfile}
+      className="p-4 lg:p-6 bg-white rounded-lg flex flex-col items-center lg:items-start w-full"
+    >
       <div className="mb-8 w-full">
         <h3 className="text-2xl font-semibold mb-2">{t("Profile Details")}</h3>
 
@@ -70,13 +122,18 @@ const Settings: React.FC = () => {
           <div className="col-span-full my-3 flex flex-col items-center justify-center">
             <div
               onClick={() => imageInputRef?.current?.click()}
-              className="w-14 h-14 lg:h-20 lg:w-20 border-2 border-dashed lg:hover:border-solid transition-all border-primary-500 rounded-full cursor-pointer mb-2"
+              className="w-14 h-14 lg:h-20 lg:w-20 border-2 border-dashed lg:hover:border-solid transition-all border-primary-500 rounded-full cursor-pointer mb-2 flex items-center justify-center"
             >
-              {profileData.profile_image && (
+              {profileData.profile_image ? (
                 <img
-                  src={profileData.profile_image}
+                  src={URL.createObjectURL(profileData.profile_image)}
                   className="h-full w-full rounded-full"
                   alt=""
+                />
+              ) : (
+                <FontAwesomeIcon
+                  className="text-primary-400 text-xl"
+                  icon={faImage}
                 />
               )}
             </div>
@@ -136,27 +193,42 @@ const Settings: React.FC = () => {
         </h3>
 
         <div className="grid grid-flow-row grid-cols-1 lg:grid-cols-2 gap-6 lg:w-4/5">
+          <div className="mb-2 lg:col-span-2">
+            <AppInput
+              name="old_password"
+              type="password"
+              placeholder={t("Old password")}
+              maxLength={24}
+            />
+          </div>
           <div className="mb-2">
             <AppInput
-              name="password"
+              name="new_password"
               type="password"
-              placeholder={t("Password")}
+              placeholder={t("New password")}
               maxLength={24}
             />
           </div>
 
           <div className="mb-2">
             <AppInput
-              name="confirm_password"
+              name="confirm_new_password"
               type="password"
-              placeholder={t("Confirm password")}
+              placeholder={t("Confirm new password")}
               maxLength={24}
             />
           </div>
         </div>
       </div>
-      <Button className="w-fit">{t("Save Changes")}!</Button>
-    </div>
+      <Button
+        type="submit"
+        isLoading={isLoading}
+        disabled={isLoading}
+        className="w-fit"
+      >
+        {t("Save Changes")}!
+      </Button>
+    </form>
   );
 };
 

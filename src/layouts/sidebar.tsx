@@ -128,7 +128,7 @@ const Sidebar: React.FC = () => {
             <span className="mr-3">
               <FontAwesomeIcon icon={faRightFromBracket} />
             </span>
-            Log Out
+            {t("Log Out")}
           </button>
         </div>
 
@@ -161,10 +161,10 @@ const Sidebar: React.FC = () => {
 
       <Dialog open={openLogout} onClose={() => setOpenLogout(false)}>
         <div className="flex items-center flex-col">
-          <DialogTitle>Confirm</DialogTitle>
+          <DialogTitle>{t("Confirm")}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Are you sure you want to log out?
+              {t("Are you sure you want to log out")}?
             </DialogContentText>
           </DialogContent>
           <div className="flex items-center justify-between w-4/5 mx-auto mb-4">
@@ -172,10 +172,10 @@ const Sidebar: React.FC = () => {
               className="bg-transparent border-2 border-primary-500"
               onClick={() => setOpenLogout(false)}
             >
-              <span className="text-primary-500">Cancel</span>
+              <span className="text-primary-500">{t("Cancel")}</span>
             </Button>
             <Button className="bg-red-700" onClick={handleLogout}>
-              Confirm
+              {t("Confirm")}
             </Button>
           </div>
         </div>

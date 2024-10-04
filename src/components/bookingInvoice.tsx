@@ -13,7 +13,6 @@ const BookingInvoice: React.FC = () => {
         <h2 className="text-3xl font-semibold">
           {t("Thank you for your purchase with MobilCharge")}
         </h2>
-        <p className="text-sm my-3">{t("See details below!")}</p>
         <p className="text-sm mt-3 mb-8 text-gray-500">
           <FontAwesomeIcon icon={faTruck} className="mr-3" />
           {t("Truck")} #1
@@ -58,11 +57,11 @@ const BookingInvoice: React.FC = () => {
           </tbody>
         </table>
       </div>
-      <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center lg:order-4 order-3">
+      <div className="lg:col-span-12 h-fit flex flex-col items-start justify-center lg:order-4 order-3">
         <h2 className="text-3xl font-semibold w-full mb-4">
           {t("Truck Details")}
         </h2>
-        <table className="table-auto w-full text-left my-4">
+        <table className="table-auto lg:w-4/5 text-left my-4">
           <tbody>
             <tr>
               <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
@@ -84,20 +83,7 @@ const BookingInvoice: React.FC = () => {
         </table>
 
         <img src={MobileChargeBus} className="lg:h-80" alt="Charge van" />
-      </div>
-
-      <div className="lg:col-span-5 h-fit order-4 lg:order-3">
-        {/* Message for driver */}
-        <div className="lg:my-8">
-          <h3 className="text-xl font-semibold mb-2">
-            {t("Estimate time arrival")}
-          </h3>
-          <div className="mb-2"> 3hrs</div>
-        </div>
-
-        <div className="flex items-center gap-10">
-          <Button className="w-full">{t("Contact Driver")}!</Button>
-        </div>
+        <Button className="w-2/5">{t("Contact Driver")}!</Button>
       </div>
     </div>
   );

@@ -187,6 +187,7 @@
 
   "Log in": "Se connecter",
   "Sign up": "S'inscrire",
+  "Log Out": "Déconnexion",
   "Password": "Mot de passe",
   "Remember me": "Souviens-toi de moi",
   "Forgot password": "Mot de passe oublié",
@@ -239,6 +240,8 @@
   "Active Drivers": "Conducteurs actifs",
   "All Drivers": "Tous les conducteurs",
   "Truck Driver": "Conducteur de camion",
+  "No active driver yet": "Pas encore de pilote actif",
+  "No driver yet": "Pas encore de pilote",
 
   "Pricing Plans": "Plans de tarification",
   "month": "mois",
@@ -272,5 +275,12 @@
 
   "Save Changes": "Enregistrer les modifications",
   "Profile Details": "Détails du profil",
-  "Password Settings": "Paramètres du mot de passe"
+  "Password Settings": "Paramètres du mot de passe",
+  "Old password": "ancien mot de passe",
+  "New password": "Nouveau mot de passe",
+  "Confirm new password": "Confirmer le nouveau mot de passe",
+
+  "Confirm": "Confirmer",
+  "Cancel": "Annuler",
+  "Are you sure you want to log out": "Etes-vous sûr de vouloir vous déconnecter"
 }
