@@ -315,11 +315,10 @@ const Book: React.FC = () => {
                 onClick={() => imageInputRef?.current?.click()}
                 className="mb-2 border-2 border-primary-500 border-dashed hover:border-solid transition-all rounded-lg w-full h-48 flex justify-center items-center cursor-pointer"
               >
-                {" "}
                 {bookData.vehicle_image ? (
                   <img
                     src={URL.createObjectURL(bookData.vehicle_image)}
-                    className="h-full w-full rounded-lg"
+                    className="h-full w-full rounded-lg object-cover"
                     alt=""
                   />
                 ) : (
