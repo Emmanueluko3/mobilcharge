@@ -343,7 +343,7 @@ const Book: React.FC = () => {
             {/* Message */}
             <div className="mb-8">
               <h3 className="text-2xl font-semibold mb-2">
-                {t("Description")}
+                {t("Leave a note for the driver")}
               </h3>
               <div className="mb-2">
                 <textarea
@@ -416,7 +416,7 @@ const Book: React.FC = () => {
             {!bookData.description && (
               <div className="lg:my-8">
                 <h3 className="text-xl font-semibold mb-2">
-                  {t("Leave a note for driver")}
+                  {t("Leave a note for the driver")}
                 </h3>
                 <div className="mb-2">
                   <textarea
