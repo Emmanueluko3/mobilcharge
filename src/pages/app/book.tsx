@@ -313,7 +313,7 @@ const Book: React.FC = () => {
               <p className="text-xs my-3">*{t("drag or browse from device")}</p>
               <div
                 onClick={() => imageInputRef?.current?.click()}
-                className="mb-2 border-2 border-primary-500 border-dashed hover:border-solid transition-all rounded-lg w-full h-48 flex justify-center items-center cursor-pointer"
+                className="mb-2 border-2 border-primary-500 border-dashed hover:border-solid transition-all rounded-lg w-full h-56 flex justify-center items-center cursor-pointer"
               >
                 {bookData.vehicle_image ? (
                   <img
