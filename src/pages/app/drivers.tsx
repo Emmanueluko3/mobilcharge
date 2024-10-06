@@ -35,7 +35,7 @@ const Drivers: React.FC = () => {
                   className="flex justify-between items-center bg-white rounded-lg p-4"
                 >
                   <img
-                    src={item.user.profile_image_url}
+                    src={item.user.profile_image}
                     className="rounded-full h-10 w-10"
                     alt="mee"
                   />
@@ -75,7 +75,7 @@ const Drivers: React.FC = () => {
                 className="flex justify-between items-center bg-white rounded-lg p-4"
               >
                 <img
-                  src={item.user.profile_image_url}
+                  src={item.user.profile_image}
                   className="rounded-full h-10 w-10"
                   alt="mee"
                 />
