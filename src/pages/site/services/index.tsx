@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -8,7 +8,7 @@ import {
   faHouse,
   faLeaf,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CarForest from "../../../assets/images/car-forest.jpg";
 import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
 import pricingBg from "../../../assets/images/pricingBg.jpg";
@@ -16,6 +16,14 @@ import { useTranslation } from "react-i18next";
 
 const Service: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const pricingRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (location.hash === "#pricing" && pricingRef.current) {
+      pricingRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
+
   return (
     <>
       {/* Hero section */}
@@ -307,6 +315,7 @@ const Service: React.FC = () => {
         </div>
 
         <section
+          ref={pricingRef}
           id="pricing"
           className="flex flex-col py-10 lg:py-24 items-center relative bg-white"
         >

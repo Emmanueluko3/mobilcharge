@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../store/hooks";
 
 const Navbar: React.FC = () => {
-  const location = useLocation().pathname;
+  const location = useLocation();
   const user: any = useAppSelector((state) => state?.auth?.user);
   const isAuthenticated: any = localStorage.getItem("accessToken");
 
@@ -169,7 +169,9 @@ const Navbar: React.FC = () => {
               key={index}
               to={item.href}
               className={`transition-all cursor-pointer text-grey-900 text-base font-bold px-2 ${
-                location === item.href
+                location.pathname === item.href ||
+                location.hash.replace("#pricing", "/services#pricing") ===
+                  item.href
                   ? "border-black border-2"
                   : "hover:text-primary-500"
               }`}
