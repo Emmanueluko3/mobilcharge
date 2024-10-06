@@ -129,7 +129,6 @@ const Book: React.FC = () => {
       "location",
       "car_make",
       "battery_type",
-      "description",
     ];
 
     requiredStringFields.forEach((field) => {
@@ -414,20 +413,22 @@ const Book: React.FC = () => {
 
           <div className="lg:col-span-5 h-fit">
             {/* Message for driver */}
-            <div className="lg:my-8">
-              <h3 className="text-xl font-semibold mb-2">
-                {t("Leave a note for driver")}
-              </h3>
-              <div className="mb-2">
-                <textarea
-                  name="drivers_note"
-                  onChange={handleChange}
-                  value={bookData.drivers_note}
-                  placeholder={t("Message")}
-                  className="block min-h-44 w-full border-0 p-4 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
-                ></textarea>
+            {!bookData.description && (
+              <div className="lg:my-8">
+                <h3 className="text-xl font-semibold mb-2">
+                  {t("Leave a note for driver")}
+                </h3>
+                <div className="mb-2">
+                  <textarea
+                    name="drivers_note"
+                    onChange={handleChange}
+                    value={bookData.drivers_note}
+                    placeholder={t("Message")}
+                    className="block min-h-44 w-full border-0 p-4 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
+                  ></textarea>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="flex items-center gap-10">
               <button
