@@ -172,7 +172,7 @@ const Signup: React.FC = () => {
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
       }}
-      className="flex items-center justify-center min-h-screen py-6"
+      className="w-full flex items-center justify-center min-h-screen py-6"
     >
       <div className="p-5 lg:p-7 lg:px-10 w-full lg:w-4/12 flex flex-col justify-center items-center bg-white rounded-lg lg:drop-shadow-lg text-center">
         <Link to="/" className="mb-6 lg:mb-8">

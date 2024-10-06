@@ -95,11 +95,11 @@ const Sidebar: React.FC = () => {
 
   return (
     <>
-      <div className="w-full bg-[#fff] h-fit p-10">
+      <div className="pl-16 w-full bg-[#fff] h-fit p-10">
         <Link to="/" className="">
           <img src={Logo} alt="Logo" className="h-10 lg:h-12" />
         </Link>
-        <div className="flex mt-12 flex-col w-4/5 h-full justify-between">
+        <div className="flex mt-12 flex-col w-full h-full justify-between">
           {navLinks.map((link, index) => (
             <Link to={link.href} key={index} className="my-3">
               <h3
@@ -132,7 +132,7 @@ const Sidebar: React.FC = () => {
           </button>
         </div>
 
-        <div className="flex mt-32 flex-col w-4/5 h-[34vh] justify-between items-center rounded-xl bg-gray-900 text-white p-5 relative">
+        <div className="flex mt-32 flex-col w-full h-64 justify-between items-center rounded-xl bg-gray-900 text-white p-5 relative">
           <div className="absolute -mt-12 drop-shadow-2xl shadow-slate-600 rounded-full h-12 w-12 bg-white flex items-center justify-center">
             <div className="h-10 w-10 bg-gray-900 flex items-center justify-center rounded-full">
               <FontAwesomeIcon

@@ -12,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Providers>
-      <Routes />
+      <div className="flex justify-center items-center w-full">
+        <Routes />
+      </div>
     </Providers>
   </React.StrictMode>
 );

@@ -8,10 +8,14 @@ const Drivers: React.FC = () => {
   const [drivers, setDrivers] = useState([]);
 
   const fetchedDrivers = async () => {
-    const response: any = await apiService("/api/driver/get-drivers/", "GET");
-    if (response) {
-      setDrivers(response?.data);
-    } else return;
+    try {
+      const response: any = await apiService("/api/driver/get-drivers/", "GET");
+      if (response) {
+        setDrivers(response?.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -26,7 +30,7 @@ const Drivers: React.FC = () => {
           {t("Active Drivers")}
         </h2>
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-3">
-          {drivers?.filter((item: any) => item?.user?.is_active !== true) ? (
+          {!drivers?.filter((item: any) => item?.user?.is_active === true) ? (
             drivers
               ?.filter((item: any) => item?.user?.is_active === true)
               .map((item: any, index) => (
