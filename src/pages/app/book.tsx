@@ -318,7 +318,7 @@ const Book: React.FC = () => {
                 {bookData.vehicle_image ? (
                   <img
                     src={URL.createObjectURL(bookData.vehicle_image)}
-                    className="h-full w-full rounded-lg object-cover"
+                    className="h-full w-full rounded-lg object-contain"
                     alt=""
                   />
                 ) : (
