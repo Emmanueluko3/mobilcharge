@@ -126,7 +126,11 @@ const Settings: React.FC = () => {
             >
               {profileData.profile_image ? (
                 <img
-                  src={URL.createObjectURL(profileData.profile_image)}
+                  src={
+                    typeof profileData.profile_image === "string"
+                      ? profileData.profile_image
+                      : URL.createObjectURL(profileData.profile_image)
+                  }
                   className="h-full w-full rounded-full"
                   alt=""
                 />
