@@ -11,7 +11,7 @@ const Drivers: React.FC = () => {
     const response: any = await apiService("/api/driver/get-drivers/", "GET");
     if (response) {
       setDrivers(response?.data);
-    }
+    } else return;
   };
 
   useEffect(() => {
@@ -26,9 +26,9 @@ const Drivers: React.FC = () => {
           {t("Active Drivers")}
         </h2>
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-3">
-          {drivers.filter((item: any) => item?.user?.is_active !== true) ? (
+          {drivers?.filter((item: any) => item?.user?.is_active !== true) ? (
             drivers
-              .filter((item: any) => item?.user?.is_active === true)
+              ?.filter((item: any) => item?.user?.is_active === true)
               .map((item: any, index) => (
                 <div
                   key={index}
@@ -68,8 +68,8 @@ const Drivers: React.FC = () => {
           {t("All Drivers")}
         </h2>
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-3">
-          {drivers.length > 0 ? (
-            drivers.map((item: any, index) => (
+          {drivers?.length > 0 ? (
+            drivers?.map((item: any, index) => (
               <div
                 key={index}
                 className="flex justify-between items-center bg-white rounded-lg p-4"

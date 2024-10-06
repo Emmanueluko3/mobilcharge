@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../components/common/button";
 import { AppInput } from "../../components/common/input";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import toast from "react-hot-toast";
 import { globalAxios } from "../../api/globalAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { getUserInfo } from "../../store/features/auth/authSlice";
 
 const Settings: React.FC = () => {
+  const dispatch = useAppDispatch();
   const user: any = useAppSelector((state) => state.auth.user);
 
   const { t } = useTranslation();
@@ -60,7 +62,7 @@ const Settings: React.FC = () => {
       formData.append("new_password", new_password);
       formData.append("confirm_new_password", confirm_new_password);
 
-      const response: any = await globalAxios.post(
+      const response: any = await globalAxios.patch(
         "/api/auth/update-profile/",
         formData,
         {
@@ -73,12 +75,18 @@ const Settings: React.FC = () => {
       );
 
       toast.success(response?.data?.success);
+      dispatch(getUserInfo());
     } catch (error: any) {
       console.error(error);
+      if (error.status === 401) {
+        toast.error("Error saving changes, Please try again");
+      }
     } finally {
       setIsLoading(false);
     }
   };
+
+  console.log("Profile updated", profileData.profile_image);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
@@ -159,6 +167,8 @@ const Settings: React.FC = () => {
             <AppInput
               name="first_name"
               type="text"
+              value={profileData.first_name}
+              onChange={handleChange}
               placeholder={t("First name")}
               maxLength={24}
             />
@@ -168,6 +178,8 @@ const Settings: React.FC = () => {
             <AppInput
               name="last_name"
               type="text"
+              value={profileData.last_name}
+              onChange={handleChange}
               placeholder={t("Last name")}
               maxLength={24}
             />
@@ -176,6 +188,8 @@ const Settings: React.FC = () => {
             <AppInput
               name="phone"
               type="tel"
+              value={profileData.phone}
+              onChange={handleChange}
               placeholder={t("Phone number")}
               maxLength={24}
             />
@@ -185,6 +199,8 @@ const Settings: React.FC = () => {
             <AppInput
               name="email"
               type="email"
+              value={profileData.email}
+              onChange={handleChange}
               placeholder={t("Email")}
               maxLength={32}
             />
@@ -201,6 +217,8 @@ const Settings: React.FC = () => {
             <AppInput
               name="old_password"
               type="password"
+              value={profileData.old_password}
+              onChange={handleChange}
               placeholder={t("Old password")}
               maxLength={24}
             />
@@ -209,6 +227,8 @@ const Settings: React.FC = () => {
             <AppInput
               name="new_password"
               type="password"
+              value={profileData.new_password}
+              onChange={handleChange}
               placeholder={t("New password")}
               maxLength={24}
             />
@@ -218,6 +238,8 @@ const Settings: React.FC = () => {
             <AppInput
               name="confirm_new_password"
               type="password"
+              value={profileData.confirm_new_password}
+              onChange={handleChange}
               placeholder={t("Confirm new password")}
               maxLength={24}
             />

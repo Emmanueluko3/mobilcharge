@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import apiService from "../../../api/apiServices";
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -11,6 +12,18 @@ const initialState: AuthState = {
   user: undefined,
   error: undefined,
 };
+
+export const getUserInfo = createAsyncThunk(
+  "auth/getUserInfo",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response: any = await apiService("api/auth/get-user-info/", "GET");
+      return response.data;
+    } catch (err: any) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -33,9 +46,18 @@ const authSlice = createSlice({
       localStorage.removeItem("refreshToken");
       state.isLoggedIn = false;
       state.user = undefined;
-
       window.location.replace("/login");
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUserInfo.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.error = undefined;
+      })
+      .addCase(getUserInfo.rejected, (state, action) => {
+        state.error = action.payload;
+      });
   },
 });
 
