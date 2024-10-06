@@ -86,8 +86,6 @@ const Settings: React.FC = () => {
     }
   };
 
-  console.log("Profile updated", profileData.profile_image);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
     const sanitizedPhone = value.replace(/\D/g, "");
@@ -171,6 +169,8 @@ const Settings: React.FC = () => {
               onChange={handleChange}
               placeholder={t("First name")}
               maxLength={24}
+              autoComplete="off"
+              inputMode="none"
             />
           </div>
 
@@ -182,6 +182,8 @@ const Settings: React.FC = () => {
               onChange={handleChange}
               placeholder={t("Last name")}
               maxLength={24}
+              autoComplete="off"
+              inputMode="none"
             />
           </div>
           <div className="mb-2">
@@ -192,6 +194,8 @@ const Settings: React.FC = () => {
               onChange={handleChange}
               placeholder={t("Phone number")}
               maxLength={24}
+              autoComplete="off"
+              inputMode="none"
             />
           </div>
 
@@ -203,6 +207,8 @@ const Settings: React.FC = () => {
               onChange={handleChange}
               placeholder={t("Email")}
               maxLength={32}
+              autoComplete="off"
+              inputMode="none"
             />
           </div>
         </div>
@@ -220,7 +226,10 @@ const Settings: React.FC = () => {
               value={profileData.old_password}
               onChange={handleChange}
               placeholder={t("Old password")}
-              maxLength={24}
+              maxLength={10}
+              autoComplete="off"
+              inputMode="none"
+              onPaste={(e) => e.preventDefault()}
             />
           </div>
           <div className="mb-2">
@@ -230,7 +239,10 @@ const Settings: React.FC = () => {
               value={profileData.new_password}
               onChange={handleChange}
               placeholder={t("New password")}
-              maxLength={24}
+              maxLength={10}
+              autoComplete="off"
+              inputMode="none"
+              onPaste={(e) => e.preventDefault()}
             />
           </div>
 
@@ -241,7 +253,10 @@ const Settings: React.FC = () => {
               value={profileData.confirm_new_password}
               onChange={handleChange}
               placeholder={t("Confirm new password")}
-              maxLength={24}
+              maxLength={10}
+              autoComplete="off"
+              inputMode="none"
+              onPaste={(e) => e.preventDefault()}
             />
           </div>
         </div>

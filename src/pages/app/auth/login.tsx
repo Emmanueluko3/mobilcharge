@@ -110,9 +110,10 @@ const Login: React.FC = () => {
               type="email"
               value={loginData.email}
               onChange={handleChange}
-              autoComplete="email"
               placeholder={t("Email")}
               maxLength={32}
+              autoComplete="off"
+              inputMode="none"
             />
             {loginError.email && (
               <p className="text-red-500 text-sm">{loginError.email}</p>
@@ -126,6 +127,8 @@ const Login: React.FC = () => {
               onChange={handleChange}
               placeholder={t("Password")}
               maxLength={10}
+              autoComplete="off"
+              inputMode="none"
             />
             {loginError.password && (
               <p className="text-red-500 text-sm">{loginError.password}</p>

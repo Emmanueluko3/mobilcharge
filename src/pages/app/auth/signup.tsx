@@ -235,6 +235,8 @@ const Signup: React.FC = () => {
               onChange={handleChange}
               placeholder={t("First name")}
               maxLength={24}
+              autoComplete="off"
+              inputMode="none"
             />
             {signupError.first_name && (
               <p className="text-red-500 text-sm">{signupError.first_name}</p>
@@ -248,6 +250,8 @@ const Signup: React.FC = () => {
               onChange={handleChange}
               placeholder={t("Last name")}
               maxLength={24}
+              autoComplete="off"
+              inputMode="none"
             />
             {signupError.last_name && (
               <p className="text-red-500 text-sm">{signupError.last_name}</p>
@@ -262,6 +266,8 @@ const Signup: React.FC = () => {
               onChange={handleChange}
               placeholder={t("Phone number")}
               maxLength={16}
+              autoComplete="off"
+              inputMode="none"
             />
             {signupError.phone && (
               <p className="text-red-500 text-sm">{signupError.phone}</p>
@@ -274,9 +280,10 @@ const Signup: React.FC = () => {
               type="email"
               value={signupData.email}
               onChange={handleChange}
-              autoComplete="email"
               placeholder={t("Email")}
               maxLength={32}
+              autoComplete="off"
+              inputMode="none"
             />
             {signupError.email && (
               <p className="text-red-500 text-sm">{signupError.email}</p>
@@ -291,6 +298,9 @@ const Signup: React.FC = () => {
               onChange={handleChange}
               placeholder={t("Password")}
               maxLength={10}
+              autoComplete="off"
+              inputMode="none"
+              onPaste={(e) => e.preventDefault()}
             />
             {signupError.password && (
               <p className="text-red-500 text-sm">{signupError.password}</p>
@@ -304,6 +314,9 @@ const Signup: React.FC = () => {
               onChange={handleChange}
               placeholder={t("Confirm password")}
               maxLength={10}
+              autoComplete="off"
+              inputMode="none"
+              onPaste={(e) => e.preventDefault()}
             />
             {signupError.confirm_password && (
               <p className="text-red-500 text-sm">
