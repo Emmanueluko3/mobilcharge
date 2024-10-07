@@ -2,19 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import apiService from "../../api/apiServices";
+import { Skeleton } from "@mui/joy";
 
 const Drivers: React.FC = () => {
   const { t } = useTranslation();
   const [drivers, setDrivers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchedDrivers = async () => {
     try {
+      setIsLoading(true);
       const response: any = await apiService("/api/driver/get-drivers/", "GET");
       if (response) {
         setDrivers(response?.data);
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -23,14 +28,28 @@ const Drivers: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full h-screen">
       {/* Active Drivers */}
       <div className="mb-16">
         <h2 className="text-3xl font-semibold w-full mb-4">
           {t("Active Drivers")}
         </h2>
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-3">
-          {drivers?.filter((item: any) => item?.user?.is_active === true) ? (
+          {isLoading ? (
+            <div className="flex items-center gap-4 p-4 justify-center lg:w-fit bg-white bg-opacity-50 rounded-lg">
+              <Skeleton variant="circular" width={48} height={48} />
+              <div>
+                <Skeleton variant="rectangular" width={200} height="14px" />
+                <Skeleton
+                  variant="rectangular"
+                  width={140}
+                  height="12px"
+                  sx={{ my: 1 }}
+                />
+                <Skeleton variant="rectangular" width={200} height="14px" />
+              </div>
+            </div>
+          ) : drivers?.filter((item: any) => item?.user?.is_active === true) ? (
             drivers
               ?.filter((item: any) => item?.user?.is_active === true)
               .map((item: any, index) => (
@@ -72,7 +91,21 @@ const Drivers: React.FC = () => {
           {t("All Drivers")}
         </h2>
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-3">
-          {drivers?.length > 0 ? (
+          {isLoading ? (
+            <div className="flex items-center gap-4 p-4 justify-center lg:w-fit bg-white bg-opacity-50 rounded-lg">
+              <Skeleton variant="circular" width={48} height={48} />
+              <div>
+                <Skeleton variant="rectangular" width={200} height="14px" />
+                <Skeleton
+                  variant="rectangular"
+                  width={140}
+                  height="12px"
+                  sx={{ my: 1 }}
+                />
+                <Skeleton variant="rectangular" width={200} height="14px" />
+              </div>
+            </div>
+          ) : drivers?.length > 0 ? (
             drivers?.map((item: any, index) => (
               <div
                 key={index}

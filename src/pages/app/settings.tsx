@@ -79,7 +79,7 @@ const Settings: React.FC = () => {
     } catch (error: any) {
       console.error(error);
       if (error.status === 401) {
-        toast.error("Error saving changes, Please try again");
+        toast.error(t("Error saving changes, Please try again"));
       }
     } finally {
       setIsLoading(false);

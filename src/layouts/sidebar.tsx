@@ -20,7 +20,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContentText from "@mui/material/DialogContentText";
 import { useAppDispatch } from "../store/hooks";
 import { logout } from "../store/features/auth/authSlice";
-// import apiService from "../api/apiServices";
+import apiService from "../api/apiServices";
 import toast from "react-hot-toast";
 import { Button } from "../components/common/button";
 // import { faRocketchat } from "@fortawesome/free-brands-svg-icons";
@@ -66,17 +66,16 @@ const Sidebar: React.FC = () => {
   const [openLogout, setOpenLogout] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const getRefreshToken = () => {
-  //   return localStorage.getItem("refreshToken");
-  // };
+  const getRefreshToken = () => {
+    return localStorage.getItem("refreshToken");
+  };
 
   const handleLogout = async () => {
-    console.log("logout", isLoading);
     try {
       setIsLoading(true);
-      // const response: any = await apiService("/api/auth/logout/", "POST", {
-      //   refresh: getRefreshToken(),
-      // });
+      const response: any = await apiService("/api/auth/logout/", "POST", {
+        refresh: getRefreshToken(),
+      });
 
       // if (response) {
       dispatch(logout());
@@ -167,15 +166,19 @@ const Sidebar: React.FC = () => {
               {t("Are you sure you want to log out")}?
             </DialogContentText>
           </DialogContent>
-          <div className="flex items-center justify-between w-4/5 mx-auto mb-4">
+          <div className="flex items-center justify-between gap-3 w-4/5 mx-auto mb-4">
             <Button
-              className="bg-transparent border-2 border-primary-500"
+              className="bg-transparent border-2 border-primary-500 w-full"
               onClick={() => setOpenLogout(false)}
             >
               <span className="text-primary-500">{t("Cancel")}</span>
             </Button>
-            <Button className="bg-red-700" onClick={handleLogout}>
-              {t("Confirm")}
+            <Button
+              disabled={isLoading}
+              className="bg-red-700 w-full"
+              onClick={handleLogout}
+            >
+              {isLoading ? t("Loading") + "..." : t("Confirm")}
             </Button>
           </div>
         </div>

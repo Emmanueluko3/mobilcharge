@@ -279,6 +279,7 @@
   "Old password": "ancien mot de passe",
   "New password": "Nouveau mot de passe",
   "Confirm new password": "Confirmer le nouveau mot de passe",
+  "Error saving changes, Please try again": "Erreur lors de l'enregistrement des modifications, veuillez réessayer",
 
   "Confirm": "Confirmer",
   "Cancel": "Annuler",
