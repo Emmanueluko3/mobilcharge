@@ -8,7 +8,7 @@ const Pricing: React.FC = () => {
 
   const pricingPlans = [
     {
-      price: 19,
+      price: "Free",
       title: t("Visitor"),
       description: t("Electric vehicle owners seeking a quick charge"),
       features: [
@@ -53,7 +53,7 @@ const Pricing: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="bg-white rounded-lg p-4 lg:p-12">
+      <div className="bg-white rounded-lg p-4 lg:p-10">
         <h2 className="text-3xl font-semibold w-full mb-16 border-b pb-3">
           {t("Pricing Plans")}
         </h2>
@@ -79,13 +79,14 @@ const Pricing: React.FC = () => {
                   item.current ? "text-white" : "text-customPurple"
                 }`}
               >
-                ${item.price}{" "}
+                {item.price !== "Free" && "$"}
+                {item.price}{" "}
                 <span
                   className={`${
                     item.current ? "text-white" : "text-gray-500"
                   } text-lg font-semibold`}
                 >
-                  /{t("month")}
+                  {item.price !== "Free" && `/${t("month")}`}
                 </span>
               </h2>
 
@@ -104,7 +105,7 @@ const Pricing: React.FC = () => {
                 {item.description}
               </p>
 
-              <div className="flex flex-col mb-10 lg:h-[30vh]">
+              <div className="flex flex-col mb-10 lg:h-80">
                 {item.features.map((text, index) => (
                   <div key={index} className="flex mb-1">
                     <span
