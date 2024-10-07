@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
                 <Link to="/dashboard/settings">
                   <img
                     src={user?.profile_image}
-                    className="h-12 w-12 rounded-full"
+                    className="h-12 w-12 rounded-full object-cover"
                     alt=""
                   />
                 </Link>

@@ -137,7 +137,7 @@ const Settings: React.FC = () => {
                       ? profileData.profile_image
                       : URL.createObjectURL(profileData.profile_image)
                   }
-                  className="h-full w-full rounded-full"
+                  className="h-full w-full rounded-full object-cover"
                   alt=""
                 />
               ) : (

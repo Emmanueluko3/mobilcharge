@@ -203,7 +203,7 @@ const Signup: React.FC = () => {
               {signupData.profile_image ? (
                 <img
                   src={URL.createObjectURL(signupData.profile_image)}
-                  className="h-full w-full rounded-full"
+                  className="h-full w-full rounded-full object-cover"
                   alt=""
                 />
               ) : (

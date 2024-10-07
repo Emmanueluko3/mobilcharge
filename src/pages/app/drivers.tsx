@@ -30,7 +30,7 @@ const Drivers: React.FC = () => {
           {t("Active Drivers")}
         </h2>
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-3">
-          {!drivers?.filter((item: any) => item?.user?.is_active === true) ? (
+          {drivers?.filter((item: any) => item?.user?.is_active === true) ? (
             drivers
               ?.filter((item: any) => item?.user?.is_active === true)
               .map((item: any, index) => (
@@ -40,8 +40,8 @@ const Drivers: React.FC = () => {
                 >
                   <img
                     src={item.user.profile_image}
-                    className="rounded-full h-10 w-10"
-                    alt="mee"
+                    className="rounded-full h-10 w-10 object-cover"
+                    alt="img"
                   />
                   <div className="mx-2 me-auto">
                     <h3 className="font-semibold text-base">
