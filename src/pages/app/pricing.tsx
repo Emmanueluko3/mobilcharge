@@ -1,55 +1,80 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import apiService from "../../api/apiServices";
 
 const Pricing: React.FC = () => {
   const { t } = useTranslation();
 
-  const pricingPlans = [
-    {
-      price: "Free",
-      title: t("Visitor"),
-      description: t("Electric vehicle owners seeking a quick charge"),
-      features: [
-        t("Individuals price list"),
-        t("With membership $32"),
-        t("Without membership $40"),
-        t("Emergency charge $200"),
-      ],
-    },
-    {
-      price: 54,
-      title: t("Membership"),
-      description: t("Electric vehicle owners seeking a quick charge"),
-      features: [
-        t("All Visitors plan features"),
-        t("Extended charge time"),
-        t("Priority customer support"),
-        t("Monthly subscription fee"),
-        t("Discount on additionals"),
-        t("With membership $32"),
-        t("Emergency charge $200"),
-      ],
-    },
-    {
-      price: 89,
-      title: t("Tailored"),
-      description: t(
-        "Hotels, event centers, fleets, dealerships, businesses, events, etc."
-      ),
-      features: [
-        t("Corporate price list"),
-        t("Price per half day (3hrs) 9 charges"),
-        t("9 charges - Total 160km $250"),
-        t("Price per day (6hrs) 18 charges"),
-        t("18 charges - Total 320km $500s"),
-        t("Price per hour (3 charges) 60km $90"),
-        t("No membership for corporates $0"),
-      ],
-      current: true,
-    },
-  ];
+  const [pricingPlans, setPricingPlans] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchedPlans = async () => {
+    try {
+      setIsLoading(true);
+      const response: any = await apiService(
+        "/api/payment/pricing-plans/",
+        "GET"
+      );
+      if (response) {
+        setPricingPlans(response?.data);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchedPlans();
+  }, []);
+
+  // const pricingPlans = [
+  //   {
+  //     price: "Free",
+  //     title: t("Visitor"),
+  //     description: t("Electric vehicle owners seeking a quick charge"),
+  //     features: [
+  //       t("Individuals price list"),
+  //       t("With membership $32"),
+  //       t("Without membership $40"),
+  //       t("Emergency charge $200"),
+  //     ],
+  //   },
+  //   {
+  //     price: 54,
+  //     title: t("Membership"),
+  //     description: t("Electric vehicle owners seeking a quick charge"),
+  //     features: [
+  //       t("All Visitors plan features"),
+  //       t("Extended charge time"),
+  //       t("Priority customer support"),
+  //       t("Monthly subscription fee"),
+  //       t("Discount on additionals"),
+  //       t("With membership $32"),
+  //       t("Emergency charge $200"),
+  //     ],
+  //   },
+  //   {
+  //     price: 89,
+  //     title: t("Tailored"),
+  //     description: t(
+  //       "Hotels, event centers, fleets, dealerships, businesses, events, etc."
+  //     ),
+  //     features: [
+  //       t("Corporate price list"),
+  //       t("Price per half day (3hrs) 9 charges"),
+  //       t("9 charges - Total 160km $250"),
+  //       t("Price per day (6hrs) 18 charges"),
+  //       t("18 charges - Total 320km $500s"),
+  //       t("Price per hour (3 charges) 60km $90"),
+  //       t("No membership for corporates $0"),
+  //     ],
+  //     current: true,
+  //   },
+  // ];
 
   return (
     <div className="w-full">
@@ -58,7 +83,7 @@ const Pricing: React.FC = () => {
           {t("Pricing Plans")}
         </h2>
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-10">
-          {pricingPlans.map((item, index) => (
+          {pricingPlans?.map((item: any, index) => (
             <div
               key={index}
               className={`flex flex-col justify-between items-start ${
@@ -70,7 +95,7 @@ const Pricing: React.FC = () => {
               <div className="w-full flex justify-end h-12">
                 {item.current && (
                   <div className="w-fit h-fit rounded-full px-4 py-1 text-purple-400 text-xs font-semibold bg-purple-900">
-                    Current Plan
+                    {t("Current Plan")}
                   </div>
                 )}
               </div>
@@ -80,7 +105,7 @@ const Pricing: React.FC = () => {
                 }`}
               >
                 {item.price !== "Free" && "$"}
-                {item.price}{" "}
+                {t(item.price)}{" "}
                 <span
                   className={`${
                     item.current ? "text-white" : "text-gray-500"
@@ -95,18 +120,18 @@ const Pricing: React.FC = () => {
                   item.current ? "text-white" : "text-customPurple"
                 }`}
               >
-                {item.title}
+                {t(item.title)}
               </h3>
               <p
                 className={`text-base my-5 ${
                   item.current ? "text-white" : "text-gray-500"
                 }`}
               >
-                {item.description}
+                {t(item.description)}
               </p>
 
               <div className="flex flex-col mb-10 lg:h-80">
-                {item.features.map((text, index) => (
+                {item.features.map((text: any, index: number) => (
                   <div key={index} className="flex mb-1">
                     <span
                       className={`${
@@ -122,7 +147,7 @@ const Pricing: React.FC = () => {
                         item.current ? "text-white" : "text-gray-500"
                       }`}
                     >
-                      {text}
+                      {t(text)}
                     </p>
                   </div>
                 ))}
