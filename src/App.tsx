@@ -17,9 +17,44 @@ import Drivers from "./pages/app/drivers";
 import Pricing from "./pages/app/pricing";
 import Emergency from "./pages/app/emergency";
 import Settings from "./pages/app/settings";
+import Overview from "./pages/app/overview";
+import Requests from "./pages/app/requests";
+import { store } from "./store/store";
+
+const isAdmin = () => {
+  const state = store.getState();
+  const isAdmin: any = state?.auth?.user;
+  return isAdmin?.is_superuser;
+};
+
+const userRoutes = {
+  path: "/dashboard",
+  element: <AppTemplate />,
+  children: [
+    { path: "", element: <Navigate to="book" /> },
+    { path: "book", element: <Book /> },
+    { path: "drivers", element: <Drivers /> },
+    // { path: "message", element: <div>Message</div> },
+    { path: "pricing", element: <Pricing /> },
+    { path: "settings", element: <Settings /> },
+    { path: "emergency", element: <Emergency /> },
+  ],
+};
+
+const adminRoutes = {
+  path: "/admin",
+  element: <AppTemplate />,
+  children: [
+    { path: "", element: <Navigate to="overview" /> },
+    { path: "overview", element: <Overview /> },
+    { path: "requests", element: <Requests /> },
+    { path: "settings", element: <Settings /> },
+  ],
+};
+
 const router = createBrowserRouter([
   {
-    path: "/", // Site Layout for public pages
+    path: "/",
     element: <PageTemplate />,
     children: [
       { path: "/", element: <Home /> },
@@ -38,19 +73,30 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  {
-    path: "/dashboard",
-    element: <AppTemplate />,
-    children: [
-      { path: "", element: <Navigate to="book" /> },
-      { path: "book", element: <Book /> },
-      { path: "drivers", element: <Drivers /> },
-      // { path: "message", element: <div>Message</div> },
-      { path: "pricing", element: <Pricing /> },
-      { path: "settings", element: <Settings /> },
-      { path: "emergency", element: <Emergency /> },
-    ],
-  },
+  isAdmin() ? adminRoutes : userRoutes,
+  // {
+  //   path: "/dashboard",
+  //   element: <AppTemplate />,
+  //   children: [
+  //     { path: "", element: <Navigate to="book" /> },
+  //     { path: "book", element: <Book /> },
+  //     { path: "drivers", element: <Drivers /> },
+  //     // { path: "message", element: <div>Message</div> },
+  //     { path: "pricing", element: <Pricing /> },
+  //     { path: "settings", element: <Settings /> },
+  //     { path: "emergency", element: <Emergency /> },
+  //   ],
+  // },
+  // {
+  //   path: "/admin",
+  //   element: <AppTemplate />,
+  //   children: [
+  //     { path: "", element: <Navigate to="overview" /> },
+  //     { path: "overview", element: <Overview /> },
+  //     { path: "requests", element: <Requests /> },
+  //     { path: "settings", element: <Settings /> },
+  //   ],
+  // },
 ]);
 
 const Routes = () => <RouterProvider router={router} />;

@@ -7,18 +7,20 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import {
+  faBorderAll,
   faDollarSign,
   faGear,
   faQuestion,
   faRightFromBracket,
   faTruck,
   faTruckMedical,
+  faUsersRectangle,
 } from "@fortawesome/free-solid-svg-icons";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContentText from "@mui/material/DialogContentText";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { logout } from "../store/features/auth/authSlice";
 import apiService from "../api/apiServices";
 import toast from "react-hot-toast";
@@ -29,17 +31,26 @@ const Sidebar: React.FC = () => {
   const location = useLocation().pathname.split("/").pop();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const user: any = useAppSelector((state) => state?.auth?.user);
+  const role = () => {
+    if (user?.is_superuser) {
+      return "admin";
+    }
+    return "user";
+  };
 
   const navLinks = [
     {
       icon: <FontAwesomeIcon icon={faCalendarDays} />,
       label: t("Book"),
       href: "book",
+      roles: ["user"],
     },
     {
       icon: <FontAwesomeIcon icon={faTruck} />,
       label: t("Drivers"),
       href: "drivers",
+      roles: ["user"],
     },
     // {
     //   icon: <FontAwesomeIcon icon={faRocketchat} />,
@@ -50,18 +61,34 @@ const Sidebar: React.FC = () => {
       icon: <FontAwesomeIcon icon={faDollarSign} />,
       label: t("Pricing"),
       href: "pricing",
+      roles: ["user"],
+    },
+    // Admin links
+    {
+      icon: <FontAwesomeIcon icon={faBorderAll} />,
+      label: t("Overview"),
+      href: "overview",
+      roles: ["admin"],
+    },
+    {
+      icon: <FontAwesomeIcon icon={faUsersRectangle} />,
+      label: t("Requests"),
+      href: "requests",
+      roles: ["admin"],
     },
     {
       icon: <FontAwesomeIcon icon={faGear} />,
       label: t("Settings"),
       href: "settings",
+      roles: ["user", "admin"],
     },
     {
       icon: <FontAwesomeIcon icon={faTruckMedical} />,
       label: t("Emergency"),
       href: "emergency",
+      roles: ["user"],
     },
-  ];
+  ].filter((link) => link.roles.includes(role()));
 
   const [openLogout, setOpenLogout] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -77,10 +104,10 @@ const Sidebar: React.FC = () => {
         refresh: getRefreshToken(),
       });
 
-      // if (response) {
-      dispatch(logout());
-      setOpenLogout(false);
-      // }
+      if (response) {
+        dispatch(logout());
+        setOpenLogout(false);
+      }
     } catch (error: any) {
       if (error?.response?.data?.error) {
         return toast.error(error?.response?.data?.error);

@@ -283,5 +283,8 @@
 
   "Confirm": "Confirmer",
   "Cancel": "Annuler",
-  "Are you sure you want to log out": "Etes-vous sûr de vouloir vous déconnecter"
+  "Are you sure you want to log out": "Etes-vous sûr de vouloir vous déconnecter",
+
+  "Overview": "Overview",
+  "Requests": "Demandes"
 }

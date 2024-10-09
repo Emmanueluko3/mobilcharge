@@ -27,7 +27,9 @@ const AppHeader: React.FC = () => {
 
       <nav className="w-full flex flex-row items-center justify-between bg-white text-black lg:pt-8 px-4 py-4 lg:pr-16 lg:px-10 lg:py-4">
         <h2 className="text-2xl font-medium">
-          {t(location.charAt(0).toUpperCase() + location.slice(1))}
+          {location === "overview"
+            ? `Hi ${user?.first_name} ${user?.last_name}`
+            : t(location.charAt(0).toUpperCase() + location.slice(1))}
         </h2>
 
         <div className="flex items-center">

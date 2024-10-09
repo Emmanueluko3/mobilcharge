@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-
 import Navbar from "../layouts/navbar";
 import Footer from "../layouts/footer";
 import { Outlet } from "react-router-dom";
@@ -15,10 +13,6 @@ const PageTemplate: React.FC = () => {
       <Footer />
     </div>
   );
-};
-
-PageTemplate.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default PageTemplate;
