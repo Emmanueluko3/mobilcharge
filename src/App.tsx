@@ -20,6 +20,7 @@ import Settings from "./pages/app/settings";
 import Overview from "./pages/app/overview";
 import Requests from "./pages/app/requests";
 import { store } from "./store/store";
+import BookingSuccess from "./components/booking/booking-success";
 
 const isAdmin = () => {
   const state = store.getState();
@@ -33,6 +34,11 @@ const userRoutes = {
   children: [
     { path: "", element: <Navigate to="book" /> },
     { path: "book", element: <Book /> },
+    {
+      path: "book",
+      element: <Book />,
+      children: [{ path: "booking-success", element: <BookingSuccess /> }],
+    },
     { path: "drivers", element: <Drivers /> },
     // { path: "message", element: <div>Message</div> },
     { path: "pricing", element: <Pricing /> },

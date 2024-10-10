@@ -1,39 +1,17 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "../../components/common/button";
-import MobileChargeBus from "../../assets/images/MobileChargebus.png";
 import toast from "react-hot-toast";
 import BookingInvoice from "../../components/bookingInvoice";
 import { globalAxios } from "../../api/globalAxios";
-import BookForm from "../../components/book/bookForm";
-
-interface bookDataProps {
-  drivers_note: string;
-}
+import BookForm from "../../components/booking/bookForm";
+import { useNavigate } from "react-router-dom";
 
 const Book: React.FC = () => {
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
-
-  const nextStep = () => setStep((prev) => prev + 1);
-  const prevStep = () => setStep((prev) => prev - 1);
-
-  const [bookData, setBookData] = useState<bookDataProps>({
-    drivers_note: "",
-  });
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-
-    setBookData({
-      ...bookData,
-      [name]: value,
-    });
-  };
 
   const handleBookSubmit = async (data: any) => {
     const {
@@ -56,7 +34,7 @@ const Book: React.FC = () => {
     formData.append("kilometers_left", kilometers_left);
     formData.append("battery_level", battery_level);
     formData.append("vehicle_image", vehicle_image);
-    formData.append("plan_id", "1");
+    formData.append("plan_id", "2");
 
     try {
       setIsLoading(true);
@@ -72,7 +50,7 @@ const Book: React.FC = () => {
         }
       );
       if (response) {
-        nextStep();
+        navigate("booking-success", { state: { bookingData: response.data } });
 
         toast.success(response?.data?.message);
       }
@@ -93,86 +71,6 @@ const Book: React.FC = () => {
         <BookForm isLoading={isLoading} onSubmit={handleBookSubmit} />
       )}
 
-      {/* Step 2 */}
-      {step === 2 && (
-        <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-12 p-4 lg:p-6 bg-white rounded-lg">
-          <div className="lg:col-span-5 h-fit">
-            <h2 className="text-3xl font-semibold">
-              {t("You are submitting a request for a charge")}
-            </h2>
-            <p className="text-sm my-3">{t("See details below!")}</p>
-            <p className="text-sm mt-3 mb-8 text-gray-500">
-              <FontAwesomeIcon icon={faUsers} className="mr-3" />
-              {t("Truck")} #1
-            </p>
-          </div>
-          <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center">
-            <h2 className="text-3xl font-semibold w-full mb-4">
-              {t("Truck Details")}
-            </h2>
-            <table className="table-auto w-full text-left my-4">
-              <tbody>
-                <tr>
-                  <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
-                    {t("Driver Name")}:
-                  </td>
-                  <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
-                    {t("Jodd")}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
-                    {t("Charging speed")}:
-                  </td>
-                  <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
-                    032.4 {t("per second")}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="lg:col-span-5 h-fit">
-            {/* Message for driver */}
-
-            <div className="lg:my-8">
-              <h3 className="text-xl font-semibold mb-2">
-                {t("Leave a note for the driver")}
-              </h3>
-              <div className="mb-2">
-                <textarea
-                  name="drivers_note"
-                  onChange={handleChange}
-                  value={bookData.drivers_note}
-                  placeholder={t("Message")}
-                  className="block min-h-44 w-full border-0 p-4 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
-                ></textarea>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-10">
-              <button
-                disabled={isLoading}
-                className="w-full px-8 py-1.5 text-base text-primary-500 border border-primary-500 hover:text-white hover:bg-primary-500 flex justify-center items-center rounded-md bg-primary font-semibold transition-all shadow-sm hover:opacity-75"
-                onClick={prevStep}
-              >
-                {t("Back")}!
-              </button>
-              <Button
-                isLoading={isLoading}
-                disabled={isLoading}
-                className="w-full"
-              >
-                {t("Book now")}!
-              </Button>
-            </div>
-          </div>
-          <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center">
-            <img src={MobileChargeBus} className="h-80" alt="Charge van" />
-          </div>
-        </div>
-      )}
-
       {/* Step 3 */}
       {step === 3 && <BookingInvoice />}
     </>
@@ -180,3 +78,47 @@ const Book: React.FC = () => {
 };
 
 export default Book;
+
+// {
+//   "message": "Booking created successfully. You will be notified when your booking is approved",
+//   "booking": {
+//       "id": 9,
+//       "user": {
+//           "id": 5,
+//           "username": "emmanuel@gmail.com",
+//           "email": "emmanuel@gmail.com",
+//           "first_name": "Emmanuel",
+//           "last_name": "Stephen",
+//           "phone": "07031982590",
+//           "is_active": true,
+//           "is_superuser": false,
+//           "date_joined": "2024-10-07T19:48:38.424581Z",
+//           "profile_image": "https://res.cloudinary.com/dqathrf7e/image/upload/v1728330517/sktnrd9pmxbesdexilew.jpg"
+//       },
+//       "driver": {
+//           "id": 1,
+//           "username": "adesolaayodeji18@gma",
+//           "email": "adesolaayodeji18@gmail.com",
+//           "first_name": "Ayodeji",
+//           "last_name": "Adesola",
+//           "phone": "05488612283",
+//           "is_active": true,
+//           "is_superuser": true,
+//           "date_joined": "2024-10-07T14:21:24.489794Z",
+//           "profile_image": "https://res.cloudinary.com/the-proton-guy/image/upload/v1660906962/6215195_0_pjwqfq.webp"
+//       },
+//       "location": "Maitama, F.C.T Abuja",
+//       "car_make": "Tesla Model S",
+//       "battery_type": "Lithium-ion (Li-ion)",
+//       "battery_level": 32,
+//       "kilometers_left": 50.0,
+//       "vehicle_image": "https://res.cloudinary.com/dqathrf7e/image/upload/v1728519717/t9krg0p3hhhf6jntw1ae.jpg",
+//       "description": "Nill",
+//       "booking_type": "Normal",
+//       "invoice_id": "05838e99-2d5f-40c3-a7fa-a9072871cbb6",
+//       "price": 0.0,
+//       "status": "Pending",
+//       "paid": false,
+//       "date": "2024-10-10"
+//   }
+// }
