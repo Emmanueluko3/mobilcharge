@@ -48,7 +48,15 @@ const userRoutes = {
     // { path: "message", element: <div>Message</div> },
     { path: "pricing", element: <Pricing /> },
     { path: "settings", element: <Settings /> },
-    { path: "emergency", element: <Emergency /> },
+    {
+      path: "emergency",
+      element: <Outlet />,
+      children: [
+        { path: "", element: <Emergency /> },
+        { path: "checkout/:id?", element: <CheckoutBooking /> },
+        { path: "booking-successful/:details", element: <BookingSuccessful /> },
+      ],
+    },
   ],
 };
 
@@ -85,29 +93,6 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   isAdmin() ? adminRoutes : userRoutes,
-  // {
-  //   path: "/dashboard",
-  //   element: <AppTemplate />,
-  //   children: [
-  //     { path: "", element: <Navigate to="book" /> },
-  //     { path: "book", element: <Book /> },
-  //     { path: "drivers", element: <Drivers /> },
-  //     // { path: "message", element: <div>Message</div> },
-  //     { path: "pricing", element: <Pricing /> },
-  //     { path: "settings", element: <Settings /> },
-  //     { path: "emergency", element: <Emergency /> },
-  //   ],
-  // },
-  // {
-  //   path: "/admin",
-  //   element: <AppTemplate />,
-  //   children: [
-  //     { path: "", element: <Navigate to="overview" /> },
-  //     { path: "overview", element: <Overview /> },
-  //     { path: "requests", element: <Requests /> },
-  //     { path: "settings", element: <Settings /> },
-  //   ],
-  // },
 ]);
 
 const Routes = () => <RouterProvider router={router} />;

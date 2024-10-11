@@ -289,5 +289,10 @@
   "Are you sure you want to log out": "Etes-vous sûr de vouloir vous déconnecter",
 
   "Overview": "Overview",
-  "Requests": "Demandes"
+  "Requests": "Demandes",
+
+  "Pending Bookings": "Réservations en attente",
+  "Pending Requests": "Demandes en attente",
+  "Completed": "Complété",
+  "Requested": "Demandée"
 }
