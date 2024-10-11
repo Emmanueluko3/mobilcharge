@@ -55,17 +55,23 @@ interface bookDataProps {
   kilometers_left: string;
   vehicle_image: any;
   description: string;
-  booking_type: string;
 }
 
 interface bookFormProps {
   isLoading: boolean;
   onSubmit: (data: bookDataProps) => void;
+  booking_type: string;
 }
 
-const BookForm: React.FC<bookFormProps> = ({ isLoading, onSubmit }) => {
+const BookForm: React.FC<bookFormProps> = ({
+  isLoading,
+  onSubmit,
+  booking_type,
+}) => {
   const { t } = useTranslation();
   const imageInputRef = useRef<HTMLInputElement>(null);
+
+  console.log(booking_type);
 
   const [bookData, setBookData] = useState<bookDataProps>({
     location: "",
@@ -75,7 +81,6 @@ const BookForm: React.FC<bookFormProps> = ({ isLoading, onSubmit }) => {
     kilometers_left: "",
     vehicle_image: null,
     description: "",
-    booking_type: "Normal",
   });
   const [bookError, setBookError] = useState<
     Partial<Record<keyof bookDataProps, string>>

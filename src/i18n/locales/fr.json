@@ -228,6 +228,7 @@
   "Battery type": "Type de batterie",
 
   "You are submitting a request for a charge": "Vous soumettez une demande de frais",
+  "You submitted a request for a charge": "Vous avez soumis une demande de frais",
   "See details below!": "Voir les détails ci-dessous !",
   "Truck": "Camion",
   "Truck Details": "Détails du camion",
@@ -236,6 +237,8 @@
   "per second": "par seconde",
   "Leave a note for the driver": "Laissez une note au chauffeur",
   "Book now": "Réservez maintenant",
+  "Pay now": "Payer",
+  "Waiting for driver approval": "En attente de l'approbation du conducteur",
 
   "Active Drivers": "Conducteurs actifs",
   "All Drivers": "Tous les conducteurs",

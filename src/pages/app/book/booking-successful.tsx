@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "./common/button";
+import { Button } from "../../../components/common/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MobileChargeBus from "../assets/images/MobileChargebus.png";
+import MobileChargeBus from "../../../assets/images/MobileChargebus.png";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 
-const BookingInvoice: React.FC = () => {
+const BookingSuccessful: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div className="grid grid-flow-row grid-cols-1 gap-6 lg:gap-12 lg:grid-cols-12 p-4 lg:p-6 bg-white rounded-lg">
@@ -89,4 +89,4 @@ const BookingInvoice: React.FC = () => {
   );
 };
 
-export default BookingInvoice;
+export default BookingSuccessful;
