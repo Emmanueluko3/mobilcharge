@@ -25,7 +25,7 @@ const Login: React.FC = () => {
     });
   };
 
-  const user = useAppSelector((state) => state.auth.user);
+  const user: any = useAppSelector((state) => state.auth.user);
   const isAuthenticated = localStorage.getItem("accessToken");
 
   useEffect(() => {
@@ -75,7 +75,11 @@ const Login: React.FC = () => {
     }
   };
   if (user && isAuthenticated && isAuthenticated.trim() !== "undefined") {
-    return <Navigate to="/dashboard" replace />;
+    return user?.is_superuser ? (
+      <Navigate to="/admin" replace />
+    ) : (
+      <Navigate to="/dashboard" replace />
+    );
   }
 
   return (
