@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import BookingInvoice from "../../components/bookingInvoice";
-import { globalAxios } from "../../api/globalAxios";
-import BookForm from "../../components/booking/bookForm";
+import { globalAxios } from "../../../api/globalAxios";
+import BookForm from "../../../components/booking/bookForm";
 import { useNavigate } from "react-router-dom";
 
-const Book: React.FC = () => {
-  const { t } = useTranslation();
-  const [step, setStep] = useState(1);
+const CreateBooking: React.FC = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const booking_type = "Normal";
 
   const handleBookSubmit = async (data: any) => {
     const {
@@ -22,7 +20,6 @@ const Book: React.FC = () => {
       battery_level,
       kilometers_left,
       description,
-      booking_type,
     } = data;
 
     const formData = new FormData();
@@ -50,7 +47,10 @@ const Book: React.FC = () => {
         }
       );
       if (response) {
-        navigate("booking-success", { state: { bookingData: response.data } });
+        navigate("/dashboard/book/checkout", {
+          state: { bookingData: response.data },
+          replace: true,
+        });
 
         toast.success(response?.data?.message);
       }
@@ -66,18 +66,15 @@ const Book: React.FC = () => {
   };
 
   return (
-    <>
-      {step === 1 && (
-        <BookForm isLoading={isLoading} onSubmit={handleBookSubmit} />
-      )}
-
-      {/* Step 3 */}
-      {step === 3 && <BookingInvoice />}
-    </>
+    <BookForm
+      isLoading={isLoading}
+      onSubmit={handleBookSubmit}
+      booking_type={booking_type}
+    />
   );
 };
 
-export default Book;
+export default CreateBooking;
 
 // {
 //   "message": "Booking created successfully. You will be notified when your booking is approved",

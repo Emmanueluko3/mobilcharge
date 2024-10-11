@@ -28,7 +28,7 @@ import { Button } from "../components/common/button";
 // import { faRocketchat } from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar: React.FC = () => {
-  const location = useLocation().pathname.split("/").pop();
+  const location = useLocation().pathname.split("/")[2];
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const user: any = useAppSelector((state) => state?.auth?.user);
@@ -103,11 +103,9 @@ const Sidebar: React.FC = () => {
       const response: any = await apiService("/api/auth/logout/", "POST", {
         refresh: getRefreshToken(),
       });
-
-      if (response) {
-        dispatch(logout());
-        setOpenLogout(false);
-      }
+      console.log(response);
+      dispatch(logout());
+      setOpenLogout(false);
     } catch (error: any) {
       if (error?.response?.data?.error) {
         return toast.error(error?.response?.data?.error);
