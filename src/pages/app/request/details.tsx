@@ -39,7 +39,7 @@ const RequestDetails: React.FC = () => {
       try {
         setLoading(true);
         const response: any = await apiService(
-          `/api/booking/update-booking-status/${id}/`,
+          `/api/booking/update-booking-status/${booking?.invoice_id}/`,
           "PATCH",
           {
             status: status,
