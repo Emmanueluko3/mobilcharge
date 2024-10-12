@@ -18,17 +18,11 @@ import Pricing from "./pages/app/pricing";
 import Emergency from "./pages/app/emergency";
 import Settings from "./pages/app/settings";
 import Overview from "./pages/app/overview";
-import Requests from "./pages/app/requests";
-import { store } from "./store/store";
+import Requests from "./pages/app/request/requests";
 import CheckoutBooking from "./pages/app/book/checkout";
 import CreateBooking from "./pages/app/book/book";
 import BookingSuccessful from "./pages/app/book/booking-successful";
-
-const isAdmin = () => {
-  const state = store.getState();
-  const isAdmin: any = state?.auth?.user;
-  return isAdmin?.is_superuser;
-};
+import RequestDetails from "./pages/app/request/details";
 
 const userRoutes = {
   path: "/dashboard",
@@ -45,7 +39,6 @@ const userRoutes = {
       ],
     },
     { path: "drivers", element: <Drivers /> },
-    // { path: "message", element: <div>Message</div> },
     { path: "pricing", element: <Pricing /> },
     { path: "settings", element: <Settings /> },
     {
@@ -66,7 +59,14 @@ const adminRoutes = {
   children: [
     { path: "", element: <Navigate to="overview" /> },
     { path: "overview", element: <Overview /> },
-    { path: "requests", element: <Requests /> },
+    {
+      path: "requests",
+      element: <Outlet />,
+      children: [
+        { path: "", element: <Requests /> },
+        { path: ":id?", element: <RequestDetails /> },
+      ],
+    },
     { path: "settings", element: <Settings /> },
   ],
 };
@@ -92,7 +92,8 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  isAdmin() ? adminRoutes : userRoutes,
+  adminRoutes,
+  userRoutes,
 ]);
 
 const Routes = () => <RouterProvider router={router} />;

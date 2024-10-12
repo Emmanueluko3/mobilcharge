@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../store/hooks";
 import { Navigate, useLocation } from "react-router-dom";
-import Sidebar from "../layouts/sidebar";
+import Sidebar, { AppFooter } from "../layouts/sidebar";
 import { Outlet } from "react-router-dom";
 import AppHeader from "../layouts/appheader";
 import { AnimatePresence, motion } from "framer-motion";
@@ -35,7 +35,8 @@ const AppTemplate: React.FC = () => {
           </div>
           <div className="col-span-12 lg:col-span-9 w-full">
             <AppHeader />
-            <div className="overflow-y-auto no-scrollbar max-h-[88vh] p-4 lg:pr-16 lg:p-8 mb-20 lg:mb-auto ">
+            <AppFooter />
+            <div className="overflow-y-auto no-scrollbar max-h-[75vh] lg:max-h-[88vh] p-4 lg:pr-16 lg:p-8 mb-32 lg:mb-auto ">
               <motion.div
                 key={location.pathname}
                 initial={{ opacity: 0, y: 20 }}

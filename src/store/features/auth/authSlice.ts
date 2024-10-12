@@ -30,9 +30,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess(state, action) {
+      localStorage.setItem(
+        "role",
+        action?.payload?.user?.is_superuser ? "admin" : "user"
+      );
       state.isLoggedIn = true;
       localStorage.setItem("accessToken", action.payload.access);
       localStorage.setItem("refreshToken", action.payload.refresh);
+
       state.user = action.payload.user;
       state.error = undefined;
     },
@@ -44,6 +49,7 @@ const authSlice = createSlice({
     logout(state) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
+      localStorage.removeItem("role");
       state.isLoggedIn = false;
       state.user = undefined;
       window.location.replace("/login");
