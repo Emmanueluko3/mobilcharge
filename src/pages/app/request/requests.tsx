@@ -16,22 +16,50 @@ const Requests: React.FC = () => {
   const { t } = useTranslation();
 
   const {
-    data: bookings,
-    isLoading,
-    error,
-  } = useFetch("/api/booking/bookings/");
+    data: pendingRequest,
+    isLoading: isPendingRequestLoading,
+    error: isPendingRequestError,
+  } = useFetch(`/api/booking/bookings/Pending`);
 
-  const pendingRequest = bookings?.filter(
-    (booking: any) => booking.status === "Pending"
-  );
-  const completedRequest = bookings?.filter(
-    (booking: any) => booking.status === "completed"
-  );
+  const {
+    data: approvedRequest,
+    isLoading: isapprovedRequestLoading,
+    error: isapprovedRequestError,
+  } = useFetch(`/api/booking/bookings/Approved`);
+
+  // const {
+  //   id,
+  //   user: {
+  //     username,
+  //     email,
+  //     first_name,
+  //     last_name,
+  //     phone,
+
+  //     profile_image,
+  //     subscription_type,
+  //   },
+
+  //   location,
+  //   car_make,
+  //   battery_type,
+  //   battery_level,
+  //   kilometers_left,
+  //   vehicle_image,
+  //   description,
+  //   booking_type,
+  //   invoice_id,
+  //   price,
+  //   status,
+  //   paid,
+  //   scheduled_date_and_time,
+  //   date,
+  // } = approvedRequest[0] || {};
 
   // Carousel scroll
   const scrollRef: any = useRef(null);
   const scroll = (direction: string) => {
-    const scrollAmount = scrollRef.current.clientWidth / 2; // Scroll by the width of one item
+    const scrollAmount = scrollRef.current.clientWidth / 2;
     scrollRef.current.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
@@ -45,51 +73,56 @@ const Requests: React.FC = () => {
           <h2 className="text-2xl font-semibold">{t("Active Requests")}</h2>
           <span className="rounded-full w-4 h-4 bg-green-500"></span>
         </div>
-        <div className="lg:p-4 rounded-2xl bg-white bg-opacity-50">
-          <h3 className="font-semibold text-lg mb-5">{t("Client Request")}</h3>
-          <img
-            src={Tesla}
-            alt="Tesla"
-            className="rounded-2xl h-52 w-full object-cover mb-2"
-          />
-          <h3 className="font-semibold text-lg">Marvin Gallek</h3>
-          <p className="my-2 text-sm text-gray-600">
-            <span className="font-medium">{t("Car Model")}</span>: Tesla
-          </p>
-          <p className="my-2 text-sm text-gray-600">
-            <span className="font-medium">{t("Location")}</span>: No.3, Maitama,
-            Abuja, Nigeria
-          </p>
-          <Link
-            to="tel:514-585-3281"
-            className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
-          >
-            514-585-3281
-          </Link>
 
-          <p className="text-gray-950 flex items-center text-sm font-semibold mb-5">
-            <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
-            {t("Requested")} 24 mins ago
-          </p>
-
-          <div className="flex flex-col">
-            <h3 className="font-semibold text-lg mb-3">{t("Detail Task")}</h3>
-            <div className="flex items-center my-2">
-              <span className="rounded-xl p-2 bg-gray-300 text-sm flex items-center justify-center h-10 w-10 mr-4">
-                12%
-              </span>
-              <p className="text-gray-800 text-base font-medium">
-                Car Battery Percentage
-              </p>
-            </div>
+        {approvedRequest?.length > 0 && (
+          <div className="lg:p-4 rounded-2xl bg-white bg-opacity-50">
+            <h3 className="font-semibold text-lg mb-5">
+              {t("Client Request")}
+            </h3>
+            <img
+              src={Tesla}
+              alt="Tesla"
+              className="rounded-2xl h-52 w-full object-cover mb-2"
+            />
+            <h3 className="font-semibold text-lg">Marvin Gallek</h3>
+            <p className="my-2 text-sm text-gray-600">
+              <span className="font-medium">{t("Car Model")}</span>: Tesla
+            </p>
+            <p className="my-2 text-sm text-gray-600">
+              <span className="font-medium">{t("Location")}</span>: No.3,
+              Maitama, Abuja, Nigeria
+            </p>
             <Link
-              to={`/admin/requests/1234`}
-              className="mt-10 lg:mt-32 bg-primary-500 w-full rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center text-sm justify-center"
+              to="tel:514-585-3281"
+              className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
             >
-              {t("See details")}
+              514-585-3281
             </Link>
+
+            <p className="text-gray-950 flex items-center text-sm font-semibold mb-5">
+              <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
+              {t("Requested")} 24 mins ago
+            </p>
+
+            <div className="flex flex-col">
+              <h3 className="font-semibold text-lg mb-3">{t("Detail Task")}</h3>
+              <div className="flex items-center my-2">
+                <span className="rounded-xl p-2 bg-gray-300 text-sm flex items-center justify-center h-10 w-10 mr-4">
+                  12%
+                </span>
+                <p className="text-gray-800 text-base font-medium">
+                  Car Battery Percentage
+                </p>
+              </div>
+              <Link
+                to={`/admin/requests/1234`}
+                className="mt-10 lg:mt-32 bg-primary-500 w-full rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center text-sm justify-center"
+              >
+                {t("See details")}
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="lg:col-span-7">
         <div className="h-56 w-full my-10">
@@ -167,7 +200,7 @@ const Requests: React.FC = () => {
                 <span className="text-gray-600 flex ms-2">{item.date}</span>
               </p>
               <Link
-                to={`${item.id}`}
+                to={`${item.invoice_id}`}
                 className={`${
                   item.booking_type === "Normal" && "bg-green-500"
                 } ${

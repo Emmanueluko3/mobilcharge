@@ -64,7 +64,7 @@ const adminRoutes = {
       element: <Outlet />,
       children: [
         { path: "", element: <Requests /> },
-        { path: ":id?", element: <RequestDetails /> },
+        { path: ":invoice_id?", element: <RequestDetails /> },
       ],
     },
     { path: "settings", element: <Settings /> },

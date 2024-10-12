@@ -6,23 +6,33 @@ import { Button } from "../../../components/common/button";
 import { useEffect, useState } from "react";
 import apiService from "../../../api/apiServices";
 import toast from "react-hot-toast";
-import { Tooltip } from "@mui/joy";
+import useFetch from "../../../components/hooks/useFetch";
+import Swal from "sweetalert2";
 
 const CheckoutBooking: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
-  const { id } = useParams();
-  const { message = "", booking = {} } = location?.state?.bookingData || {};
+  const searchParams = new URLSearchParams(location.search);
+  const invoiceId = searchParams.get("booking_invoice_id");
+  const { message = "" } = location?.state?.bookingData || {};
+
+  const {
+    data: booking,
+    isLoading: isBookingLoading,
+    error: isBookingError,
+  } = useFetch(`/api/booking/${invoiceId}/`);
 
   const [drivers_note, setDrivers_note] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!id && !location?.state?.bookingData) {
+    if (!invoiceId && !location?.state?.bookingData) {
       navigate("/dashboard/book", { replace: true });
     }
-  }, [id, location, navigate]);
+  }, [location, navigate]);
+
+  console.log("details:", invoiceId);
 
   const handlePayment = async () => {
     try {
@@ -32,7 +42,7 @@ const CheckoutBooking: React.FC = () => {
         "POST",
         {
           plan_id: "2",
-          booking_id: booking?.id || id,
+          booking_id: booking?.id,
           drivers_note: drivers_note,
         }
       );
@@ -42,9 +52,18 @@ const CheckoutBooking: React.FC = () => {
       }
     } catch (error: any) {
       if (error?.response?.data?.error) {
-        return toast.error(error?.response?.data?.error);
+        return Swal.fire({
+          title: t("Error!"),
+          text: error?.response?.data?.error,
+          icon: "error",
+        });
       }
-      toast.error("Unknown error occurred");
+      Swal.fire({
+        title: t("Error!"),
+        text: t("Something went wrong. Please try again."),
+        icon: "error",
+      });
+      console.log("error message", error);
     } finally {
       setIsLoading(false);
     }
@@ -52,7 +71,7 @@ const CheckoutBooking: React.FC = () => {
 
   return (
     <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-12 p-4 lg:p-6 bg-white rounded-lg">
-      <div className="lg:col-span-5 h-fit">
+      <div className="lg:col-span-5 h-fit order-1">
         <h2 className="text-3xl font-semibold">
           {t("You submitted a request for a charge")}
         </h2>
@@ -62,7 +81,7 @@ const CheckoutBooking: React.FC = () => {
           {t("Truck")} #1
         </p>
       </div>
-      <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center">
+      <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center order-2">
         <h2 className="text-3xl font-semibold w-full mb-4">{t("Details")}</h2>
         <table className="table-auto w-full text-left my-4">
           <tbody>
@@ -86,7 +105,7 @@ const CheckoutBooking: React.FC = () => {
         </table>
       </div>
 
-      <div className="lg:col-span-5 h-fit">
+      <div className="lg:col-span-5 h-fit order-4 lg:order-3">
         {/* Message for driver */}
 
         <div className="lg:my-8">
@@ -99,7 +118,7 @@ const CheckoutBooking: React.FC = () => {
               onChange={(e) => setDrivers_note(e.target.value)}
               value={drivers_note}
               placeholder={t("Message")}
-              className="block min-h-44 w-full border-0 p-4 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
+              className="block min-h-32 lg:min-h-44 w-full border-0 p-4 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
             ></textarea>
           </div>
         </div>
@@ -109,22 +128,26 @@ const CheckoutBooking: React.FC = () => {
             {t("Back")}
           </button>
 
-          <Tooltip title={t("Waiting for driver approval")} size="sm" arrow>
-            <Button
-              className={`w-full ${
-                booking?.status === "Pending" && "cursor-not-allowed"
-              }`}
-              disabled={booking?.status === "Pending"}
-              isLoading={isLoading}
-              onClick={handlePayment}
-            >
-              {t("Pay now")}
-            </Button>
-          </Tooltip>
+          {/* <Tooltip title={t("Waiting for driver approval")} size="sm" arrow> */}
+          <Button
+            className={`w-full ${
+              booking?.status === "Pending" && "cursor-not-allowed"
+            }`}
+            disabled={booking?.status === "Pending"}
+            isLoading={isLoading}
+            onClick={handlePayment}
+          >
+            {t("Pay now")}
+          </Button>
+          {/* </Tooltip> */}
         </div>
       </div>
-      <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center">
-        <img src={booking?.vehicle_image} className="h-80" alt="Charge van" />
+      <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center order-3 lg:order-4">
+        <img
+          src={booking?.vehicle_image}
+          className="h-48 lg:h-80 object-cover"
+          alt="Charge van"
+        />
       </div>
     </div>
   );

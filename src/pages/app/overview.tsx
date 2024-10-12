@@ -17,22 +17,21 @@ const Overview: React.FC = () => {
   const { t } = useTranslation();
 
   const {
-    data: bookings,
-    isLoading,
-    error,
-  } = useFetch("/api/booking/bookings/");
+    data: pendingRequest,
+    isLoading: isPendingRequestLoading,
+    error: isPendingRequestError,
+  } = useFetch(`/api/booking/bookings/Pending`);
 
-  const pendingRequest = bookings?.filter(
-    (booking: any) => booking.status === "Pending"
-  );
-  const completedRequest = bookings?.filter(
-    (booking: any) => booking.status === "completed"
-  );
+  const {
+    data: completedRequest,
+    isLoading: iscompletedRequestLoading,
+    error: iscompletedRequestError,
+  } = useFetch(`/api/booking/bookings/Completed`);
 
   // Request Percentages
   const totalPendingRequests = pendingRequest?.length || 0;
   const completedPercentage = totalPendingRequests
-    ? (completedRequest.length / totalPendingRequests) * 100
+    ? (completedRequest?.length / totalPendingRequests) * 100
     : 0;
 
   const { value: value2, reset } = useCountUp({
@@ -44,7 +43,7 @@ const Overview: React.FC = () => {
 
   useEffect(() => {
     reset();
-  }, [bookings]);
+  }, [pendingRequest]);
 
   // Carousel scroll
   const scrollRef: any = useRef(null);

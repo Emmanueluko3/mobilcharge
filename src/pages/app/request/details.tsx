@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../../../components/common/button";
 import useFetch from "../../../components/hooks/useFetch";
 import apiService from "../../../api/apiServices";
@@ -12,22 +12,43 @@ import Swal from "sweetalert2";
 const RequestDetails: React.FC = () => {
   const { t } = useTranslation();
 
-  const { id } = useParams();
+  const { invoice_id } = useParams();
 
   const {
     data: booking,
     isLoading,
     error,
     refetch,
-  } = useFetch(`/api/booking/${id}/`);
+  } = useFetch(`/api/booking/${invoice_id}/`);
 
   const [status, setStatus] = useState<null | string>(null);
   const [loading, setLoading] = useState(false);
 
   const updateBooking = async () => {
+    let confirmationMessage = "";
+
+    switch (status) {
+      case "approved":
+        confirmationMessage = t(
+          "Are you sure you want to approve this request?"
+        );
+        break;
+      case "declined":
+        confirmationMessage = t(
+          "Are you sure you want to decline this request?"
+        );
+        break;
+      case "Completed":
+        confirmationMessage = t(
+          "Are you sure you want to complete this request?"
+        );
+        break;
+      default:
+        confirmationMessage = "";
+    }
     const result = await Swal.fire({
       title: t("Confirm"),
-      text: t("Are you sure you want to approve this request?"),
+      text: confirmationMessage,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#428bca",
@@ -47,19 +68,24 @@ const RequestDetails: React.FC = () => {
         );
 
         if (response.data) {
+          Swal.fire({
+            title: "Success!",
+            text: response?.data?.message,
+            icon: "success",
+          });
           refetch();
         }
       } catch (error: any) {
         if (error?.response?.data?.error) {
           return Swal.fire({
-            title: "Error!",
+            title: t("Error!"),
             text: error?.response?.data?.error,
             icon: "error",
           });
         }
         Swal.fire({
-          title: "Error!",
-          text: "Something went wrong. Please try again.",
+          title: t("Error!"),
+          text: t("Something went wrong. Please try again."),
           icon: "error",
         });
         console.log("error message", error);
@@ -105,44 +131,65 @@ const RequestDetails: React.FC = () => {
               {booking?.description}
             </p>
 
-            <div className="flex gap-6 lg:gap-16 mb-10">
-              {[
-                {
-                  text: t("Approve Request"),
-                  status: "approved",
-                  icon: faCheck,
-                },
-                {
-                  text: t("Decline Request"),
-                  status: "cancelled",
-                  icon: faCheck,
-                },
-              ].map((item, index) => (
-                <div key={index} className="flex flex-col items-center w-full">
-                  <h3 className="mb-2 lg:mb-4 text-sm lg:text-lg font-semibold text-center">
-                    {item.text}?
-                  </h3>
-                  <span
-                    onClick={() => setStatus(item.status)}
-                    className={`${
-                      item.status === status
-                        ? "border-green-500 border-4"
-                        : "border-gray-300"
-                    } p-2 border rounded-full w-8 h-8 lg:w-10 lg:h-10 flex justify-center items-center cursor-pointer`}
+            {booking?.status == "Pending" && (
+              <div className="flex gap-6 lg:gap-16 mb-10">
+                {[
+                  {
+                    text: t("Approve Request"),
+                    status: "approved",
+                    icon: faCheck,
+                  },
+                  {
+                    text: t("Decline Request"),
+                    status: "cancelled",
+                    icon: faXmark,
+                  },
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center w-full"
                   >
-                    <FontAwesomeIcon icon={item.icon} />
-                  </span>
-                </div>
-              ))}
-            </div>
-            <Button
-              className="w-full lg:w-2/6"
-              disabled={!status || isLoading}
-              isLoading={loading}
-              onClick={updateBooking}
-            >
-              {t("Finish")}
-            </Button>
+                    <h3 className="mb-2 lg:mb-4 text-sm lg:text-lg font-semibold text-center">
+                      {item.text}?
+                    </h3>
+                    <span
+                      onClick={() => setStatus(item.status)}
+                      className={`${
+                        item.status === status
+                          ? "border-green-500 border-4"
+                          : "border-gray-300"
+                      } p-2 border rounded-full w-8 h-8 lg:w-10 lg:h-10 flex justify-center items-center cursor-pointer`}
+                    >
+                      <FontAwesomeIcon icon={item.icon} />
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {booking?.status == "Pending" && (
+              <Button
+                className="w-full lg:w-2/6"
+                disabled={!status || isLoading}
+                isLoading={loading}
+                onClick={updateBooking}
+              >
+                {t("Finish")}
+              </Button>
+            )}
+
+            {booking?.status == "Approved" && (
+              <Button
+                className="w-full lg:w-2/6"
+                disabled={isLoading}
+                isLoading={loading}
+                onClick={() => {
+                  setStatus("Completed");
+                  updateBooking();
+                }}
+              >
+                {t("Finished Request?")}
+              </Button>
+            )}
           </div>
         </div>
 
@@ -150,7 +197,7 @@ const RequestDetails: React.FC = () => {
           <h3 className="font-semibold text-lg mb-5">{t("Client Request")}</h3>
           <img
             src={booking?.vehicle_image}
-            alt="Tesla"
+            alt={booking?.car_make}
             className="rounded-2xl h-52 w-full object-cover mb-2"
           />
           <h3 className="font-semibold text-lg">

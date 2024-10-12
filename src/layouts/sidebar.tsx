@@ -110,14 +110,14 @@ const Sidebar: React.FC = () => {
       } catch (error: any) {
         if (error?.response?.data?.error) {
           return Swal.fire({
-            title: "Error!",
+            title: t("Error!"),
             text: error?.response?.data?.error,
             icon: "error",
           });
         }
         Swal.fire({
-          title: "Error!",
-          text: "Something went wrong. Please try again.",
+          title: t("Error!"),
+          text: t("Something went wrong. Please try again."),
           icon: "error",
         });
         console.log("error message", error);
@@ -268,7 +268,7 @@ export const AppFooter = () => {
             } flex items-center font-bold text-base flex-col`}
           >
             {link.icon}
-            <span className="text-xs mt-1">{link.label}</span>
+            {/* <span className="text-xs mt-1">{link.label}</span> */}
           </h3>
         </Link>
       ))}
