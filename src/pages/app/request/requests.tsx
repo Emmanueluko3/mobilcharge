@@ -16,17 +16,10 @@ const Requests: React.FC = () => {
   const { t } = useTranslation();
 
   const {
-    data: bookings,
-    isLoading,
-    error,
-  } = useFetch("/api/booking/bookings/");
-
-  const pendingRequest = bookings?.filter(
-    (booking: any) => booking.status === "Pending"
-  );
-  const completedRequest = bookings?.filter(
-    (booking: any) => booking.status === "completed"
-  );
+    data: pendingRequest,
+    isLoading: isPendingRequestLoading,
+    error: isPendingRequestError,
+  } = useFetch(`/api/booking/bookings/Pending`);
 
   // Carousel scroll
   const scrollRef: any = useRef(null);

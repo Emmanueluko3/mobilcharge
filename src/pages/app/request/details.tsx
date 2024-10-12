@@ -47,19 +47,24 @@ const RequestDetails: React.FC = () => {
         );
 
         if (response.data) {
+          Swal.fire({
+            title: "Success!",
+            text: response?.data?.message,
+            icon: "success",
+          });
           refetch();
         }
       } catch (error: any) {
         if (error?.response?.data?.error) {
           return Swal.fire({
-            title: "Error!",
+            title: t("Error!"),
             text: error?.response?.data?.error,
             icon: "error",
           });
         }
         Swal.fire({
-          title: "Error!",
-          text: "Something went wrong. Please try again.",
+          title: t("Error!"),
+          text: t("Something went wrong. Please try again."),
           icon: "error",
         });
         console.log("error message", error);
@@ -150,7 +155,7 @@ const RequestDetails: React.FC = () => {
           <h3 className="font-semibold text-lg mb-5">{t("Client Request")}</h3>
           <img
             src={booking?.vehicle_image}
-            alt="Tesla"
+            alt={booking?.car_make}
             className="rounded-2xl h-52 w-full object-cover mb-2"
           />
           <h3 className="font-semibold text-lg">

@@ -306,5 +306,7 @@
   "Battery Percentage": "Pourcentage de batterie",
   "Battery Type": "Type de batterie",
   "Are you sure you want to approve this request?": "Etes-vous sûr de vouloir approuver cette demande?",
-  "Are you sure you want to save changes?": "Etes-vous sûr de vouloir enregistrer les modifications ?"
+  "Are you sure you want to save changes?": "Etes-vous sûr de vouloir enregistrer les modifications ?",
+  "Something went wrong. Please try again.": "Une erreur s'est produite. Veuillez réessayer.",
+  "Error!": "Erreur!"
 }

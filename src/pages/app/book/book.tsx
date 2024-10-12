@@ -3,9 +3,12 @@ import toast from "react-hot-toast";
 import { globalAxios } from "../../../api/globalAxios";
 import BookForm from "../../../components/booking/bookForm";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 const CreateBooking: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -51,14 +54,25 @@ const CreateBooking: React.FC = () => {
           state: { bookingData: response.data },
           replace: true,
         });
-
-        toast.success(response?.data?.message);
+        Swal.fire({
+          title: "Success!",
+          text: response?.data?.message,
+          icon: "success",
+        });
       }
     } catch (error: any) {
       if (error?.response?.data?.error) {
-        return toast.error(error?.response?.data?.error);
+        return Swal.fire({
+          title: t("Error!"),
+          text: error?.response?.data?.error,
+          icon: "error",
+        });
       }
-      toast.error("Unknown error occurred");
+      Swal.fire({
+        title: t("Error!"),
+        text: t("Something went wrong. Please try again."),
+        icon: "error",
+      });
       console.log("error message", error);
     } finally {
       setIsLoading(false);

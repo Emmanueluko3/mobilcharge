@@ -77,7 +77,7 @@ const AppHeader: React.FC = () => {
           <Link to="settings" className="ms-4">
             <img
               src={user?.profile_image}
-              className="h-12 w-12 rounded-full object-cover"
+              className="h-8 w-8 lg:h-12 lg:w-12 rounded-full object-cover"
               alt=""
             />
           </Link>
