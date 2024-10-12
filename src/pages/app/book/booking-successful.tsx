@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MobileChargeBus from "../../../assets/images/MobileChargebus.png";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const BookingSuccessful: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="grid grid-flow-row grid-cols-1 gap-6 lg:gap-12 lg:grid-cols-12 p-4 lg:p-6 bg-white rounded-lg">
+    <div className="grid grid-flow-row grid-cols-1 gap-6  lg:grid-cols-12 p-4 lg:p-6 bg-white rounded-lg">
       <div className="lg:col-span-7 h-fit order-1">
         <h2 className="text-3xl font-semibold">
           {t("Thank you for your purchase with MobilCharge")}
@@ -79,11 +80,18 @@ const BookingSuccessful: React.FC = () => {
                 032.4 {t("per second")}
               </td>
             </tr>
+            <tr>
+              <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
+                {t("Contact Driver")}:
+              </td>
+              <td className="px-4 py-1 text-primary-500 hover:text-primary-700 transition-all font-medium text-sm lg:text-base">
+                <Link to={`tel:+1234567890`}>+1234567890</Link>
+              </td>
+            </tr>
           </tbody>
         </table>
 
         <img src={MobileChargeBus} className="lg:h-80" alt="Charge van" />
-        <Button className="w-2/5">{t("Contact Driver")}!</Button>
       </div>
     </div>
   );
