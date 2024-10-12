@@ -3,11 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../../components/common/button";
 import { AppInput } from "../../components/common/input";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import toast from "react-hot-toast";
 import { globalAxios } from "../../api/globalAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { getUserInfo } from "../../store/features/auth/authSlice";
+import Swal from "sweetalert2";
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -39,50 +39,69 @@ const Settings: React.FC = () => {
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
+    const result = await Swal.fire({
+      title: t("Confirm"),
+      text: t("Are you sure you want to save changes?"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#428bca",
+      cancelButtonColor: "#54577A",
+      confirmButtonText: t("Confirm"),
+      cancelButtonText: t("Cancel"),
+    });
+    if (result.isConfirmed) {
+      try {
+        setIsLoading(true);
+        const {
+          profile_image,
+          first_name,
+          last_name,
+          phone,
+          email,
+          old_password,
+          new_password,
+          confirm_new_password,
+        } = profileData;
+        const formData = new FormData();
+        formData.append("profile_image", profile_image);
+        formData.append("first_name", first_name);
+        formData.append("last_name", last_name);
+        formData.append("phone", phone);
+        formData.append("email", email);
+        formData.append("old_password", old_password);
+        formData.append("new_password", new_password);
+        formData.append("confirm_new_password", confirm_new_password);
 
-    try {
-      setIsLoading(true);
-      const {
-        profile_image,
-        first_name,
-        last_name,
-        phone,
-        email,
-        old_password,
-        new_password,
-        confirm_new_password,
-      } = profileData;
-      const formData = new FormData();
-      formData.append("profile_image", profile_image);
-      formData.append("first_name", first_name);
-      formData.append("last_name", last_name);
-      formData.append("phone", phone);
-      formData.append("email", email);
-      formData.append("old_password", old_password);
-      formData.append("new_password", new_password);
-      formData.append("confirm_new_password", confirm_new_password);
+        const response: any = await globalAxios.patch(
+          "/api/auth/update-profile/",
+          formData,
+          {
+            headers: {
+              ...globalAxios.defaults.headers.common,
+              "Content-Type": "multipart/form-data",
+              Accept: "application/json",
+            },
+          }
+        );
+        Swal.fire({
+          title: "Success!",
+          text: response?.data?.success,
+          icon: "success",
+        });
 
-      const response: any = await globalAxios.patch(
-        "/api/auth/update-profile/",
-        formData,
-        {
-          headers: {
-            ...globalAxios.defaults.headers.common,
-            "Content-Type": "multipart/form-data",
-            Accept: "application/json",
-          },
+        dispatch(getUserInfo());
+      } catch (error: any) {
+        console.error(error);
+        if (error.status === 401) {
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong. Please try again.",
+            icon: "error",
+          });
         }
-      );
-
-      toast.success(response?.data?.success);
-      dispatch(getUserInfo());
-    } catch (error: any) {
-      console.error(error);
-      if (error.status === 401) {
-        toast.error(t("Error saving changes, Please try again"));
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 

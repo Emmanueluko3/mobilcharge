@@ -294,5 +294,17 @@
   "Pending Bookings": "Réservations en attente",
   "Pending Requests": "Demandes en attente",
   "Completed": "Complété",
-  "Requested": "Demandée"
+  "Requested": "Demandée",
+  "Client Request": "Demande du client",
+  "Detail Task": "Tâche détaillée",
+  "Active Requests": "Demandes actives",
+  "Approve Request": "Approuver la demande",
+  "Decline Request?": "Refuser la demande",
+  "Emergency Request": "Demande d'urgence",
+  "Customer's Note": "Note du client",
+  "Finish": "Soumettre",
+  "Battery Percentage": "Pourcentage de batterie",
+  "Battery Type": "Type de batterie",
+  "Are you sure you want to approve this request?": "Etes-vous sûr de vouloir approuver cette demande?",
+  "Are you sure you want to save changes?": "Etes-vous sûr de vouloir enregistrer les modifications ?"
 }

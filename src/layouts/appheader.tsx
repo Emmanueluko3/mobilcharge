@@ -11,7 +11,7 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { useAppSelector } from "../store/hooks";
 
 const AppHeader: React.FC = () => {
-  const location: any = useLocation().pathname.split("/").pop();
+  const location: any = useLocation().pathname.split("/")[2];
   const user: any = useAppSelector((state) => state.auth.user);
 
   // Translate
@@ -26,10 +26,10 @@ const AppHeader: React.FC = () => {
       <ScrollToTop />
 
       <nav className="w-full flex flex-row items-center justify-between bg-white text-black lg:pt-8 px-4 py-4 lg:pr-16 lg:px-10 lg:py-4">
-        <h2 className="text-2xl font-medium">
+        <h2 className="text-lg lg:text-2xl font-medium">
           {location === "overview"
             ? `Hi ${user?.first_name} ${user?.last_name}`
-            : t(location.charAt(0).toUpperCase() + location.slice(1))}
+            : t(location?.charAt(0).toUpperCase() + location?.slice(1))}
         </h2>
 
         <div className="flex items-center">
@@ -71,10 +71,10 @@ const AppHeader: React.FC = () => {
               </MenuItem>
             </Menu>
           </Dropdown>
-          <div className="rounded-full h-10 w-10 border mx-4 flex justify-center items-center">
+          <div className="rounded-full h-10 w-10 border mx-4 justify-center items-center hidden">
             <FontAwesomeIcon className="h-6 text-gray-400" icon={faBell} />
           </div>
-          <Link to="settings">
+          <Link to="settings" className="ms-4">
             <img
               src={user?.profile_image}
               className="h-12 w-12 rounded-full object-cover"
