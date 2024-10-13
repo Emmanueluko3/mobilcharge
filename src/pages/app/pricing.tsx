@@ -3,33 +3,54 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import apiService from "../../api/apiServices";
+import useFetch from "../../components/hooks/useFetch";
+import Swal from "sweetalert2";
+import { CircularProgress, Skeleton } from "@mui/joy";
 
 const Pricing: React.FC = () => {
   const { t } = useTranslation();
 
-  const [pricingPlans, setPricingPlans] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubscribeLoading, setIsSubscribeLoading] = useState(false);
 
-  const fetchedPlans = async () => {
+  const {
+    data: pricingPlans,
+    isLoading,
+    error,
+    refetch,
+  } = useFetch(`/api/payment/pricing-plans/`);
+
+  const handleSubcription = async (planId: string) => {
     try {
-      setIsLoading(true);
+      setIsSubscribeLoading(true);
+
       const response: any = await apiService(
-        "/api/payment/pricing-plans/",
-        "GET"
+        "/api/payment/stripe/create-subscription/",
+        "POST",
+        {
+          plan_id: planId,
+        }
       );
-      if (response) {
-        setPricingPlans(response?.data);
+      if (response.data) {
+        window.location.href = response?.data?.checkout_url;
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      if (error?.response?.data?.error) {
+        return Swal.fire({
+          title: t("Error!"),
+          text: error?.response?.data?.error,
+          icon: "error",
+        });
+      }
+      Swal.fire({
+        title: t("Error!"),
+        text: t("Something went wrong. Please try again."),
+        icon: "error",
+      });
+      console.log("error message", error);
     } finally {
-      setIsLoading(false);
+      setIsSubscribeLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchedPlans();
-  }, []);
 
   // const pricingPlans = [
   //   {
@@ -83,7 +104,7 @@ const Pricing: React.FC = () => {
           {t("Pricing Plans")}
         </h2>
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-10">
-          {pricingPlans?.map((item: any, index) => (
+          {pricingPlans?.map((item: any, index: number) => (
             <div
               key={index}
               className={`flex flex-col justify-between items-start ${
@@ -153,13 +174,21 @@ const Pricing: React.FC = () => {
                 ))}
               </div>
               <button
+                onClick={() => handleSubcription(item.id)}
+                disabled={isSubscribeLoading}
                 className={`${
                   item.current
                     ? "bg-purple-400 hover:bg-purple-700"
                     : "bg-gray-400 hover:bg-gray-500"
                 } text-white  px-6 py-2  w-full transition-all text-sm font-bold flex justify-center items-center text-center rounded-full`}
               >
-                Choose plan
+                {isSubscribeLoading ? (
+                  <>
+                    <CircularProgress size="sm" /> Loading...
+                  </>
+                ) : (
+                  "Choose plan"
+                )}
               </button>
             </div>
           ))}
