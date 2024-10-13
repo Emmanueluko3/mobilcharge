@@ -1,7 +1,13 @@
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  replace,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { Button } from "../../../components/common/button";
 import { useEffect, useState } from "react";
 import apiService from "../../../api/apiServices";
@@ -17,11 +23,9 @@ const CheckoutBooking: React.FC = () => {
   const invoiceId = searchParams.get("booking_invoice_id");
   const { message = "" } = location?.state?.bookingData || {};
 
-  const {
-    data: booking,
-    isLoading: isBookingLoading,
-    error: isBookingError,
-  } = useFetch(`/api/booking/${invoiceId}/`);
+  const { data: booking, isLoading: isBookingLoading } = useFetch(
+    `/api/booking/${invoiceId}/`
+  );
 
   const [drivers_note, setDrivers_note] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -31,8 +35,6 @@ const CheckoutBooking: React.FC = () => {
       navigate("/dashboard/book", { replace: true });
     }
   }, [location, navigate]);
-
-  console.log("details:", invoiceId);
 
   const handlePayment = async () => {
     try {
@@ -68,6 +70,15 @@ const CheckoutBooking: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  if (booking?.paid) {
+    return (
+      <Navigate
+        to={`/dashboard/book/booking-successful/invoice?success=true&booking_invoice_id=${invoiceId}`}
+        replace
+      />
+    );
+  }
 
   return (
     <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-12 p-4 lg:p-6 bg-white rounded-lg">
@@ -124,22 +135,30 @@ const CheckoutBooking: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-10 w-full">
-          <button className="w-full px-8 py-1.5 text-base text-primary-500 border border-primary-500 hover:text-white hover:bg-primary-500 flex justify-center items-center rounded-md bg-primary font-semibold transition-all shadow-sm hover:opacity-75">
-            {t("Back")}
-          </button>
+          {booking?.paid ? (
+            <span className="text-base bg-green-500 py-2 px-20 w-full rounded-lg font-semibold text-white text-center">
+              Payment Completed
+            </span>
+          ) : (
+            <>
+              <button className="w-full px-8 py-1.5 text-base text-primary-500 border border-primary-500 hover:text-white hover:bg-primary-500 flex justify-center items-center rounded-md bg-primary font-semibold transition-all shadow-sm hover:opacity-75">
+                {t("Back")}
+              </button>
 
-          {/* <Tooltip title={t("Waiting for driver approval")} size="sm" arrow> */}
-          <Button
-            className={`w-full ${
-              booking?.status === "Pending" && "cursor-not-allowed"
-            }`}
-            disabled={booking?.status === "Pending"}
-            isLoading={isLoading}
-            onClick={handlePayment}
-          >
-            {t("Pay now")}
-          </Button>
-          {/* </Tooltip> */}
+              {/* <Tooltip title={t("Waiting for driver approval")} size="sm" arrow> */}
+              <Button
+                className={`w-full ${
+                  booking?.status === "Pending" && "cursor-not-allowed"
+                }`}
+                disabled={booking?.status === "Pending"}
+                isLoading={isLoading}
+                onClick={handlePayment}
+              >
+                {t("Pay now")}
+              </Button>
+              {/* </Tooltip> */}
+            </>
+          )}
         </div>
       </div>
       <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center order-3 lg:order-4">

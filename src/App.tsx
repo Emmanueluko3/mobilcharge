@@ -35,7 +35,7 @@ const userRoutes = {
       children: [
         { path: "", element: <CreateBooking /> },
         { path: "checkout/:id?", element: <CheckoutBooking /> },
-        { path: "booking-successful/:details", element: <BookingSuccessful /> },
+        { path: "booking-successful/:invoice", element: <BookingSuccessful /> },
       ],
     },
     { path: "drivers", element: <Drivers /> },

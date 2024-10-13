@@ -239,6 +239,9 @@
   "Book now": "Réservez maintenant",
   "Pay now": "Payer",
   "Waiting for driver approval": "En attente de l'approbation du conducteur",
+  "Booking type": "Type de réservation",
+  "Invoice id": "ID de facture",
+  "Price": "Prix",
 
   "Active Drivers": "Conducteurs actifs",
   "All Drivers": "Tous les conducteurs",

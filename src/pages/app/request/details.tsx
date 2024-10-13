@@ -95,8 +95,6 @@ const RequestDetails: React.FC = () => {
     }
   };
 
-  //mobilecharge.onrender.com/api/booking/update-booking-status/{invoice_id}/
-
   https: return (
     <div className="w-full h-screen">
       {/* Requests */}
