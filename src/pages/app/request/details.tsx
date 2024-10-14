@@ -227,7 +227,7 @@ const RequestDetails: React.FC = () => {
               <p className="text-gray-800 text-sm font-medium mr-3">
                 {t("Battery Percentage")}:
               </p>
-              <span className="rounded-xl p-2 bg-gray-300 text-sm flex items-center justify-center h-10 min-w-10">
+              <span className="rounded-xl p-2 text-sm flex items-center justify-center">
                 {booking?.battery_level}%
               </span>
             </div>

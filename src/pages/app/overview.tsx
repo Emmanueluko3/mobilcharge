@@ -210,7 +210,7 @@ const Overview: React.FC = () => {
                     <span className="text-sm flex">{item?.battery_type}</span>
                   </div>
                   <Link
-                    to={`${item.invoice_id}`}
+                    to={`/admin/requests/${item.invoice_id}`}
                     className="mt-10 lg:mt-16 bg-primary-500 w-full rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center text-sm justify-center"
                   >
                     {t("See details")}
