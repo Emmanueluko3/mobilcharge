@@ -233,7 +233,7 @@ const RequestDetails: React.FC = () => {
             </div>
             <div className="flex items-center my-1">
               <p className="text-gray-800 text-sm font-medium mr-3">
-                Battery Type:
+                {t("Battery Type")}:
               </p>
               <span className="text-sm flex">{booking?.battery_type}</span>
             </div>

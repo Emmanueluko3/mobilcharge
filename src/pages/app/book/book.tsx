@@ -50,10 +50,13 @@ const CreateBooking: React.FC = () => {
         }
       );
       if (response) {
-        navigate("/dashboard/book/checkout", {
-          state: { bookingData: response.data },
-          replace: true,
-        });
+        navigate(
+          `/dashboard/book/checkout?booking_invoice_id=${response?.data?.booking?.invoice_id}`,
+          {
+            state: { bookingData: response.data },
+            replace: true,
+          }
+        );
         Swal.fire({
           title: "Success!",
           text: response?.data?.message,

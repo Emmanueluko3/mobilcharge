@@ -117,7 +117,6 @@ const Login: React.FC = () => {
               placeholder={t("Email")}
               maxLength={32}
               autoComplete="off"
-              inputMode="none"
             />
             {loginError.email && (
               <p className="text-red-500 text-sm">{loginError.email}</p>
@@ -132,7 +131,6 @@ const Login: React.FC = () => {
               placeholder={t("Password")}
               maxLength={10}
               autoComplete="off"
-              inputMode="none"
             />
             {loginError.password && (
               <p className="text-red-500 text-sm">{loginError.password}</p>

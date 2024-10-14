@@ -189,7 +189,6 @@ const Settings: React.FC = () => {
               placeholder={t("First name")}
               maxLength={24}
               autoComplete="off"
-              inputMode="none"
             />
           </div>
 
@@ -202,7 +201,6 @@ const Settings: React.FC = () => {
               placeholder={t("Last name")}
               maxLength={24}
               autoComplete="off"
-              inputMode="none"
             />
           </div>
           <div className="mb-2">
@@ -214,7 +212,6 @@ const Settings: React.FC = () => {
               placeholder={t("Phone number")}
               maxLength={24}
               autoComplete="off"
-              inputMode="none"
             />
           </div>
 
@@ -227,7 +224,6 @@ const Settings: React.FC = () => {
               placeholder={t("Email")}
               maxLength={32}
               autoComplete="off"
-              inputMode="none"
             />
           </div>
         </div>
@@ -247,7 +243,6 @@ const Settings: React.FC = () => {
               placeholder={t("Old password")}
               maxLength={10}
               autoComplete="off"
-              inputMode="none"
               onPaste={(e) => e.preventDefault()}
             />
           </div>
@@ -260,7 +255,6 @@ const Settings: React.FC = () => {
               placeholder={t("New password")}
               maxLength={10}
               autoComplete="off"
-              inputMode="none"
               onPaste={(e) => e.preventDefault()}
             />
           </div>
@@ -274,7 +268,6 @@ const Settings: React.FC = () => {
               placeholder={t("Confirm new password")}
               maxLength={10}
               autoComplete="off"
-              inputMode="none"
               onPaste={(e) => e.preventDefault()}
             />
           </div>
