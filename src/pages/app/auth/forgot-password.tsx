@@ -10,12 +10,12 @@ import { loginSuccess } from "../../../store/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import toast from "react-hot-toast";
 
-const Login: React.FC = () => {
+const ForgotPassowrd: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [loginError, setLoginError] = useState({ email: "", password: "" });
+  const [loginData, setLoginData] = useState({ email: "" });
+  const [loginError, setLoginError] = useState({ email: "" });
   const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -29,8 +29,8 @@ const Login: React.FC = () => {
   const isAuthenticated = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    setLoginData({ email: "", password: "" });
-    setLoginError({ email: "", password: "" });
+    setLoginData({ email: "" });
+    setLoginError({ email: "" });
   }, [location, user]);
 
   const validateForm = () => {
@@ -40,15 +40,10 @@ const Login: React.FC = () => {
         : !/\S+@\S+\.\S+/.test(loginData.email)
         ? "Email is invalid"
         : "",
-      password: !loginData.password
-        ? "Password is required"
-        : loginData.password.length < 6
-        ? "Password must be at least 6 characters"
-        : "",
     };
 
     setLoginError(errors);
-    return !errors.email && !errors.password;
+    return !errors.email;
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -57,12 +52,10 @@ const Login: React.FC = () => {
       try {
         setIsLoading(true);
         const response: any = await apiService(
-          "/api/auth/token/",
+          "/api/auth/password-reset/request/",
           "POST",
           loginData
         );
-
-        dispatch(loginSuccess(response.data));
       } catch (error: any) {
         if (error?.response?.data?.error) {
           return toast.error(error?.response?.data?.error);
@@ -97,13 +90,13 @@ const Login: React.FC = () => {
         </Link>
 
         <h2 className="font-semibold text-3xl mb-3 text-center">
-          {t("Log in")}
+          {t("Forgot password")}?
         </h2>
 
         <p className="text-grey-700 font-medium text-sm text-center">
-          {t("Don’t have an account")}?{" "}
-          <Link to="/signup" className="text-primary-500 font-semibold">
-            {t("Sign up")}
+          {t("Remember your password")}?{" "}
+          <Link to="/login" className="text-primary-500 font-semibold">
+            {t("Log in")}
           </Link>
         </p>
 
@@ -122,44 +115,23 @@ const Login: React.FC = () => {
               <p className="text-red-500 text-sm">{loginError.email}</p>
             )}
           </div>
-          <div className="w-full mb-6 text-start">
-            <InputIcon
-              name="password"
-              type="password"
-              value={loginData.password}
-              onChange={handleChange}
-              placeholder={t("Password")}
-              maxLength={10}
-              autoComplete="off"
-            />
-            {loginError.password && (
-              <p className="text-red-500 text-sm">{loginError.password}</p>
-            )}
-          </div>
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center">
-              <input type="checkbox" className="h-4 w-4 border-0 mr-3" />
-              <span className="text-sm font-medium">{t("Remember me")}</span>
-            </div>
-            <Link
-              to="/forgot-password"
-              className="text-sm font-medium text-primary-500 hover:text-primary-700 transition-all"
-            >
-              {t("Forgot password")}?
-            </Link>
-          </div>
+
           <Button
             type="submit"
             isLoading={isLoading}
             disabled={isLoading}
             className="w-full"
           >
-            {t("Log in")}
+            {t("Reset password")}
           </Button>
         </form>
+
+        <p className="mt-4 lg:mt-6 text-base text-gray-700 text-center">
+          {t("You will receive a link in your email to reset your password.")}
+        </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default ForgotPassowrd;
