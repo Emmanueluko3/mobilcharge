@@ -23,6 +23,7 @@ import CheckoutBooking from "./pages/app/book/checkout";
 import CreateBooking from "./pages/app/book/book";
 import BookingSuccessful from "./pages/app/book/booking-successful";
 import RequestDetails from "./pages/app/request/details";
+import ForgotPassowrd from "./pages/app/auth/forgot-password";
 
 const userRoutes = {
   path: "/dashboard",
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassowrd />,
   },
   adminRoutes,
   userRoutes,
