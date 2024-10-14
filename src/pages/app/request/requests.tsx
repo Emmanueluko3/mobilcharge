@@ -15,46 +15,12 @@ import {
 const Requests: React.FC = () => {
   const { t } = useTranslation();
 
-  const {
-    data: pendingRequest,
-    isLoading: isPendingRequestLoading,
-    error: isPendingRequestError,
-  } = useFetch(`/api/booking/bookings/Pending`);
+  const { data: pendingRequest, isLoading: isPendingRequestLoading } = useFetch(
+    `/api/booking/bookings/Pending`
+  );
 
-  const {
-    data: approvedRequest,
-    isLoading: isapprovedRequestLoading,
-    error: isapprovedRequestError,
-  } = useFetch(`/api/booking/bookings/Approved`);
-
-  // const {
-  //   id,
-  //   user: {
-  //     username,
-  //     email,
-  //     first_name,
-  //     last_name,
-  //     phone,
-
-  //     profile_image,
-  //     subscription_type,
-  //   },
-
-  //   location,
-  //   car_make,
-  //   battery_type,
-  //   battery_level,
-  //   kilometers_left,
-  //   vehicle_image,
-  //   description,
-  //   booking_type,
-  //   invoice_id,
-  //   price,
-  //   status,
-  //   paid,
-  //   scheduled_date_and_time,
-  //   date,
-  // } = approvedRequest[0] || {};
+  const { data: approvedRequest, isLoading: isapprovedRequestLoading } =
+    useFetch(`/api/booking/bookings/Approved`);
 
   // Carousel scroll
   const scrollRef: any = useRef(null);
@@ -91,22 +57,22 @@ const Requests: React.FC = () => {
               <h3 className="font-semibold text-lg">
                 {item?.user?.first_name} {item?.user?.last_name}
               </h3>
-              <p className="my-2 text-xs lg:text-sm text-gray-600">
+              <p className="my-2 text-sm text-gray-600">
                 <span className="font-medium">{t("Car Model")}</span>:{" "}
                 {item?.car_make}
               </p>
-              <p className="my-2 text-xs lg:text-sm text-gray-600">
+              <p className="my-2 text-sm text-gray-600">
                 <span className="font-medium">{t("Location")}</span>:{" "}
                 {item?.location}
               </p>
               <Link
                 to={`tel:${item?.user?.phone}`}
-                className="text-xs lg:text-sm text-primary-500 mb-4 flex hover:text-primary-700"
+                className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
               >
                 {item?.user?.phone}
               </Link>
 
-              <p className="text-gray-950 flex items-center text-xs lg:text-sm font-semibold mb-5">
+              <p className="text-gray-950 flex items-center text-sm font-semibold mb-12">
                 <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
                 {t("Requested")} {item?.date}
               </p>
@@ -117,24 +83,22 @@ const Requests: React.FC = () => {
                 </h3>
 
                 <div className="flex items-center my-1">
-                  <p className="text-gray-800 text-xs lg:text-sm font-medium mr-3">
+                  <p className="text-gray-800 text-sm font-medium mr-3">
                     {t("Battery Percentage")}:
                   </p>
-                  <span className="rounded-xl p-2 bg-gray-300 text-xs lg:text-sm flex items-center justify-center h-10 min-w-10">
+                  <span className="rounded-xl p-2 text-sm flex items-center justify-center">
                     {item?.battery_level}%
                   </span>
                 </div>
                 <div className="flex items-center my-1">
-                  <p className="text-gray-800 text-xs lg:text-sm font-medium mr-3">
+                  <p className="text-gray-800 text-sm font-medium mr-3">
                     {t("Battery Type")}:
                   </p>
-                  <span className="text-xs lg:text-sm flex">
-                    {item?.battery_type}
-                  </span>
+                  <span className="text-sm flex">{item?.battery_type}</span>
                 </div>
                 <Link
                   to={`${item.invoice_id}`}
-                  className="mt-10 lg:mt-32 bg-primary-500 w-full rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center text-sm justify-center"
+                  className="mt-10  bg-primary-500 w-full rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center text-sm justify-center"
                 >
                   {t("See details")}
                 </Link>

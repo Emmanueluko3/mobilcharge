@@ -3,11 +3,9 @@ import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useCountUp } from "use-count-up";
 import useFetch from "../../components/hooks/useFetch";
-import Tesla from "../../assets/images/Tesla_Model_Y.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { Button } from "../../components/common/button";
 import {
   faChevronLeft,
   faChevronRight,
@@ -16,17 +14,15 @@ import {
 const Overview: React.FC = () => {
   const { t } = useTranslation();
 
-  const {
-    data: pendingRequest,
-    isLoading: isPendingRequestLoading,
-    error: isPendingRequestError,
-  } = useFetch(`/api/booking/bookings/Pending`);
+  const { data: pendingRequest, isLoading: isPendingRequestLoading } = useFetch(
+    `/api/booking/bookings/Pending`
+  );
 
-  const {
-    data: completedRequest,
-    isLoading: iscompletedRequestLoading,
-    error: iscompletedRequestError,
-  } = useFetch(`/api/booking/bookings/Completed`);
+  const { data: approvedRequest, isLoading: isapprovedRequestLoading } =
+    useFetch(`/api/booking/bookings/Approved`);
+
+  const { data: completedRequest, isLoading: iscompletedRequestLoading } =
+    useFetch(`/api/booking/bookings/Completed`);
 
   // Request Percentages
   const totalPendingRequests = pendingRequest?.length || 0;
@@ -157,48 +153,71 @@ const Overview: React.FC = () => {
           </Box>
         </div>
         <div className="lg:col-span-5">
-          <div className="p-3 lg:p-4 rounded-2xl bg-white bg-opacity-50">
-            <h3 className="font-semibold text-lg mb-3 lg:mb-5">
-              {t("Client Request")}
-            </h3>
-            <img
-              src={Tesla}
-              alt="Tesla"
-              className="rounded-2xl h-52 w-full object-cover mb-2"
-            />
-            <h3 className="font-semibold text-lg">Marvin Gallek</h3>
-            <p className="my-2 text-sm text-gray-600">
-              <span className="font-medium">{t("Car Model")}</span>: Tesla
-            </p>
-            <p className="my-2 text-sm text-gray-600">
-              <span className="font-medium">{t("Location")}</span>: No.3,
-              Maitama, Abuja, Nigeria
-            </p>
-            <Link
-              to="tel:514-585-3281"
-              className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
-            >
-              514-585-3281
-            </Link>
-
-            <p className="text-gray-950 flex items-center text-sm font-semibold mb-5">
-              <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
-              {t("Requested")} 24 mins ago
-            </p>
-
-            <div className="flex flex-col">
-              <h3 className="font-semibold text-lg mb-3">{t("Detail Task")}</h3>
-              <div className="flex items-center my-2">
-                <span className="rounded-xl p-2 bg-gray-300 text-sm flex items-center justify-center h-10 w-10 mr-4">
-                  12%
-                </span>
-                <p className="text-gray-800 text-base font-medium">
-                  Car Battery Percentage
+          {approvedRequest?.length > 0 &&
+            approvedRequest?.splice(0, 1).map((item: any, index: number) => (
+              <div
+                key={index}
+                className="lg:p-4 rounded-2xl bg-white bg-opacity-50"
+              >
+                <h3 className="font-semibold text-lg mb-5">
+                  {t("Client Request")}
+                </h3>
+                <img
+                  src={item?.vehicle_image}
+                  alt={item?.car_make}
+                  className="rounded-2xl h-52 w-full object-cover mb-2"
+                />
+                <h3 className="font-semibold text-lg">
+                  {item?.user?.first_name} {item?.user?.last_name}
+                </h3>
+                <p className="my-2 text-sm text-gray-600">
+                  <span className="font-medium">{t("Car Model")}</span>:{" "}
+                  {item?.car_make}
                 </p>
+                <p className="my-2 text-sm text-gray-600">
+                  <span className="font-medium">{t("Location")}</span>:{" "}
+                  {item?.location}
+                </p>
+                <Link
+                  to={`tel:${item?.user?.phone}`}
+                  className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
+                >
+                  {item?.user?.phone}
+                </Link>
+
+                <p className="text-gray-950 flex items-center text-sm font-semibold mb-12">
+                  <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
+                  {t("Requested")} {item?.date}
+                </p>
+
+                <div className="flex flex-col">
+                  <h3 className="font-semibold text-lg mb-3">
+                    {t("Detail Task")}
+                  </h3>
+
+                  <div className="flex items-center my-1">
+                    <p className="text-gray-800 text-sm font-medium mr-3">
+                      {t("Battery Percentage")}:
+                    </p>
+                    <span className="rounded-xl p-2 text-sm flex items-center justify-center">
+                      {item?.battery_level}%
+                    </span>
+                  </div>
+                  <div className="flex items-center my-1">
+                    <p className="text-gray-800 text-sm font-medium mr-3">
+                      {t("Battery Type")}:
+                    </p>
+                    <span className="text-sm flex">{item?.battery_type}</span>
+                  </div>
+                  <Link
+                    to={`${item.invoice_id}`}
+                    className="mt-10 lg:mt-16 bg-primary-500 w-full rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center text-sm justify-center"
+                  >
+                    {t("See details")}
+                  </Link>
+                </div>
               </div>
-              <Button className="mt-10 lg:mt-32">{t("See details")}</Button>
-            </div>
-          </div>
+            ))}
         </div>
       </div>
     </div>
