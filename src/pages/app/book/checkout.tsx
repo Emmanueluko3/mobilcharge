@@ -1,19 +1,13 @@
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
-import {
-  Navigate,
-  replace,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/common/button";
 import { useEffect, useState } from "react";
 import apiService from "../../../api/apiServices";
-import toast from "react-hot-toast";
 import useFetch from "../../../components/hooks/useFetch";
 import Swal from "sweetalert2";
+import { Skeleton } from "@mui/joy";
 
 const CheckoutBooking: React.FC = () => {
   const { t } = useTranslation();
@@ -98,18 +92,51 @@ const CheckoutBooking: React.FC = () => {
           <tbody>
             <tr>
               <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
-                {t("Driver Name")}:
+                <Skeleton
+                  variant="rectangular"
+                  width={200}
+                  height="14px"
+                  sx={{ mb: 1 }}
+                  loading={isBookingLoading}
+                >
+                  {t("Driver Name")}:
+                </Skeleton>
               </td>
               <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
-                {booking?.driver?.first_name} {booking?.driver?.last_name}
+                <Skeleton
+                  variant="rectangular"
+                  width={200}
+                  height="14px"
+                  sx={{ mb: 1 }}
+                  loading={isBookingLoading}
+                >
+                  {booking?.driver?.first_name} {booking?.driver?.last_name}
+                </Skeleton>
               </td>
             </tr>
             <tr>
               <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
-                {t("Charging speed")}:
+                <Skeleton
+                  variant="rectangular"
+                  width={200}
+                  height="14px"
+                  sx={{ mb: 1 }}
+                  loading={isBookingLoading}
+                >
+                  {t("Charging speed")}:
+                </Skeleton>
               </td>
+
               <td className="px-4 py-1 text-gray-500 font-medium text-sm lg:text-base">
-                032.4 {t("per second")}
+                <Skeleton
+                  variant="rectangular"
+                  width={200}
+                  height="14px"
+                  sx={{ mb: 1 }}
+                  loading={isBookingLoading}
+                >
+                  032.4 {t("per second")}
+                </Skeleton>
               </td>
             </tr>
           </tbody>
@@ -126,6 +153,7 @@ const CheckoutBooking: React.FC = () => {
           <div className="mb-2">
             <textarea
               name="drivers_note"
+              disabled={isBookingLoading}
               onChange={(e) => setDrivers_note(e.target.value)}
               value={drivers_note}
               placeholder={t("Message")}
@@ -150,7 +178,9 @@ const CheckoutBooking: React.FC = () => {
                 className={`w-full ${
                   booking?.status === "Pending" && "cursor-not-allowed"
                 }`}
-                disabled={booking?.status === "Pending"}
+                disabled={
+                  !booking || booking?.status === "Pending" || isBookingLoading
+                }
                 isLoading={isLoading}
                 onClick={handlePayment}
               >
@@ -162,11 +192,13 @@ const CheckoutBooking: React.FC = () => {
         </div>
       </div>
       <div className="lg:col-span-7 h-fit flex flex-col items-center justify-center order-3 lg:order-4">
-        <img
-          src={booking?.vehicle_image}
-          className="h-48 lg:h-80 object-cover"
-          alt="Charge van"
-        />
+        {booking?.vehicle_image && (
+          <img
+            src={booking?.vehicle_image}
+            className="h-48 lg:h-80 object-cover w-full flex"
+            alt="Charge van"
+          />
+        )}
       </div>
     </div>
   );
