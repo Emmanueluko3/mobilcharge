@@ -8,9 +8,11 @@ import MapImage from "../../../assets/images/map_image.png";
 import { Box } from "@mui/joy";
 import useFetch from "../../../components/hooks/useFetch";
 import {
+  faBars,
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import Spinner from "../../../components/common/spinner";
 
 const Requests: React.FC = () => {
   const { t } = useTranslation();
@@ -39,9 +41,13 @@ const Requests: React.FC = () => {
           <h2 className="text-2xl font-semibold">{t("Active Requests")}</h2>
           <span className="rounded-full w-4 h-4 bg-green-500"></span>
         </div>
-
-        {approvedRequest?.length > 0 &&
-          approvedRequest?.splice(0, 1).map((item: any, index: number) => (
+        {isapprovedRequestLoading ? (
+          <div className="lg:p-4 rounded-2xl bg-white bg-opacity-50 h-96 w-full flex items-center justify-center">
+            <Spinner size="w-16 h-16" />
+          </div>
+        ) : approvedRequest?.length > 0 ? (
+          approvedRequest?.length > 0 &&
+          approvedRequest?.slice(0, 1).map((item: any, index: number) => (
             <div
               key={index}
               className="lg:p-4 rounded-2xl bg-white bg-opacity-50"
@@ -104,7 +110,18 @@ const Requests: React.FC = () => {
                 </Link>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="lg:p-4 rounded-2xl bg-white bg-opacity-50 h-96 w-full flex items-center justify-center relative">
+            <FontAwesomeIcon
+              icon={faBars}
+              className="text-gray-100 absolute text-8xl animate-pulse"
+            />
+            <p className="font-medium text-gray-400 z-20">
+              No active request yet
+            </p>
+          </div>
+        )}
       </div>
       <div className="lg:col-span-7">
         <div className="h-56 w-full my-10">
@@ -156,44 +173,67 @@ const Requests: React.FC = () => {
             "::-webkit-scrollbar": { display: "none" },
           }}
         >
-          {pendingRequest?.map((item: any, index: number) => (
-            <div key={index} className="p-3 lg:p-4 rounded-2xl bg-opacity-50">
-              <img
-                src={item.vehicle_image}
-                alt={item.car_make}
-                className="rounded-2xl h-48 w-full object-cover mb-2"
-              />
-              <h3 className="font-semibold text-lg">
-                {item.user.first_name + "  " + item.user.last_name}
-              </h3>
-              <p className="my-2 text-sm text-gray-800">
-                {t("Car Model")}: {item.car_make}
-              </p>
-              <Link
-                to={`tel:${item.user.phone}`}
-                className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
-              >
-                {item.user.phone}
-              </Link>
+          {isPendingRequestLoading ? (
+            <>
+              <div>
+                <FontAwesomeIcon
+                  icon={faBars}
+                  className="text-gray-100 absolute text-8xl animate-pulse"
+                />
+              </div>
+              <div>
+                <FontAwesomeIcon
+                  icon={faBars}
+                  className="text-gray-100 absolute text-8xl animate-pulse"
+                />
+              </div>
+            </>
+          ) : pendingRequest?.length > 0 ? (
+            pendingRequest?.map((item: any, index: number) => (
+              <div key={index} className="p-3 lg:p-4 rounded-2xl bg-opacity-50">
+                <img
+                  src={item.vehicle_image}
+                  alt={item.car_make}
+                  className="rounded-2xl h-48 w-full object-cover mb-2"
+                />
+                <h3 className="font-semibold text-lg">
+                  {item.user.first_name + "  " + item.user.last_name}
+                </h3>
+                <p className="my-2 text-sm text-gray-800">
+                  {t("Car Model")}: {item.car_make}
+                </p>
+                <Link
+                  to={`tel:${item.user.phone}`}
+                  className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
+                >
+                  {item.user.phone}
+                </Link>
 
-              <p className="text-gray-950 flex items-center text-sm font-semibold mb-10">
-                <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
-                {t("Requested")}
-                <span className="text-gray-600 flex ms-2">{item.date}</span>
+                <p className="text-gray-950 flex items-center text-sm font-semibold mb-10">
+                  <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
+                  {t("Requested")}
+                  <span className="text-gray-600 flex ms-2">{item.date}</span>
+                </p>
+                <Link
+                  to={`${item.invoice_id}`}
+                  className={`${
+                    item.booking_type === "Normal" && "bg-green-500"
+                  } ${
+                    item.booking_type === "Emergency" && "bg-red-500"
+                  }  w-full text-sm rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center justify-center`}
+                >
+                  {item.booking_type === "Normal" && t("Approve requests")}
+                  {item.booking_type === "Emergency" && t("Emergency Request")}
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="lg:p-4 rounded-2xl bg-white bg-opacity-50 w-full flex items-center justify-center relative">
+              <p className="font-medium text-gray-400 z-20">
+                No Pending request yet
               </p>
-              <Link
-                to={`${item.invoice_id}`}
-                className={`${
-                  item.booking_type === "Normal" && "bg-green-500"
-                } ${
-                  item.booking_type === "Emergency" && "bg-red-500"
-                }  w-full text-sm rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center justify-center`}
-              >
-                {item.booking_type === "Normal" && t("Approve requests")}
-                {item.booking_type === "Emergency" && t("Emergency Request")}
-              </Link>
             </div>
-          ))}
+          )}
         </Box>
       </div>
     </div>
