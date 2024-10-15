@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import {
+  faBars,
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import Spinner from "../../components/common/spinner";
 
 const Overview: React.FC = () => {
   const { t } = useTranslation();
@@ -25,7 +27,8 @@ const Overview: React.FC = () => {
     useFetch(`/api/booking/bookings/Completed`);
 
   // Request Percentages
-  const totalPendingRequests = pendingRequest?.length || 0;
+  const totalPendingRequests =
+    pendingRequest?.length + approvedRequest?.length || 0;
   const completedPercentage = totalPendingRequests
     ? (completedRequest?.length / totalPendingRequests) * 100
     : 0;
@@ -119,42 +122,69 @@ const Overview: React.FC = () => {
               "::-webkit-scrollbar": { display: "none" },
             }}
           >
-            {pendingRequest?.map((item: any, index: number) => (
-              <div
-                key={index}
-                className="p-3 lg:p-4 rounded-2xl bg-white bg-opacity-50"
-              >
-                <img
-                  src={item.vehicle_image}
-                  alt={item.car_make}
-                  className="rounded-2xl h-40 lg:h-48 w-full object-cover mb-2"
-                />
-                <h3 className="font-semibold text-lg">
-                  {item.user.first_name + "  " + item.user.last_name}
-                </h3>
-                <p className="my-2 text-sm text-gray-800">
-                  {t("Car Model")}: {item.car_make}
-                </p>
-                <Link
-                  to={`tel:${item.user.phone}`}
-                  className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
+            {isPendingRequestLoading ? (
+              <>
+                <div>
+                  <FontAwesomeIcon
+                    icon={faBars}
+                    className="text-white text-opacity-80 absolute text-8xl animate-pulse"
+                  />
+                </div>
+                <div>
+                  <FontAwesomeIcon
+                    icon={faBars}
+                    className="text-white text-opacity-80 absolute text-8xl animate-pulse"
+                  />
+                </div>
+              </>
+            ) : pendingRequest?.length > 0 ? (
+              pendingRequest?.map((item: any, index: number) => (
+                <div
+                  key={index}
+                  className="p-3 lg:p-4 rounded-2xl bg-white bg-opacity-50"
                 >
-                  {item.user.phone}
-                </Link>
+                  <img
+                    src={item.vehicle_image}
+                    alt={item.car_make}
+                    className="rounded-2xl h-40 lg:h-48 w-full object-cover mb-2"
+                  />
+                  <h3 className="font-semibold text-lg">
+                    {item.user.first_name + "  " + item.user.last_name}
+                  </h3>
+                  <p className="my-2 text-sm text-gray-800">
+                    {t("Car Model")}: {item.car_make}
+                  </p>
+                  <Link
+                    to={`tel:${item.user.phone}`}
+                    className="text-sm text-primary-500 mb-4 flex hover:text-primary-700"
+                  >
+                    {item.user.phone}
+                  </Link>
 
-                <p className="text-gray-950 flex items-center text-sm font-semibold">
-                  <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
-                  {t("Requested")}
+                  <p className="text-gray-950 flex items-center text-sm font-semibold">
+                    <FontAwesomeIcon icon={faClock} className="mr-2 h-5 w-5" />
+                    {t("Requested")}
 
-                  <span className="text-gray-600 flex ms-2">{item.date}</span>
+                    <span className="text-gray-600 flex ms-2">{item.date}</span>
+                  </p>
+                </div>
+              ))
+            ) : (
+              <div className="lg:p-4 rounded-2xl bg-white bg-opacity-50 w-full flex items-center justify-center relative">
+                <p className="font-medium text-gray-400 z-20">
+                  No Pending request yet
                 </p>
               </div>
-            ))}
+            )}
           </Box>
         </div>
         <div className="lg:col-span-5">
-          {approvedRequest?.length > 0 &&
-            approvedRequest?.splice(0, 1).map((item: any, index: number) => (
+          {isapprovedRequestLoading ? (
+            <div className="lg:p-4 rounded-2xl bg-white bg-opacity-50 h-96 w-full flex items-center justify-center">
+              <Spinner size="w-16 h-16" />
+            </div>
+          ) : approvedRequest?.length > 0 ? (
+            approvedRequest?.slice(0, 1)?.map((item: any, index: number) => (
               <div
                 key={index}
                 className="lg:p-4 rounded-2xl bg-white bg-opacity-50"
@@ -217,7 +247,18 @@ const Overview: React.FC = () => {
                   </Link>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="lg:p-4 rounded-2xl bg-white bg-opacity-50 h-96 w-full flex items-center justify-center relative">
+              <FontAwesomeIcon
+                icon={faBars}
+                className="text-gray-100 absolute text-8xl animate-pulse"
+              />
+              <p className="font-medium text-gray-400 z-20">
+                No active request yet
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

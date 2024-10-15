@@ -6,7 +6,6 @@ import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
 import apiService from "../../../api/apiServices";
-import { loginSuccess } from "../../../store/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import toast from "react-hot-toast";
 
