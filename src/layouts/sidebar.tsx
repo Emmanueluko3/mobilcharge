@@ -257,7 +257,7 @@ export const AppFooter = () => {
   ].filter((link) => link.roles.includes(role()));
 
   return (
-    <div className="flex justify-between z-50 flex-row items-center px-6 pt-1 pb-8 lg:hidden w-full bg-white fixed bottom-0 rounded-t-xl">
+    <div className="flex justify-between z-50 flex-row items-center px-6 pt-1 pb-8 lg:hidden w-full bg-white fixed bottom-0 rounded-t-xl min-h-14">
       {navLinks.map((link, index) => (
         <Link to={link.href} key={index} className="my-3">
           <h3
