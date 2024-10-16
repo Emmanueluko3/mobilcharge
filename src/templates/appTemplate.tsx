@@ -36,7 +36,7 @@ const AppTemplate: React.FC = () => {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="h-[96vh] lg:min-h-screen justify-center bg-gray-100 grid grid-flow-row grid-cols-12">
+        <div className="min-h-screen justify-center bg-gray-100 grid grid-flow-row grid-cols-12">
           <div className="col-span-3 bg-[#fff] hidden lg:block">
             <Sidebar />
           </div>
