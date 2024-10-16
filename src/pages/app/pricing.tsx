@@ -1,21 +1,21 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import apiService from "../../api/apiServices";
 import useFetch from "../../components/hooks/useFetch";
 import Swal from "sweetalert2";
-import { CircularProgress, Skeleton } from "@mui/joy";
+import { CircularProgress } from "@mui/joy";
 
 const Pricing: React.FC = () => {
   const { t } = useTranslation();
 
   const [isSubscribeLoading, setIsSubscribeLoading] = useState(false);
+  const [isUnsubscribeLoading, setIsUnsubscribeLoading] = useState(false);
 
   const {
     data: pricingPlans,
     isLoading,
-    error,
     refetch,
   } = useFetch(`/api/payment/pricing-plans/`);
 
@@ -52,50 +52,52 @@ const Pricing: React.FC = () => {
     }
   };
 
-  // const pricingPlans = [
-  //   {
-  //     price: "Free",
-  //     title: t("Visitor"),
-  //     description: t("Electric vehicle owners seeking a quick charge"),
-  //     features: [
-  //       t("Individuals price list"),
-  //       t("With membership $32"),
-  //       t("Without membership $40"),
-  //       t("Emergency charge $200"),
-  //     ],
-  //   },
-  //   {
-  //     price: 54,
-  //     title: t("Membership"),
-  //     description: t("Electric vehicle owners seeking a quick charge"),
-  //     features: [
-  //       t("All Visitors plan features"),
-  //       t("Extended charge time"),
-  //       t("Priority customer support"),
-  //       t("Monthly subscription fee"),
-  //       t("Discount on additionals"),
-  //       t("With membership $32"),
-  //       t("Emergency charge $200"),
-  //     ],
-  //   },
-  //   {
-  //     price: 89,
-  //     title: t("Tailored"),
-  //     description: t(
-  //       "Hotels, event centers, fleets, dealerships, businesses, events, etc."
-  //     ),
-  //     features: [
-  //       t("Corporate price list"),
-  //       t("Price per half day (3hrs) 9 charges"),
-  //       t("9 charges - Total 160km $250"),
-  //       t("Price per day (6hrs) 18 charges"),
-  //       t("18 charges - Total 320km $500s"),
-  //       t("Price per hour (3 charges) 60km $90"),
-  //       t("No membership for corporates $0"),
-  //     ],
-  //     current: true,
-  //   },
-  // ];
+  const handleUnsubscribe = async (plan_title: string) => {
+    const result = await Swal.fire({
+      title: t("Confirm"),
+      text: t(`Are you sure you want to unsubscribe to ${plan_title} plan?`),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#428bca",
+      cancelButtonColor: "#54577A",
+      confirmButtonText: t("Confirm"),
+      cancelButtonText: t("Cancel"),
+    });
+    if (result.isConfirmed) {
+      try {
+        setIsUnsubscribeLoading(true);
+
+        const response: any = await apiService(
+          "/api/payment/cancel-subscription/",
+          "POST"
+        );
+        if (response) {
+          Swal.fire({
+            title: "Success!",
+            text: response?.data?.message,
+            icon: "success",
+          });
+          refetch();
+        }
+      } catch (error: any) {
+        if (error?.response?.data?.error) {
+          return Swal.fire({
+            title: t("Error!"),
+            text: error?.response?.data?.error,
+            icon: "error",
+          });
+        }
+        Swal.fire({
+          title: t("Error!"),
+          text: t("Something went wrong. Please try again."),
+          icon: "error",
+        });
+        console.log("error message", error);
+      } finally {
+        setIsUnsubscribeLoading(false);
+      }
+    }
+  };
 
   return (
     <div className="w-full">
@@ -173,23 +175,45 @@ const Pricing: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <button
-                onClick={() => handleSubcription(item.id)}
-                disabled={isSubscribeLoading}
-                className={`${
-                  item.current
-                    ? "bg-purple-400 hover:bg-purple-700"
-                    : "bg-gray-400 hover:bg-gray-500"
-                } text-white  px-6 py-2  w-full transition-all text-sm font-bold flex justify-center items-center text-center rounded-full`}
-              >
-                {isSubscribeLoading ? (
-                  <>
-                    <CircularProgress size="sm" /> Loading...
-                  </>
-                ) : (
-                  "Choose plan"
-                )}
-              </button>
+              {item?.current ? (
+                <button
+                  onClick={() => handleUnsubscribe(item.title)}
+                  disabled={isSubscribeLoading}
+                  className={`${
+                    item.current
+                      ? "bg-purple-400 hover:bg-purple-700"
+                      : "bg-gray-400 hover:bg-gray-500"
+                  } text-white  px-6 py-2  w-full transition-all text-sm font-bold flex justify-center items-center text-center rounded-full flex-nowrap`}
+                >
+                  {isUnsubscribeLoading ? (
+                    <>
+                      <CircularProgress size="sm" />{" "}
+                      <span className="ml-2">Loading...</span>
+                    </>
+                  ) : (
+                    "Unsubscribe"
+                  )}
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleSubcription(item.id)}
+                  disabled={isSubscribeLoading}
+                  className={`${
+                    item.current
+                      ? "bg-purple-400 hover:bg-purple-700"
+                      : "bg-gray-400 hover:bg-gray-500"
+                  } text-white  px-6 py-2  w-full transition-all text-sm font-bold flex justify-center items-center text-center rounded-full flex-nowrap`}
+                >
+                  {isSubscribeLoading ? (
+                    <>
+                      <CircularProgress size="sm" />{" "}
+                      <span className="ml-2">Loading...</span>
+                    </>
+                  ) : (
+                    "Choose plan"
+                  )}
+                </button>
+              )}
             </div>
           ))}
         </div>
