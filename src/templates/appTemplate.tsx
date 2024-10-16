@@ -40,7 +40,7 @@ const AppTemplate: React.FC = () => {
           <div className="col-span-3 bg-[#fff] hidden lg:block">
             <Sidebar />
           </div>
-          <div className="col-span-12 lg:col-span-9 w-full">
+          <div className="col-span-12 lg:col-span-9 w-full overflow-hidden">
             <AppHeader />
             <AppFooter />
             <div className="overflow-y-auto no-scrollbar max-h-[75vh] lg:max-h-[88vh] p-4 lg:pr-16 lg:p-8 mb-32 lg:mb-auto ">
