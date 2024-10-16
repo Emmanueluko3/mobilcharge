@@ -114,7 +114,7 @@ const Settings: React.FC = () => {
         if (files) {
           setProfileData({
             ...profileData,
-            profile_image: URL.createObjectURL(files[0]),
+            profile_image: files[0],
           });
         }
         break;
