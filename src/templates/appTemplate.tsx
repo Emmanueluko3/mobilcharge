@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useAppSelector } from "../store/hooks";
 import { Navigate, useLocation } from "react-router-dom";
 import Sidebar, { AppFooter } from "../layouts/sidebar";
@@ -10,6 +10,13 @@ const AppTemplate: React.FC = () => {
   const user: any = useAppSelector((state) => state.auth.user);
   const isAuthenticated: any = localStorage.getItem("accessToken");
   const location = useLocation();
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (divRef.current) {
+      divRef.current.scrollTop = 0;
+    }
+  }, [location.pathname]);
 
   if (
     !user ||

@@ -108,7 +108,7 @@ const RequestDetails: React.FC = () => {
               <img
                 src={booking?.user?.profile_image}
                 alt=""
-                className="rounded-full h-10 w-10 lg:h-12 lg:w-12 mr-3 drop-shadow-md"
+                className="rounded-full h-10 w-10 object-cover lg:h-12 lg:w-12 mr-3 drop-shadow-md"
               />
               <div className="">
                 <h4 className="text-sm lg:text-base font-medium">
