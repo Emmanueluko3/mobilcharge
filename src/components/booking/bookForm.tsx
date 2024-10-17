@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { AppInput } from "../common/input";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
-import MapImage from "../../assets/images/map_image.png";
+import { Map, Marker } from "@vis.gl/react-google-maps";
 
 const electricVehicleMakes = [
   "Tesla Model S",
@@ -70,8 +70,6 @@ const BookForm: React.FC<bookFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const imageInputRef = useRef<HTMLInputElement>(null);
-
-  console.log(booking_type);
 
   const [bookData, setBookData] = useState<bookDataProps>({
     location: "",
@@ -152,12 +150,24 @@ const BookForm: React.FC<bookFormProps> = ({
     }
   };
 
+  const [markerLocation, setMarkerLocation] = useState({
+    lat: 43.65107,
+    lng: -79.347015,
+  });
+
   return (
     <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-12 p-4 lg:p-6 bg-white rounded-lg">
       <form onSubmit={handleSubmit} className="lg:col-span-5">
-        <h2 className="text-3xl font-semibold">
-          {t("Request a charge for now or later")}
-        </h2>
+        {booking_type === "Emergency" ? (
+          <h2 className="text-3xl font-semibold text-red-500">
+            {t("Request an emergency charge now")}
+          </h2>
+        ) : (
+          <h2 className="text-3xl font-semibold">
+            {t("Request a charge for now or later")}
+          </h2>
+        )}
+
         <p className="text-sm my-3">
           {t("Add your car details, book,  and go")}
         </p>
@@ -299,8 +309,16 @@ const BookForm: React.FC<bookFormProps> = ({
           {t("Submit")}
         </Button>
       </form>
-      <div className="lg:col-span-7">
-        <img src={MapImage} alt="Map" />
+      <div className="lg:col-span-7 min-h-[60vh]">
+        <Map
+          style={{ borderRadius: "20px" }}
+          defaultZoom={13}
+          defaultCenter={markerLocation}
+          gestureHandling={"greedy"}
+          disableDefaultUI
+        >
+          <Marker position={markerLocation} />
+        </Map>{" "}
       </div>
     </div>
   );

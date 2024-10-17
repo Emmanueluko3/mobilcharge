@@ -281,6 +281,7 @@
   "Tax": "Impôt",
   "Total": "Total",
   "You are submitting a request for an emergency charge": "Vous soumettez une demande de frais d'urgence",
+  "Request an emergency charge now": "Demandez une charge d'urgence maintenant",
 
   "Save Changes": "Enregistrer les modifications",
   "Profile Details": "Détails du profil",
@@ -316,5 +317,7 @@
   "Are you sure you want to decline this request?": "Etes-vous sûr de vouloir refuser cette demande ?",
   "Are you sure you want to save changes?": "Etes-vous sûr de vouloir enregistrer les modifications ?",
   "Something went wrong. Please try again.": "Une erreur s'est produite. Veuillez réessayer.",
-  "Error!": "Erreur!"
+  "Error!": "Erreur!",
+  "Unsubscribe": "Se désabonner",
+  "Loading": "Chargement"
 }

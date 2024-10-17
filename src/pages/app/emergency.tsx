@@ -47,10 +47,13 @@ const Emergency: React.FC = () => {
         }
       );
       if (response) {
-        navigate("/dashboard/emergency/checkout", {
-          state: { bookingData: response.data },
-          replace: true,
-        });
+        navigate(
+          `/dashboard/emergency/checkout?booking_invoice_id=${response?.data?.booking?.invoice_id}`,
+          {
+            state: { bookingData: response.data },
+            replace: true,
+          }
+        );
 
         toast.success(response?.data?.message);
       }
