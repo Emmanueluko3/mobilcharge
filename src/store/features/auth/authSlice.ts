@@ -50,6 +50,7 @@ const authSlice = createSlice({
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("role");
+      localStorage.removeItem("persist:root");
       state.isLoggedIn = false;
       state.user = undefined;
       window.location.replace("/login");

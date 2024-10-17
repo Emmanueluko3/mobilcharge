@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Contact buttons */}
-          {(!user || !isAuthenticated) && (
+          {/* {(!user || !isAuthenticated) && (
             <div className="flex items-center gap-6 max-md:hidden lg:order-last">
               <Link to="/" className="hover:text-primary-500 mr-4">
                 <FontAwesomeIcon icon={faFacebookF} className="h-5" />
@@ -123,7 +123,7 @@ const Navbar: React.FC = () => {
                 {t("BOOK NOW!")}
               </Link>
             </div>
-          )}
+          )} */}
         </nav>
 
         {/* Menu Toggle Button for Mobile */}
