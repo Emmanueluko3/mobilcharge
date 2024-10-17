@@ -6,15 +6,19 @@ import { persistStore } from "redux-persist";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n/i18n";
 import { Toaster } from "react-hot-toast";
+import { APIProvider } from "@vis.gl/react-google-maps";
 
 const persistor = persistStore(store);
 export function Providers({ children }: { children: React.ReactNode }) {
+  const apiKey: any = process.env.REACT_APP_GOOGLE_API_KEY;
   return (
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Toaster />
-          {children}
+          <APIProvider apiKey={apiKey}>
+            <Toaster />
+            {children}
+          </APIProvider>
         </PersistGate>
       </Provider>
     </I18nextProvider>

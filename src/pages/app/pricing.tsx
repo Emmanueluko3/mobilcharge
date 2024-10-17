@@ -6,6 +6,7 @@ import apiService from "../../api/apiServices";
 import useFetch from "../../components/hooks/useFetch";
 import Swal from "sweetalert2";
 import { CircularProgress } from "@mui/joy";
+import Spinner from "../../components/common/spinner";
 
 const Pricing: React.FC = () => {
   const { t } = useTranslation();
@@ -100,11 +101,15 @@ const Pricing: React.FC = () => {
   };
 
   return (
-    <div className="w-full">
-      <div className="bg-white rounded-lg p-4 lg:p-10">
-        <h2 className="text-3xl font-semibold w-full mb-16 border-b pb-3">
-          {t("Pricing Plans")}
-        </h2>
+    <div className="bg-white rounded-lg p-4 lg:p-10 w-full">
+      <h2 className="text-3xl font-semibold w-full mb-16 border-b pb-3">
+        {t("Pricing Plans")}
+      </h2>
+      {isLoading ? (
+        <div className="mb-16 bg-white w-full h-96 rounded-lg p-4 flex items-center justify-center">
+          <Spinner size="w-16 h-16" />
+        </div>
+      ) : (
         <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-10">
           {pricingPlans?.map((item: any, index: number) => (
             <div
@@ -188,10 +193,10 @@ const Pricing: React.FC = () => {
                   {isUnsubscribeLoading ? (
                     <>
                       <CircularProgress size="sm" />{" "}
-                      <span className="ml-2">Loading...</span>
+                      <span className="ml-2">{t("Loading")}...</span>
                     </>
                   ) : (
-                    "Unsubscribe"
+                    t("Unsubscribe")
                   )}
                 </button>
               ) : (
@@ -217,7 +222,7 @@ const Pricing: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 };

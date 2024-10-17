@@ -78,7 +78,9 @@ const CheckoutBooking: React.FC = () => {
     <div className="grid grid-flow-row grid-cols-1 gap-6 lg:grid-cols-12 p-4 lg:p-6 bg-white rounded-lg">
       <div className="lg:col-span-5 h-fit order-1">
         <h2 className="text-3xl font-semibold">
-          {t("You submitted a request for a charge")}
+          {booking?.booking_type === "Emergency"
+            ? t("You are submitting a request for an emergency charge")
+            : t("You submitted a request for a charge")}
         </h2>
         <p className="text-sm my-3">{message}</p>
         <p className="text-sm mt-3 mb-8 text-gray-500">
@@ -177,7 +179,7 @@ const CheckoutBooking: React.FC = () => {
               <Button
                 className={`w-full ${
                   booking?.status === "Pending" && "cursor-not-allowed"
-                }`}
+                } ${booking?.booking_type === "Emergency" && "bg-red-500"}`}
                 disabled={
                   !booking || booking?.status === "Pending" || isBookingLoading
                 }
