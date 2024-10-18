@@ -25,7 +25,7 @@ const About: React.FC = () => {
           playsInline
         >
           <source
-            src="https://mobilcharge.ca/wp-content/uploads/2024/05/MobilCharge_Recharge_Mobile_EV.mp4"
+            src="assets/MobilCharge_Recharge_Mobile_EV.mp4"
             type="video/mp4"
           />
         </video>
@@ -124,7 +124,7 @@ const About: React.FC = () => {
       <div className="bg-primary-500 mt-14 lg:mt-56 p-0">
         <div className=" h-[40vh] w-full relative flex justify-center items-end py-10">
           <img
-            src="https://mobilcharge.ca/wp-content/uploads/2024/05/LettrageTransit_MobilCharge_sans-ombre-1024x799.png"
+            src="assets/LettrageTransit_MobilCharge_sans-ombre-1024x799.png"
             className="absolute -top-10 lg:-top-96 rounded-lg z-10"
             alt=""
           />
@@ -235,7 +235,7 @@ const About: React.FC = () => {
               playsInline
             >
               <source
-                src="https://mobilcharge.ca/wp-content/uploads/2024/05/Recharge_Rapide_MobilCharge.mp4"
+                src="assets/Recharge_Rapide_MobilCharge.mp4"
                 type="video/mp4"
               />
             </video>
