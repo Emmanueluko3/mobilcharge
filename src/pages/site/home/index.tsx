@@ -43,10 +43,7 @@ const Home: React.FC = () => {
           loop
           playsInline
         >
-          <source
-            src="https://mobilcharge.ca/wp-content/uploads/2024/05/mobilcharge-page-accueil.mp4"
-            type="video/mp4"
-          />
+          <source src="assets/mobilcharge-page-accueil.mp4" type="video/mp4" />
         </video>
 
         <div className="lg:p-32 p-4 bg-[#0000007A] bg-opacity-90 text-gray-200 z-50 h-full flex flex-col justify-center">
