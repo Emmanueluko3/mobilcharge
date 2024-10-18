@@ -238,7 +238,7 @@ const Signup: React.FC = () => {
               value={signupData.first_name}
               onChange={handleChange}
               placeholder={t("First name")}
-              maxLength={24}
+              maxLength={40}
               autoComplete="off"
             />
             {signupError.first_name && (
@@ -252,7 +252,7 @@ const Signup: React.FC = () => {
               value={signupData.last_name}
               onChange={handleChange}
               placeholder={t("Last name")}
-              maxLength={24}
+              maxLength={40}
               autoComplete="off"
             />
             {signupError.last_name && (
@@ -282,7 +282,7 @@ const Signup: React.FC = () => {
               value={signupData.email}
               onChange={handleChange}
               placeholder={t("Email")}
-              maxLength={32}
+              maxLength={40}
               autoComplete="off"
             />
             {signupError.email && (
@@ -297,7 +297,7 @@ const Signup: React.FC = () => {
               value={signupData.password}
               onChange={handleChange}
               placeholder={t("Password")}
-              maxLength={10}
+              maxLength={40}
               autoComplete="off"
               onPaste={(e) => e.preventDefault()}
             />
@@ -312,7 +312,7 @@ const Signup: React.FC = () => {
               value={signupData.confirm_password}
               onChange={handleChange}
               placeholder={t("Confirm password")}
-              maxLength={10}
+              maxLength={40}
               autoComplete="off"
               onPaste={(e) => e.preventDefault()}
             />

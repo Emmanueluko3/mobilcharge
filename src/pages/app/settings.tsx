@@ -187,7 +187,7 @@ const Settings: React.FC = () => {
               value={profileData.first_name}
               onChange={handleChange}
               placeholder={t("First name")}
-              maxLength={24}
+              maxLength={40}
               autoComplete="off"
             />
           </div>
@@ -199,7 +199,7 @@ const Settings: React.FC = () => {
               value={profileData.last_name}
               onChange={handleChange}
               placeholder={t("Last name")}
-              maxLength={24}
+              maxLength={40}
               autoComplete="off"
             />
           </div>
@@ -210,7 +210,7 @@ const Settings: React.FC = () => {
               value={profileData.phone}
               onChange={handleChange}
               placeholder={t("Phone number")}
-              maxLength={24}
+              maxLength={40}
               autoComplete="off"
             />
           </div>
@@ -222,7 +222,7 @@ const Settings: React.FC = () => {
               value={profileData.email}
               onChange={handleChange}
               placeholder={t("Email")}
-              maxLength={32}
+              maxLength={40}
               autoComplete="off"
             />
           </div>
@@ -241,7 +241,7 @@ const Settings: React.FC = () => {
               value={profileData.old_password}
               onChange={handleChange}
               placeholder={t("Old password")}
-              maxLength={10}
+              maxLength={40}
               autoComplete="off"
               onPaste={(e) => e.preventDefault()}
             />
@@ -253,7 +253,7 @@ const Settings: React.FC = () => {
               value={profileData.new_password}
               onChange={handleChange}
               placeholder={t("New password")}
-              maxLength={10}
+              maxLength={40}
               autoComplete="off"
               onPaste={(e) => e.preventDefault()}
             />
@@ -266,7 +266,7 @@ const Settings: React.FC = () => {
               value={profileData.confirm_new_password}
               onChange={handleChange}
               placeholder={t("Confirm new password")}
-              maxLength={10}
+              maxLength={40}
               autoComplete="off"
               onPaste={(e) => e.preventDefault()}
             />
