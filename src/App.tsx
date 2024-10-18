@@ -25,10 +25,12 @@ import BookingSuccessful from "./pages/app/book/booking-successful";
 import RequestDetails from "./pages/app/request/details";
 import ForgotPassowrd from "./pages/app/auth/forgot-password";
 import ResetPassword from "./pages/app/auth/reset-password";
+import ErrorPage from "./pages/error";
 
 const userRoutes = {
   path: "/dashboard",
   element: <AppTemplate />,
+  errorElement: <ErrorPage />,
   children: [
     { path: "", element: <Navigate to="book" /> },
     {
@@ -58,6 +60,7 @@ const userRoutes = {
 const adminRoutes = {
   path: "/admin",
   element: <AppTemplate />,
+  errorElement: <ErrorPage />,
   children: [
     { path: "", element: <Navigate to="overview" /> },
     { path: "overview", element: <Overview /> },
@@ -89,22 +92,30 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/signup",
     element: <Signup />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/forgot-password",
     element: <ForgotPassowrd />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/reset-password",
     element: <ResetPassword />,
+    errorElement: <ErrorPage />,
   },
 
   adminRoutes,
   userRoutes,
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 ]);
 
 const Routes = () => <RouterProvider router={router} />;
