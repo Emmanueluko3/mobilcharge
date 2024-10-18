@@ -22,10 +22,7 @@ const Reservation: React.FC = () => {
           loop
           playsInline
         >
-          <source
-            src="https://mobilcharge.ca/wp-content/uploads/2024/05/Recharge_MobilCharge.mp4"
-            type="video/mp4"
-          />
+          <source src="assets/Recharge_MobilCharge.mp4" type="video/mp4" />
         </video>
 
         <div className="bg-[#0000007A] bg-opacity-90 text-gray-200 z-50 h-full flex flex-col justify-center items-center">
