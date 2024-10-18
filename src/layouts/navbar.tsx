@@ -1,4 +1,3 @@
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { faPhone, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -52,12 +51,22 @@ const Navbar: React.FC = () => {
         <nav className="w-full flex items-center justify-between text-black lg:my-6">
           <div className="flex items-center order-last lg:order-first">
             <div className="flex items-center lg:mr-6">
-              <FontAwesomeIcon icon={faPhone} className="lg:mr-3 mr-2" />
+              <Link
+                to="tel:+5143121110"
+                className="hover:text-primary-500 transition-all"
+              >
+                <FontAwesomeIcon icon={faPhone} className="lg:mr-3 mr-2" />
+              </Link>
               <div className="">
                 <h4 className="text-grey-700 text-sm font-medium">
                   {t("Call us")}
                 </h4>
-                <p className="text-grey-500 text-xs">+1 (340) 555 4567</p>
+                <Link
+                  to="tel:+5143121110"
+                  className="text-grey-500 text-xs flex hover:text-primary-500 transition-all"
+                >
+                  +5143121110
+                </Link>
               </div>
             </div>
             <div className="lg:flex items-center hidden">

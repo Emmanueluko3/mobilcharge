@@ -24,6 +24,7 @@ import CreateBooking from "./pages/app/book/book";
 import BookingSuccessful from "./pages/app/book/booking-successful";
 import RequestDetails from "./pages/app/request/details";
 import ForgotPassowrd from "./pages/app/auth/forgot-password";
+import ResetPassword from "./pages/app/auth/reset-password";
 
 const userRoutes = {
   path: "/dashboard",
@@ -97,6 +98,11 @@ const router = createBrowserRouter([
     path: "/forgot-password",
     element: <ForgotPassowrd />,
   },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
+  },
+
   adminRoutes,
   userRoutes,
 ]);

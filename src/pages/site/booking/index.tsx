@@ -106,12 +106,12 @@ const Reservation: React.FC = () => {
             {
               icon: faPhone,
               text: t("Phone"),
-              link: "tel:+1234567890",
+              link: "tel:+5143121110",
             },
             {
               icon: faEnvelope,
               text: t("Email"),
-              link: "mailto:example@example.com",
+              link: "mailto:Info@mobilcharge.ca",
             },
           ].map((item, index) => (
             <Link
