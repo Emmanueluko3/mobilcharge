@@ -319,5 +319,8 @@
   "Something went wrong. Please try again.": "Une erreur s'est produite. Veuillez réessayer.",
   "Error!": "Erreur!",
   "Unsubscribe": "Se désabonner",
-  "Loading": "Chargement"
+  "Loading": "Chargement",
+  "Resend the OTP in": "Renvoyez l'OTP dans",
+  "seconds.": "secondes.",
+  "Resend OTP": "Renvoyer l'OTP"
 }

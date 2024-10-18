@@ -6,16 +6,17 @@ import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
 import apiService from "../../../api/apiServices";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import toast from "react-hot-toast";
+import OTPInput from "../../../components/common/otpInput";
 
 const ForgotPassowrd: React.FC = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const location = useLocation();
   const [loginData, setLoginData] = useState({ email: "" });
   const [loginError, setLoginError] = useState({ email: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const [nextStep, setNextStep] = useState(1);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setLoginData({
@@ -45,7 +46,7 @@ const ForgotPassowrd: React.FC = () => {
     return !errors.email;
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleForgotpassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       try {
@@ -55,6 +56,9 @@ const ForgotPassowrd: React.FC = () => {
           "POST",
           loginData
         );
+        if (response) {
+          setCountdown(30);
+        }
       } catch (error: any) {
         if (error?.response?.data?.error) {
           return toast.error(error?.response?.data?.error);
@@ -66,6 +70,29 @@ const ForgotPassowrd: React.FC = () => {
       }
     }
   };
+
+  const [countdown, setCountdown] = useState(30);
+  const [canResend, setCanResend] = useState(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (countdown > 0) {
+      setCanResend(false);
+      timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    } else {
+      setCanResend(true);
+    }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [countdown]);
+
   if (user && isAuthenticated && isAuthenticated.trim() !== "undefined") {
     return user?.is_superuser ? (
       <Navigate to="/admin" replace />
@@ -99,34 +126,66 @@ const ForgotPassowrd: React.FC = () => {
           </Link>
         </p>
 
-        <form onSubmit={handleLogin} className="my-5 w-full">
-          <div className="w-full mb-6 text-start">
-            <InputIcon
-              name="email"
-              type="email"
-              value={loginData.email}
-              onChange={handleChange}
-              placeholder={t("Email")}
-              maxLength={32}
-              autoComplete="off"
-            />
-            {loginError.email && (
-              <p className="text-red-500 text-sm">{loginError.email}</p>
-            )}
-          </div>
+        {nextStep === 1 && (
+          <p className="text-grey-700 font-medium text-sm text-center mt-3">
+            {t("Please Enter OTP")}
+          </p>
+        )}
 
-          <Button
-            type="submit"
-            isLoading={isLoading}
-            disabled={isLoading}
-            className="w-full"
-          >
-            {t("Reset password")}
-          </Button>
+        <form onSubmit={handleForgotpassword} className="my-5 w-full">
+          {nextStep === 0 && (
+            <>
+              <div className="w-full mb-6 text-start">
+                <InputIcon
+                  name="email"
+                  type="email"
+                  value={loginData.email}
+                  onChange={handleChange}
+                  placeholder={t("Email")}
+                  maxLength={32}
+                  autoComplete="off"
+                />
+                {loginError.email && (
+                  <p className="text-red-500 text-sm">{loginError.email}</p>
+                )}
+              </div>
+
+              <Button
+                type="submit"
+                isLoading={isLoading}
+                disabled={isLoading}
+                className="w-full"
+              >
+                {t("Reset password")}
+              </Button>
+            </>
+          )}
         </form>
+        {nextStep === 1 && (
+          <OTPInput length={6} onComplete={(input) => console.log(input)} />
+        )}
 
-        <p className="mt-4 lg:mt-6 text-base text-gray-700 text-center">
-          {t("You will receive a link in your email to reset your password.")}
+        <p className="mt-4 lg:mt-6 text-base text-gray-700 text-center flex">
+          {nextStep === 0 &&
+            t("You will receive a link in your email to reset your password.")}
+
+          {nextStep === 1 && (
+            <>
+              {canResend
+                ? t("You can now resend the OTP.")
+                : `${t("Resend OTP in")} ${countdown} ${t("seconds.")}`}
+
+              <button
+                className={`ms-3 inline-flex text-primary-500 hover:text-primary-700 ${
+                  !canResend ? "cursor-not-allowed" : "cursor-pointer"
+                }`}
+                onClick={handleForgotpassword}
+                disabled={!canResend}
+              >
+                {t("Resend OTP")}
+              </button>
+            </>
+          )}
         </p>
       </div>
     </div>
