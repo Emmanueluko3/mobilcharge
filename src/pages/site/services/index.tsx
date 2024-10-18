@@ -36,7 +36,7 @@ const Service: React.FC = () => {
           playsInline
         >
           <source
-            src="https://mobilcharge.ca/wp-content/uploads/2024/05/MobilCharge_ServiceClient_RechargeVehicule.mp4"
+            src="assets/MobilCharge_ServiceClient_RechargeVehicule.mp4"
             type="video/mp4"
           />
         </video>
@@ -231,7 +231,7 @@ const Service: React.FC = () => {
             playsInline
           >
             <source
-              src="https://mobilcharge.ca/wp-content/uploads/2024/05/MobilCharge_Electric_Vehicle_On_Road_Forest.mp4"
+              src="assets/MobilCharge_Electric_Vehicle_On_Road_Forest.mp4"
               type="video/mp4"
             />
           </video>
@@ -459,7 +459,7 @@ const Service: React.FC = () => {
               playsInline
             >
               <source
-                src="https://mobilcharge.ca/wp-content/uploads/2024/05/Recharge_Rapide_MobilCharge.mp4"
+                src="assets/Recharge_Rapide_MobilCharge.mp4"
                 type="video/mp4"
               />
             </video>

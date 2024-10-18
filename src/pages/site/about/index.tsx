@@ -25,7 +25,7 @@ const About: React.FC = () => {
           playsInline
         >
           <source
-            src="https://mobilcharge.ca/wp-content/uploads/2024/05/MobilCharge_Recharge_Mobile_EV.mp4"
+            src="assets/MobilCharge_Recharge_Mobile_EV.mp4"
             type="video/mp4"
           />
         </video>
@@ -235,7 +235,7 @@ const About: React.FC = () => {
               playsInline
             >
               <source
-                src="https://mobilcharge.ca/wp-content/uploads/2024/05/Recharge_Rapide_MobilCharge.mp4"
+                src="assets/Recharge_Rapide_MobilCharge.mp4"
                 type="video/mp4"
               />
             </video>
