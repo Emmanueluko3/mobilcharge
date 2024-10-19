@@ -243,12 +243,14 @@ const Home: React.FC = () => {
           {
             icon: faPhone,
             text: t("Phone"),
-            link: "tel:+5143121110",
+            link: "tel:+15143121110",
+            subtext: "(514)312-1110",
           },
           {
             icon: faEnvelope,
             text: t("Email"),
             link: "mailto:Info@mobilcharge.ca",
+            subtext: "mailto:Info@mobilcharge.ca",
           },
         ].map((item, index) => (
           <Link
@@ -261,7 +263,7 @@ const Home: React.FC = () => {
               className="text-primary-500 text-2xl lg:text-5xl"
             />
             <span className="lg:my-6 my-4 font-bold text-2xl">{item.text}</span>
-            <span className="font-medium">{item.link.split(":")[1]}</span>
+            <span className="font-medium">{item.subtext}</span>
           </Link>
         ))}
       </div>
