@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import MobileChargeBus from "../../../assets/images/MobileChargebus.png";
 import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
@@ -9,18 +9,20 @@ import apiService from "../../../api/apiServices";
 import { useAppSelector } from "../../../store/hooks";
 import toast from "react-hot-toast";
 import OTPInput from "../../../components/common/otpInput";
+import Swal from "sweetalert2";
 
 const ForgotPassowrd: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  const [loginData, setLoginData] = useState({ email: "" });
+  const navigate = useNavigate();
+  const [forgotPasswordData, setForgotPasswordData] = useState({ email: "" });
   const [loginError, setLoginError] = useState({ email: "" });
   const [isLoading, setIsLoading] = useState(false);
-  const [nextStep, setNextStep] = useState(1);
+  const [nextStep, setNextStep] = useState(0);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
+    setForgotPasswordData({
+      ...forgotPasswordData,
       [name]: value,
     });
   };
@@ -29,15 +31,15 @@ const ForgotPassowrd: React.FC = () => {
   const isAuthenticated = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    setLoginData({ email: "" });
+    setForgotPasswordData({ email: "" });
     setLoginError({ email: "" });
   }, [location, user]);
 
   const validateForm = () => {
     const errors = {
-      email: !loginData.email
+      email: !forgotPasswordData.email
         ? "Email is required"
-        : !/\S+@\S+\.\S+/.test(loginData.email)
+        : !/\S+@\S+\.\S+/.test(forgotPasswordData.email)
         ? "Email is invalid"
         : "",
     };
@@ -54,9 +56,10 @@ const ForgotPassowrd: React.FC = () => {
         const response: any = await apiService(
           "/api/auth/password-reset/request/",
           "POST",
-          loginData
+          forgotPasswordData
         );
         if (response) {
+          setNextStep(1);
           setCountdown(30);
         }
       } catch (error: any) {
@@ -64,6 +67,49 @@ const ForgotPassowrd: React.FC = () => {
           return toast.error(error?.response?.data?.error);
         }
         toast.error("Unknown error occurred");
+        console.log("error message", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const handleVerifycode = async (code: string) => {
+    const resetData = await { email: forgotPasswordData.email, code: code };
+    if (validateForm()) {
+      try {
+        setIsLoading(true);
+        const response: any = await apiService(
+          "/api/auth/verify-reset-code/",
+          "POST",
+          resetData
+        );
+        if (response) {
+          Swal.fire({
+            title: "Success!",
+            text: response?.data?.success,
+            icon: "success",
+          });
+          setNextStep(1);
+          setCountdown(30);
+          navigate(`/reset-password`, {
+            state: { resetData: resetData },
+            replace: true,
+          });
+        }
+      } catch (error: any) {
+        if (error?.response?.data?.error) {
+          Swal.fire({
+            title: "Error!",
+            text: error?.response?.data?.error,
+            icon: "error",
+          });
+        }
+        Swal.fire({
+          title: "Error!",
+          text: "Something went wrong. Please try again.",
+          icon: "error",
+        });
         console.log("error message", error);
       } finally {
         setIsLoading(false);
@@ -139,7 +185,7 @@ const ForgotPassowrd: React.FC = () => {
                 <InputIcon
                   name="email"
                   type="email"
-                  value={loginData.email}
+                  value={forgotPasswordData.email}
                   onChange={handleChange}
                   placeholder={t("Email")}
                   maxLength={40}
@@ -161,8 +207,22 @@ const ForgotPassowrd: React.FC = () => {
             </>
           )}
         </form>
+
         {nextStep === 1 && (
-          <OTPInput length={6} onComplete={(input) => console.log(input)} />
+          <>
+            <OTPInput
+              length={6}
+              onComplete={(input) => handleVerifycode(input)}
+            />
+            <Button
+              isLoading={isLoading}
+              disabled={isLoading}
+              className="w-full mt-6"
+              onClick={() => setNextStep(0)}
+            >
+              {t("Back")}
+            </Button>
+          </>
         )}
 
         <p className="mt-4 lg:mt-6 text-base text-gray-700 text-center flex">
