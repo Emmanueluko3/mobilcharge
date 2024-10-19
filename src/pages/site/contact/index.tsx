@@ -57,12 +57,14 @@ const Contact: React.FC = () => {
             {
               icon: faPhone,
               text: t("Phone"),
-              link: "tel:+5143121110",
+              link: "tel:+15143121110",
+              subtext: "(514)312-1110",
             },
             {
               icon: faEnvelope,
               text: t("Email"),
               link: "mailto:Info@mobilcharge.ca",
+              subtext: "mailto:Info@mobilcharge.ca",
             },
           ].map((item, index) => (
             <Link
@@ -77,7 +79,7 @@ const Contact: React.FC = () => {
               <span className="lg:my-6 my-4 font-bold text-2xl">
                 {item.text}
               </span>
-              <span className="font-medium">{item.link.split(":")[1]}</span>
+              <span className="font-medium">{item.subtext}</span>
             </Link>
           ))}
         </div>
@@ -85,8 +87,9 @@ const Contact: React.FC = () => {
       {/* Contact form */}
       <div className="flex flex-col items-center justify-center px-4 lg:px-36 lg:py-16 mb-16">
         <h2 className="text-xl lg:text-4xl font-bold mb-10 lg:mb-16 text-center">
-          To request more information, please fill out the form below or send us
-          an email directly.
+          {t(
+            "To request more information, please fill out the form below or send us an email directly."
+          )}
         </h2>
         <div className="grid grid-cols-2 grid-flow-row gap-4 lg:gap-8 w-full">
           <div className="col-span-2 lg:col-span-1">

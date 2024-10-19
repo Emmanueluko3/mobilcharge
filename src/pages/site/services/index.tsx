@@ -421,7 +421,7 @@ const Service: React.FC = () => {
                     ))}
                   </div>
                   <Link
-                    to="/contact"
+                    to="/dashboard/pricing"
                     className="border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white text-sm lg:text-base transition-all px-5 py-2 font-bold flex items-center w-fit my-8"
                   >
                     {t("JOIN US")}

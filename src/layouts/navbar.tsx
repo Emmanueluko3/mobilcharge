@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center order-last lg:order-first">
             <div className="flex items-center lg:mr-6">
               <Link
-                to="tel:+5143121110"
+                to="tel:+15143121110"
                 className="hover:text-primary-500 transition-all"
               >
                 <FontAwesomeIcon icon={faPhone} className="lg:mr-3 mr-2" />
@@ -62,10 +62,10 @@ const Navbar: React.FC = () => {
                   {t("Call us")}
                 </h4>
                 <Link
-                  to="tel:+5143121110"
+                  to="tel:+15143121110"
                   className="text-grey-500 text-xs flex hover:text-primary-500 transition-all"
                 >
-                  +5143121110
+                  (514)312-1110
                 </Link>
               </div>
             </div>

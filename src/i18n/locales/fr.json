@@ -168,8 +168,9 @@
   "Price per half day (3 hrs) (max 9 charges - total 160kWh) $250": "Prix par demi-journée (3 heures) (max 9 charges - total 160 kWh) : 250 $",
   "Price per hour (max 3 charges - total 60kWh) $90": "Prix par heure (max 3 charges - total 60 kWh) : 90 $",
   "No membership for corporate clients $0": "Pas d'adhésion pour les clients commerciaux : 0 $",
+  "JOIN US": "REJOIGNEZ-NOUS",
 
-  "Choose sustainable and convenient mobility by booking your charging service with MobilCharge now using the form below.": "Optez pour une mobilité durable et pratique en réservant dès maintenant votre service de recharge avec MobilCharge via le formulaire ci-dessous.",
+  "Choose sustainable and convenient mobility by booking your charging service with MobilCharge now": "Choisissez une mobilité durable et pratique en réservant dès maintenant votre service de recharge avec MobilCharge",
 
   "Contact Information": "Coordonnées",
 
@@ -206,9 +207,9 @@
   "Confirm password": "Confirmez le mot de passe",
   "I accept all terms & conditions": "J'accepte tous les termes et conditions",
 
-  "Book": "Livre",
+  "Book": "Céduler",
   "Trucks": "Camions",
-  "Drivers": "Conductrices",
+  "Drivers": "conducteur",
   "Settings": "Paramètres",
   "Emergency": "Urgence",
   "Help Center": "Centre d'aide",
