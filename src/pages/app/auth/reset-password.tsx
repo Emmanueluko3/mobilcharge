@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import MobileChargeBus from "../../../assets/images/MobileChargebus.png";
 import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
@@ -8,10 +8,13 @@ import { useTranslation } from "react-i18next";
 import apiService from "../../../api/apiServices";
 import { useAppSelector } from "../../../store/hooks";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ResetPassword: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
+  const { resetData } = location.state || {};
   const [resetPasswordData, setResetPasswordData] = useState({
     password: "",
     confirm_password: "",
@@ -78,10 +81,21 @@ const ResetPassword: React.FC = () => {
       try {
         setIsLoading(true);
         const response: any = await apiService(
-          "/api/auth/password-reset/request/",
+          "/api/auth/reset-password/",
           "POST",
-          resetPasswordData
+          { ...resetData, ...resetPasswordData }
         );
+        if (response) {
+          Swal.fire({
+            title: "Success!",
+            text: response?.data?.success,
+            icon: "success",
+          });
+
+          navigate(`/login`, {
+            replace: true,
+          });
+        }
       } catch (error: any) {
         if (error?.response?.data?.error) {
           return toast.error(error?.response?.data?.error);
