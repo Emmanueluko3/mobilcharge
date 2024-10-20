@@ -175,6 +175,7 @@ const Settings: React.FC = () => {
               className="hidden"
               name="profile_image"
               accept="image/*"
+              capture={true}
               ref={imageInputRef}
               onChange={handleChange}
             />

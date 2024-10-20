@@ -59,6 +59,11 @@ const ForgotPassowrd: React.FC = () => {
           forgotPasswordData
         );
         if (response) {
+          Swal.fire({
+            title: "Success!",
+            text: "A reset password OTP has been sent to your email. Please check your inbox.",
+            icon: "success",
+          });
           setNextStep(1);
           setCountdown(30);
         }
@@ -87,7 +92,7 @@ const ForgotPassowrd: React.FC = () => {
         if (response) {
           Swal.fire({
             title: "Success!",
-            text: response?.data?.success,
+            text: "The OTP code is valid. You may now proceed to reset your password.",
             icon: "success",
           });
           setNextStep(1);
