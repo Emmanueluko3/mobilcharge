@@ -1,6 +1,6 @@
 {
-  "short_name": "EV Charge",
-  "name": "EV Mobile Charge Platform",
+  "short_name": "MobilCharge",
+  "name": "Mobilcharge Platform",
   "icons": [
     {
       "src": "bolt.ico",

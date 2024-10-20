@@ -197,6 +197,8 @@ export default Sidebar;
 export const AppFooter = () => {
   const location = useLocation().pathname.split("/")[2];
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
   const user: any = useAppSelector((state) => state?.auth?.user);
   const role = () => {
     if (user?.is_superuser) {
@@ -256,11 +258,48 @@ export const AppFooter = () => {
     },
   ].filter((link) => link.roles.includes(role()));
 
+  const getRefreshToken = () => {
+    return localStorage.getItem("refreshToken");
+  };
+
+  const handleLogout = async () => {
+    const result = await Swal.fire({
+      title: t("Confirm"),
+      text: t("Are you sure you want to log out"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#E82519",
+      cancelButtonColor: "#54577A",
+      confirmButtonText: t("Confirm"),
+      cancelButtonText: t("Cancel"),
+    });
+    if (result.isConfirmed) {
+      try {
+        const response: any = await apiService("/api/auth/logout/", "POST", {
+          refresh: getRefreshToken(),
+        });
+
+        dispatch(logout());
+      } catch (error: any) {
+        if (error?.response?.data?.error) {
+          return Swal.fire({
+            title: t("Error!"),
+            text: error?.response?.data?.error,
+            icon: "error",
+          });
+        }
+        Swal.fire({
+          title: t("Error!"),
+          text: t("Something went wrong. Please try again."),
+          icon: "error",
+        });
+        console.log("error message", error);
+      }
+    }
+  };
+
   return (
-    <div
-      className="flex justify-between z-50 flex-row items-center px-6 pt-1 pb-8 lg:hidden w-full bg-white fixed bottom-0 rounded-t-xl min-h-14"
-      style={{ bottom: "env(safe-area-inset-bottom)" }}
-    >
+    <div className="flex justify-between z-50 flex-row items-center px-6 py-1 lg:hidden w-full bg-white bottom-0 rounded-t-xl fixed">
       {navLinks.map((link, index) => (
         <Link to={link.href} key={index} className="my-3">
           <h3
@@ -275,6 +314,9 @@ export const AppFooter = () => {
           </h3>
         </Link>
       ))}
+      <span onClick={handleLogout} className="font-bold text-red-500">
+        <FontAwesomeIcon icon={faRightFromBracket} />
+      </span>
     </div>
   );
 };
