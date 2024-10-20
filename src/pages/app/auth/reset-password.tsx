@@ -88,7 +88,7 @@ const ResetPassword: React.FC = () => {
         if (response) {
           Swal.fire({
             title: "Success!",
-            text: response?.data?.success,
+            text: response?.data?.detail,
             icon: "success",
           });
 
