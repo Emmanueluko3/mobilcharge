@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { getUserInfo } from "../../store/features/auth/authSlice";
 import Swal from "sweetalert2";
+import imageCompression from "browser-image-compression";
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -99,23 +100,51 @@ const Settings: React.FC = () => {
             icon: "error",
           });
         }
+        Swal.fire({
+          title: "Error!",
+          text: "Something went wrong. Please try again.",
+          icon: "error",
+        });
       } finally {
         setIsLoading(false);
       }
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
     const sanitizedPhone = value.replace(/\D/g, "");
 
     switch (name) {
       case "profile_image":
         if (files) {
-          setProfileData({
-            ...profileData,
-            profile_image: files[0],
-          });
+          const file = files[0];
+
+          const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 800,
+            useWebWorker: true,
+          };
+
+          try {
+            const compressedFile = await imageCompression(file, options);
+
+            setProfileData({
+              ...profileData,
+              profile_image: compressedFile,
+            });
+          } catch (error) {
+            Swal.fire({
+              title: "Error!",
+              text: "Image size too large",
+              icon: "error",
+            });
+            console.error("Error while resizing image:", error);
+          }
+          // setProfileData({
+          //   ...profileData,
+          //   profile_image: files[0],
+          // });
         }
         break;
       case "phone":
@@ -175,7 +204,6 @@ const Settings: React.FC = () => {
               className="hidden"
               name="profile_image"
               accept="image/*"
-              capture={true}
               ref={imageInputRef}
               onChange={handleChange}
             />
