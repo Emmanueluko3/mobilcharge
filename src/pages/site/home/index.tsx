@@ -250,7 +250,7 @@ const Home: React.FC = () => {
             icon: faEnvelope,
             text: t("Email"),
             link: "mailto:Info@mobilcharge.ca",
-            subtext: "mailto:Info@mobilcharge.ca",
+            subtext: "Info@mobilcharge.ca",
           },
         ].map((item, index) => (
           <Link

@@ -327,7 +327,21 @@ const Signup: React.FC = () => {
           <div className="flex items-center mb-8 w-full">
             <input type="checkbox" className="h-4 w-4 border-0 mr-3" />
             <span className="text-sm font-medium">
-              {t("I accept all terms & conditions")}
+              {t("I accept all")}{" "}
+              <Link
+                to="/terms&conditions"
+                className="text-sm font-medium text-blue-500  lg:hover:text-blue-700"
+              >
+                {t("terms")}
+              </Link>{" "}
+              &{" "}
+              <Link
+                to="/terms&conditions"
+                className="text-sm font-medium text-blue-500 lg:hover:text-blue-700"
+              >
+                {t("conditions")}
+              </Link>
+              {/* {t("I accept all terms & conditions")} */}
             </span>
           </div>
 
