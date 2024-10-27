@@ -148,9 +148,11 @@ const Service: React.FC = () => {
       <div className="bg-primary-500 mt-14 lg:mt-56 p-0">
         <div className=" h-[40vh] w-full relative flex justify-center items-end py-10">
           <img
-            data-aos="fade-up"
             src="assets/LettrageTransit_MobilCharge_sans-ombre-1024x799.png"
             className="absolute -top-10 lg:-top-96 rounded-lg z-10"
+            data-aos="fade-up"
+            data-aos-delay="50"
+            data-aos-easing="ease-in-out"
             alt=""
           />
         </div>
