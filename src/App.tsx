@@ -26,6 +26,9 @@ import RequestDetails from "./pages/app/request/details";
 import ForgotPassowrd from "./pages/app/auth/forgot-password";
 import ResetPassword from "./pages/app/auth/reset-password";
 import ErrorPage from "./pages/error";
+import TermsAndConditions from "./pages/site/terms&conditions/terms&condition";
+import PrivacyPolicies from "./pages/site/privacy-policies";
+import ServiceAgreement from "./pages/site/service-agrement";
 
 const userRoutes = {
   path: "/dashboard",
@@ -86,6 +89,9 @@ const router = createBrowserRouter([
       { path: "services", element: <Service /> },
       { path: "booking", element: <Reservation /> },
       { path: "contact-us", element: <Contact /> },
+      { path: "privacy-policies", element: <PrivacyPolicies /> },
+      { path: "service-agreement", element: <ServiceAgreement /> },
+      { path: "terms&conditions", element: <TermsAndConditions /> },
     ],
   },
 

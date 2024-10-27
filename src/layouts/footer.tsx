@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
               <Link
                 to={item.href}
                 key={index}
-                className="border-b border-gray-600 p-4 transition-all hover:text-primary-500 font-bold"
+                className="border-b border-gray-600 p-4 transition-all lg:hover:text-primary-500 font-bold"
               >
                 {item.label.toLocaleUpperCase()}
               </Link>
@@ -50,27 +50,27 @@ const Footer: React.FC = () => {
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-3 grid-flow-row lg:grid-flow-col gap-1 items-center mb-4 lg:mb-0">
           <Link
-            to="/"
-            className="hover:text-primary-500 transition-all text-sm lg:text-base text-center text-nowrap font-medium"
+            to="/privacy-policies"
+            className="lg:hover:text-primary-500 transition-all text-sm lg:text-base text-center text-nowrap font-medium"
           >
             {t("Privacy Policies")}
           </Link>
           <Link
-            to="/"
-            className="hover:text-primary-500 transition-all text-sm lg:text-base text-center text-nowrap font-medium"
+            to="/service-agreement"
+            className="lg:hover:text-primary-500 transition-all text-sm lg:text-base text-center text-nowrap font-medium"
           >
             {t("Service Agreement")}
           </Link>
           <Link
-            to="/"
-            className="hover:text-primary-500 transition-all text-sm lg:text-base text-center text-nowrap font-medium"
+            to="/terms&conditions"
+            className="lg:hover:text-primary-500 transition-all text-sm lg:text-base text-center text-nowrap font-medium"
           >
             {t("Terms and Conditions")}
           </Link>
         </div>
         <Link
           to="/"
-          className="text-primary-500 hover:text-primary-700 transition-all mb-4 lg:mb-0 lg:mr-4 order-first lg:order-last"
+          className="text-primary-500 lg:hover:text-primary-700 transition-all mb-4 lg:mb-0 lg:mr-4 order-first lg:order-last"
         >
           <FontAwesomeIcon icon={faFacebookF} className="h-5" />
         </Link>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import { useTranslation } from "react-i18next";
@@ -105,7 +105,7 @@ const Sidebar: React.FC = () => {
         const response: any = await apiService("/api/auth/logout/", "POST", {
           refresh: getRefreshToken(),
         });
-
+        console.log(response);
         dispatch(logout());
       } catch (error: any) {
         if (error?.response?.data?.error) {
@@ -144,8 +144,8 @@ const Sidebar: React.FC = () => {
                   : "text-gray-500"
               } flex items-center font-medium ${
                 link.href === "emergency"
-                  ? "hover:text-red-500 hover:bg-red-50"
-                  : "hover:bg-gray-100 hover:text-black"
+                  ? "lg:hover:text-red-500 lg:hover:bg-red-50"
+                  : "lg:hover:bg-gray-100 lg:hover:text-black"
               } text-base`}
             >
               <span className="mr-3">{link.icon}</span> {link.label}
@@ -154,7 +154,7 @@ const Sidebar: React.FC = () => {
         ))}
         <button
           onClick={handleLogout}
-          className="flex items-center font-bold text-gray-500 hover:text-red-500 px-5 py-2 mt-20"
+          className="flex items-center font-bold text-gray-500 lg:hover:text-red-500 px-5 py-2 mt-20"
         >
           <span className="mr-3">
             <FontAwesomeIcon icon={faRightFromBracket} />
@@ -183,7 +183,7 @@ const Sidebar: React.FC = () => {
 
         <Link
           to="/contact-us"
-          className="text-sm font-bold text-center text-gray-900 bg-white hover:bg-gray-200 transition-all rounded-xl px-4 py-2"
+          className="text-sm font-bold text-center text-gray-900 bg-white lg:hover:bg-gray-200 transition-all rounded-xl px-4 py-2"
         >
           {t("Go To Help Center")}
         </Link>
@@ -278,7 +278,7 @@ export const AppFooter = () => {
         const response: any = await apiService("/api/auth/logout/", "POST", {
           refresh: getRefreshToken(),
         });
-
+        console.log(response);
         dispatch(logout());
       } catch (error: any) {
         if (error?.response?.data?.error) {

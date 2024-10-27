@@ -206,6 +206,9 @@
   "Phone number": "Numéro de téléphone",
   "Confirm password": "Confirmez le mot de passe",
   "I accept all terms & conditions": "J'accepte tous les termes et conditions",
+  "I accept all": "J'accepte tous les",
+  "terms": "termes",
+  "conditions": "conditions",
 
   "Book": "Céduler",
   "Trucks": "Camions",
@@ -324,5 +327,83 @@
   "Resend the OTP in": "Renvoyez l'OTP dans",
   "seconds.": "secondes.",
   "Resend OTP": "Renvoyer l'OTP",
-  "Back": "Dos"
+  "Back": "Dos",
+
+  "Effective from date of website visit": "En vigueur à compter de la date de visite du site Web",
+  "Welcome to www.mobilecharge.ca. By accessing and using our services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.": "Bienvenue sur www.mobilecharge.ca. En accédant à nos services et en les utilisant, vous acceptez de vous conformer aux conditions générales suivantes et d'y être lié. Veuillez les lire attentivement.",
+  "Acceptance of Terms": "Acceptation des conditions",
+  "By using our website and services, you agree to these Terms and Conditions. If you do not agree, please do not use our services.": "En utilisant notre site Web et nos services, vous acceptez les présentes conditions générales. Si vous n'êtes pas d'accord, veuillez ne pas utiliser nos services.",
+  "MobilCharge offers electric vehicle mobile charging services. The availability of services may vary based on location and demand.": "MobilCharge propose des services de recharge mobile pour véhicules électriques. La disponibilité des services peut varier en fonction de l'emplacement et de la demande.",
+  "User Responsibilities": "Responsabilités de l'utilisateur",
+  "Users must provide accurate information and ensure their vehicles are compatible with our charging equipment. Users are responsible for any damages caused by improper use of our services.": "Les utilisateurs doivent fournir des informations exactes et s'assurer que leurs véhicules sont compatibles avec nos équipements de recharge. Les utilisateurs sont responsables de tout dommage causé par une mauvaise utilisation de nos services.",
+  "Payment": "Paiement",
+  "All charges for services must be paid as indicated on our website. Payment methods and terms are outlined during the booking process.": "Tous les frais de services doivent être payés comme indiqué sur notre site Web. Les modes et conditions de paiement sont précisés lors du processus de réservation.",
+  "Limitation of Liability": "Limitation de responsabilité",
+  "MobilCharge is not liable for any indirect, incidental, or consequential damages arising from the use of our services.": "MobilCharge n'est pas responsable des dommages indirects, accessoires ou consécutifs résultant de l'utilisation de nos services.",
+  "Changes to Terms": "Modifications des conditions",
+  "We reserve the right to modify these Terms and Conditions at any time. Changes will be effective upon posting on our website.": "Nous nous réservons le droit de modifier ces Conditions Générales à tout moment. Les modifications entreront en vigueur dès leur publication sur notre site Internet.",
+  "Governing Law": "Loi applicable",
+  "These Terms and Conditions are governed by the laws of Quebec, Canada.": "Les présentes conditions générales sont régies par les lois du Québec, Canada.",
+
+  "Privacy and Data Policy": "Politique de confidentialité et de données",
+  "MobilCharge is committed to protecting your privacy. This Privacy and Data Policy outlines how we collect, use, and protect your personal information when you use our services or visit our website, www.mobilecharge.ca.": "MobilCharge s'engage à protéger votre vie privée. Cette politique de confidentialité et de données décrit la manière dont nous recueillons, utilisons et protégeons vos informations personnelles lorsque vous utilisez nos services ou visitez notre site Web, www.mobilecharge.ca.",
+
+  "Information Collection": "Collecte d'informations",
+  "We collect personal information that you voluntarily provide to us when you register on the Website, use our services, or contact us. This includes:": "Nous recueillons les informations personnelles que vous nous fournissez volontairement lorsque vous vous inscrivez sur le site Web, utilisez nos services ou nous contactez. Cela comprend :",
+  "Contact Information: Name, email address, phone number, and mailing address.": "Coordonnées : Nom, adresse électronique, numéro de téléphone et adresse postale.",
+  "Vehicle Information: Make, model, and license plate number.": "Informations sur le véhicule : marque, modèle et numéro de plaque d'immatriculation.",
+  "Payment Information: Credit card details and billing information.": "Informations de paiement : détails de la carte de crédit et informations de facturation.",
+  "Usage Data: Information about your interactions with our Website, such as pages visited, time spent on each page, and the services used.": "Données d'utilisation : informations sur vos interactions avec notre site Web, telles que les pages visitées, le temps passé sur chaque page et les services utilisés.",
+
+  "Use of Information": "Utilisation des informations",
+  "We use the information collected for various purposes, including:": "Nous utilisons les informations collectées à diverses fins, notamment :",
+  "To provide, operate, and maintain our services.": "Pour fournir, exploiter et entretenir nos services.",
+  "To process your transactions and manage your orders.": "Pour traiter vos transactions et gérer vos commandes.",
+  "To communicate with you, including responding to inquiries and providing customer support.": "Pour communiquer avec vous, notamment pour répondre à vos demandes et fournir un service client.",
+  "To send you updates, marketing communications, and promotional materials related to our services.": "Pour vous envoyer des mises à jour, des communications marketing et du matériel promotionnel liés à nos services.",
+  "To improve our Website and services based on user feedback and usage patterns.": "Pour améliorer notre site Web et nos services en fonction des commentaires des utilisateurs et des modèles d’utilisation.",
+  "To ensure the security and integrity of our systems and databases.": "Pour assurer la sécurité et l’intégrité de nos systèmes et bases de données.",
+
+  "Data Protection": "Protection des données",
+  "We implement a variety of security measures to protect your personal information, including:": "Nous mettons en œuvre diverses mesures de sécurité pour protéger vos informations personnelles, notamment :",
+  "Encryption: We use industry-standard encryption to protect your data during transmission and storage.": "Cryptage : nous utilisons un cryptage standard du secteur pour protéger vos données pendant la transmission et le stockage.",
+  "Access Controls: Access to your personal information is restricted to authorized personnel who need it to perform their job functions.": "Contrôles d'accès : L'accès à vos informations personnelles est limité au personnel autorisé qui en a besoin pour exercer ses fonctions.",
+  "Regular Audits: We conduct regular audits and assessments to ensure our security practices are effective and up-to-date.": "Audits réguliers : Nous effectuons des audits et des évaluations réguliers pour garantir que nos pratiques de sécurité sont efficaces et à jour.",
+  "Secure Payment Processing: We use third-party payment processors that comply with PCI-DSS standards to process your payments securely.": "Traitement sécurisé des paiements : nous utilisons des processeurs de paiement tiers conformes aux normes PCI-DSS pour traiter vos paiements en toute sécurité.",
+
+  "Sharing of Information": "Partage d'informations",
+  "We do not sell, trade, or otherwise transfer your personal information to outside parties, except in the following circumstances:": "Nous ne vendons, n'échangeons ni ne transférons vos informations personnelles à des tiers, sauf dans les circonstances suivantes :",
+  "Service Providers: We may share your information with trusted third-party service providers who assist us in operating our Website and providing our services, as long as they agree to keep this information confidential.": "Fournisseurs de services : Nous pouvons partager vos informations avec des fournisseurs de services tiers de confiance qui nous aident à exploiter notre site Web et à fournir nos services, à condition qu'ils acceptent de garder ces informations confidentielles.",
+  "Legal Requirements: We may disclose your information if required by law, such as to comply with a subpoena, or if we believe that such action is necessary to protect our rights or comply with a judicial proceeding.": "Exigences légales : Nous pouvons divulguer vos informations si la loi l'exige, par exemple pour se conformer à une assignation à comparaître, ou si nous pensons qu'une telle action est nécessaire pour protéger nos droits ou se conformer à une procédure judiciaire.",
+
+  "Cookies": "Cookies",
+  "Our Website uses cookies and similar technologies to enhance user experience and gather information about how our Website is used. You can manage your cookie preferences through your browser settings. However, disabling cookies may affect the functionality of our Website.": "Notre site Web utilise des cookies et des technologies similaires pour améliorer l'expérience utilisateur et recueillir des informations sur la manière dont notre site Web est utilisé. Vous pouvez gérer vos préférences en matière de cookies via les paramètres de votre navigateur. Cependant, la désactivation des cookies peut affecter la fonctionnalité de notre site Web.",
+
+  "Data Retention": "Conservation des données",
+  "We retain your personal information for as long as necessary to fulfill the purposes outlined in this policy unless a longer retention period is required or permitted by law. Once your information is no longer needed, we will securely delete them.": "Nous conservons vos informations personnelles aussi longtemps que nécessaire pour atteindre les objectifs décrits dans la présente politique, à moins qu'une période de conservation plus longue ne soit requise ou autorisée par la loi. Une fois que vos informations ne sont plus nécessaires, nous les supprimerons en toute sécurité.",
+
+  "Changes to Policy": "Modifications de la politique",
+  "This Privacy and Data Policy is subject to change(s) from time to time to reflect changes in our practices or legal requirements. Any changes will be posted on our Website with the updated effective date. We encourage you to review this policy periodically to stay informed about how we are protecting your information.": "Cette politique de confidentialité et de données est susceptible d'être modifiée de temps à autre afin de refléter les changements dans nos pratiques ou les exigences légales. Tout changement sera publié sur notre site Web avec la date d'entrée en vigueur mise à jour. Nous vous encourageons à consulter régulièrement cette politique pour rester informé de la manière dont nous protégeons vos informations.",
+  "If you have any questions or concerns about this policy or our data practices, please contact us at:": "Si vous avez des questions ou des préoccupations concernant cette politique ou nos pratiques en matière de données, veuillez nous contacter à l'adresse suivante :",
+
+  "This Service Agreement is entered into by and between MobilCharge and the every customer, for electric vehicle mobile charging services.": "Ce contrat de service est conclu entre MobilCharge et chaque client, pour les services de recharge mobile de véhicules électriques.",
+
+  "Services Provided": "Services fournis",
+  "MobilCharge agrees to provide mobile charging services for electric vehicles as requested by the Customer.": "MobilCharge s'engage à fournir des services de recharge mobile pour véhicules électriques à la demande du Client.",
+
+  "Service Availability": "Disponibilité du service",
+  "Services are subject to availability and may vary based on location and demand. MobilCharge will make reasonable efforts to provide timely service.": "Les services sont soumis à disponibilité et peuvent varier en fonction de l'emplacement et de la demande. MobilCharge fera des efforts raisonnables pour fournir un service rapide.",
+
+  "Customer Responsibilities": "Responsabilités du client",
+  "Customers must provide accurate information about their vehicle and ensure it is compatible with MobilCharge’s equipment. Customers must be present during the charging process.": "Les clients doivent fournir des informations exactes sur leur véhicule et s’assurer qu’il est compatible avec l’équipement de MobilCharge. Les clients doivent être présents pendant le processus de recharge.",
+
+  "Customers agree to pay the fees as outlined on our website. Payment must be made at the time of booking.": "Les clients s'engagent à payer les frais tels que décrits sur notre site Internet. Le paiement doit être effectué au moment de la réservation.",
+
+  "Liability and Warranty": "Responsabilité et garantie",
+  "MobilCharge is not liable for any damages or losses arising from the use of our services. Our services are provided 'as is' without any warranties.": "MobilCharge n'est pas responsable des dommages ou pertes résultant de l'utilisation de nos services. Nos services sont fournis 'tels quels' sans aucune garantie.",
+
+  "Termination": "Terminaison",
+  "Either party may terminate this Agreement with 30 days’ notice. Any outstanding fees must be settled upon termination.": "Chacune des parties peut résilier le présent Contrat avec un préavis de 30 jours. Tous les frais impayés doivent être réglés à la résiliation.",
+
+  "This Agreement is governed by the laws of Quebec, Canada.": ""
 }
