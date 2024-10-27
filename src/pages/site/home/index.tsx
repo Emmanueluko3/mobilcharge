@@ -129,10 +129,13 @@ const Home: React.FC = () => {
           <img
             src="assets/LettrageTransit_MobilCharge_sans-ombre-1024x799.png"
             className="absolute -top-10 lg:-top-96 rounded-lg z-10"
+            data-aos="fade-up"
+            data-aos-delay="50"
+            data-aos-easing="ease-in-out"
             alt=""
           />
           <Link
-            to="/booking"
+            to="/dashboard/book"
             className="font-bold text-sm lg:text-base flex items-center w-fit text-white hover:text-primary-500 transition-all lg:mb-10 p-4 lg:py-3 lg:px-20 rounded-lg border-2 border-white hover:bg-white z-20"
           >
             <svg
@@ -173,7 +176,7 @@ const Home: React.FC = () => {
               className="mr-2 lg:mr-4 text-2xl lg:text-4xl"
             />
             <Link
-              to="/contact"
+              to="/dashboard/pricing"
               className="border-b-2 border-black font-semibold text-lg lg:text-xl"
             >
               {t("Subscribe Now")}
@@ -297,7 +300,7 @@ const Home: React.FC = () => {
           </p>
           <div className="flex items-center flex-col lg:flex-row gap-4">
             <Link
-              to="/booking"
+              to="/dashboard/book"
               className="font-bold text-base flex items-center w-fit text-white transition-all lg:mb-16 py-3 px-20 rounded-lg bg-primary-500 hover:bg-primary-600"
             >
               <svg
@@ -312,7 +315,7 @@ const Home: React.FC = () => {
               {t("BOOK NOW | Limited Availability")}
             </Link>
             <Link
-              to="/contact"
+              to="/dashboard/pricing"
               className="font-bold text-base flex items-center w-fit text-white hover:text-primary-500 transition-all lg:mb-16 py-3 px-20 rounded-lg hover:bg-white border-2"
             >
               {t("Subscribe Now")}

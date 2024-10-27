@@ -64,7 +64,7 @@ const Contact: React.FC = () => {
               icon: faEnvelope,
               text: t("Email"),
               link: "mailto:Info@mobilcharge.ca",
-              subtext: "mailto:Info@mobilcharge.ca",
+              subtext: "Info@mobilcharge.ca",
             },
           ].map((item, index) => (
             <Link
@@ -99,7 +99,7 @@ const Contact: React.FC = () => {
             <Input type="text" placeholder={t("Phone")} name="Phone" />
           </div>
           <div className="col-span-2 lg:col-span-1">
-            <Input type="email" placeholder={t("Name")} name="Email" />
+            <Input type="email" placeholder={t("Email")} name="Email" />
           </div>
           <div className="col-span-2 lg:col-span-1">
             <Input type="Text" placeholder={t("Subject")} />
