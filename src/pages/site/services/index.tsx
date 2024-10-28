@@ -332,9 +332,9 @@ const Service: React.FC = () => {
             {t("Pricing")}
           </h2>
           <p className="w-4/5 lg:w-3/5 text-center font-medium my-10 lg:my-16 text-white z-20">
-            {
+            {t(
               "Choose the plan that fits your charging needs and enjoy the convenience of our mobile EV charging service. Join today to benefit from the convenience and security of reliable emergency charging for your EV, available whenever you need it."
-            }
+            )}
           </p>
           <div className="flex flex-row flex-wrap px-8 lg:px-0 justify-center gap-10 z-20">
             {[
