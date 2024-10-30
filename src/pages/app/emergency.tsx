@@ -16,7 +16,6 @@ const Emergency: React.FC = () => {
       vehicle_image,
       location,
       car_make,
-      battery_type,
       battery_level,
       kilometers_left,
       description,
@@ -25,7 +24,6 @@ const Emergency: React.FC = () => {
     const formData = new FormData();
     formData.append("location", location);
     formData.append("car_make", car_make);
-    formData.append("battery_type", battery_type);
     formData.append("booking_type", booking_type);
     formData.append("description", description);
     formData.append("kilometers_left", kilometers_left);

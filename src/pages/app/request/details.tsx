@@ -199,11 +199,13 @@ const RequestDetails: React.FC = () => {
             <h3 className="font-semibold text-lg mb-5">
               {t("Client Request")}
             </h3>
-            <img
-              src={booking?.vehicle_image}
-              alt={booking?.car_make}
-              className="rounded-2xl h-52 w-full object-cover mb-2"
-            />
+            {booking?.vehicle_image && (
+              <img
+                src={booking?.vehicle_image}
+                alt={booking?.car_make}
+                className="rounded-2xl h-52 w-full object-cover mb-2"
+              />
+            )}
             <h3 className="font-semibold text-lg">
               {booking?.user?.first_name} {booking?.user?.last_name}
             </h3>
@@ -237,12 +239,12 @@ const RequestDetails: React.FC = () => {
                   {booking?.battery_level}%
                 </span>
               </div>
-              <div className="flex items-center my-1">
+              {/* <div className="flex items-center my-1">
                 <p className="text-gray-800 text-sm font-medium mr-3">
                   {t("Battery Type")}:
                 </p>
                 <span className="text-sm flex">{booking?.battery_type}</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

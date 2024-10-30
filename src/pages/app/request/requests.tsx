@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import Tesla from "../../../assets/images/Tesla_Model_Y.jpg";
 import MapImage from "../../../assets/images/map_image.png";
 import { Box } from "@mui/joy";
 import useFetch from "../../../components/hooks/useFetch";
@@ -55,11 +54,13 @@ const Requests: React.FC = () => {
               <h3 className="font-semibold text-lg mb-5">
                 {t("Client Request")}
               </h3>
-              <img
-                src={item?.vehicle_image}
-                alt={item?.car_make}
-                className="rounded-2xl h-52 w-full object-cover mb-2"
-              />
+              {item?.vehicle_image && (
+                <img
+                  src={item?.vehicle_image}
+                  alt={item?.car_make}
+                  className="rounded-2xl h-52 w-full object-cover mb-2"
+                />
+              )}
               <h3 className="font-semibold text-lg">
                 {item?.user?.first_name} {item?.user?.last_name}
               </h3>
@@ -96,12 +97,12 @@ const Requests: React.FC = () => {
                     {item?.battery_level}%
                   </span>
                 </div>
-                <div className="flex items-center my-1">
+                {/* <div className="flex items-center my-1">
                   <p className="text-gray-800 text-sm font-medium mr-3">
                     {t("Battery Type")}:
                   </p>
                   <span className="text-sm flex">{item?.battery_type}</span>
-                </div>
+                </div> */}
                 <Link
                   to={`${item.invoice_id}`}
                   className="mt-10  bg-primary-500 w-full rounded-lg py-2 px-10 font-semibold text-white hover:bg-opacity-80 transition-all flex items-center text-center text-sm justify-center"

@@ -8,49 +8,93 @@ import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { Map, Marker } from "@vis.gl/react-google-maps";
 
 const electricVehicleMakes = [
-  "Tesla Model S",
-  "Tesla Model 3",
-  "Tesla Model X",
-  "Tesla Model Y",
-  "Ford Mustang Mach-E",
-  "Ford F-150 Lightning",
-  "Chevrolet Bolt EV",
-  "Chevrolet Blazer EV",
-  "BMW i4",
-  "BMW iX",
-  "BMW i5",
-  "Mercedes-Benz EQE",
-  "Mercedes-Benz EQS",
-  "Mercedes-Benz EQB",
+  "Alfa Romeo Tonale PHEV",
   "Audi Q4 e-tron",
-  "Audi e-tron GT",
-  "Hyundai Ioniq 5",
-  "Hyundai Ioniq 6",
-  "Kia EV6",
-  "Nissan Ariya",
-  "Nissan Leaf",
+  "BMW 330e",
+  "BMW 330e xDrive",
+  "BMW i4 eDrive35 Gran Coupe",
+  "BMW i4 eDrive40 Gran Coupe",
+  "Cadillac OPTIQ",
+  "Chevrolet Blazer EV LT TI",
+  "Chevrolet Blazer EV RS PA",
+  "Chevrolet Blazer EV RS TI",
+  "Chevrolet Equinox EV 2025",
+  "Chevrolet Equinox EV AWD 2025",
+  "Chrysler Pacifica Hybrid rechargeable",
+  "Dodge Charger Daytona EV",
+  "Dodge Hornet R/T PHEV",
+  "Fiat 500e RED",
+  "Ford Escape PHEV",
+  "Ford E-Transit (commercial)",
+  "Ford F150 Lightning Pro",
+  "Ford Mustang Mach-E 2024",
+  "Ford Mustang Mach-E 2024 AWD",
+  "Ford MUSTANG MACH-E 2024 AWD Extended Range",
+  "Honda Prologue",
+  "Hyundai IONIQ 5 - Long Range",
+  "Hyundai IONIQ 5 - Long Range AWD",
+  "Hyundai IONIQ 6 - Long Range",
+  "Hyundai IONIQ 6 - Long Range AWD",
+  "Hyundai Kona EV",
+  "Jeep Wrangler 4Xe",
+  "Kia EV6 Land",
+  "Kia EV6 Wind",
+  "Kia EV9 Land",
+  "Kia EV9 Light",
+  "Kia EV9 Wind",
+  "Kia Niro EV",
+  "Kia Niro PHEV",
+  "Kia Sorento PHEV",
+  "Kia Sportage PHEV",
+  "Lexus NX 450h+",
+  "Lexus RZ 450e",
+  "Lincoln Corsair Grand Touring",
+  "Mazda CX-70 VÉHR",
+  "Mazda CX-90 VÉHR",
+  "Mazda MX-30",
+  "Mercedes-Benz EQB 250+",
+  "Mercedes-Benz EQB 300 4MATIC",
+  "Mercedes-Benz GLC 350e 4MATIC",
+  "Mini Cooper SE 3 Door",
+  "Mini Countryman SE All4",
+  "Mitsubishi Outlander PHEV",
+  "Nissan Ariya Evolve e-4ORCE",
+  "Nissan Ariya Evolve+ e-4ORCE",
+  "Nissan Ariya Evolve+ FWD",
+  "Nissan Ariya Engage FWD",
+  "Nissan LEAF SV",
+  "Nissan LEAF SV Plus",
+  "Polestar 2 Long Range Dual motor AWD",
+  "Polestar 2 Long Range Single motor RWD",
+  "Polestar 4 Long Range Single motor RWD",
+  "Subaru Solterra",
+  "Tesla Model 3 AWD",
+  "Tesla Model 3 RWD",
+  "Tesla Model Y AWD",
+  "Tesla Model Y AWD 7 places",
+  "Tesla Model Y RWD",
+  "Toyota BZ4X",
+  "Toyota BZ4X AWD",
+  "Toyota Prius Prime SE",
+  "Toyota Prius Prime XSE",
+  "Toyota RAV4 Prime",
   "Volkswagen ID.4",
-  "Volkswagen ID.Buzz",
-  "Volvo XC40 Recharge",
-  "Volvo C40 Recharge",
-  "Porsche Taycan",
-];
-const electricVehicleBatteryTypes = [
-  "Lithium-ion (Li-ion)",
-  "Lithium Iron Phosphate (LFP)",
-  "Nickel-Metal Hydride (NiMH)",
-  "Solid-state Battery",
-  "Nickel-Cobalt-Aluminum (NCA)",
-  "Nickel-Manganese-Cobalt (NMC)",
-  "Lithium-Sulfur (Li-S)",
-  "Zinc-Air",
-  "Sodium-ion",
+  "Volkswagen ID.4 Pro",
+  "Volkswagen ID.4 Pro AWD",
+  "Volvo EC40 Single Motor",
+  "Volvo EC40 Twin Motor",
+  "Volvo EX30 Core Single Motor",
+  "Volvo EX30 Plus Twin Motor",
+  "Volvo EX40 Single Motor",
+  "Volvo EX40 Twin Motor",
+  "Volvo S60 Recharge",
+  "Volvo XC60 Recharge",
+  "VinFast VF8",
 ];
 
 interface bookDataProps {
   location: string;
   car_make: string;
-  battery_type: string;
   battery_level: string;
   kilometers_left: string;
   vehicle_image: any;
@@ -74,7 +118,6 @@ const BookForm: React.FC<bookFormProps> = ({
   const [bookData, setBookData] = useState<bookDataProps>({
     location: "",
     car_make: "",
-    battery_type: "",
     battery_level: "",
     kilometers_left: "",
     vehicle_image: null,
@@ -124,7 +167,6 @@ const BookForm: React.FC<bookFormProps> = ({
     const requiredStringFields: (keyof bookDataProps)[] = [
       "location",
       "car_make",
-      "battery_type",
     ];
 
     requiredStringFields.forEach((field) => {
@@ -133,9 +175,9 @@ const BookForm: React.FC<bookFormProps> = ({
       }
     });
 
-    if (!data.vehicle_image) {
-      errors.vehicle_image = "Vehicle image is required";
-    }
+    // if (!data.vehicle_image) {
+    //   errors.vehicle_image = "Vehicle image is required";
+    // }
 
     return errors;
   };
@@ -211,24 +253,7 @@ const BookForm: React.FC<bookFormProps> = ({
             </select>
             <p className="text-xs text-red-500">{bookError.car_make}</p>
           </div>
-          <div className="mb-2">
-            <select
-              name="battery_type"
-              value={bookData.battery_type}
-              onChange={handleChange}
-              className="block w-full border-0 p-2.5 bg-white text-gray-900 rounded-lg shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-500 placeholder:text-base placeholder:font-medium focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-            >
-              <option value="" disabled hidden>
-                {t("Battery type")}
-              </option>
-              {electricVehicleBatteryTypes.map((item, index) => (
-                <option value={item} key={index}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <p className="text-xs text-red-500">{bookError.battery_type}</p>
-          </div>
+
           <div className="mb-2">
             <AppInput
               name="battery_level"
@@ -272,7 +297,7 @@ const BookForm: React.FC<bookFormProps> = ({
               />
             )}
           </div>
-          <p className="text-xs text-red-500">{bookError.vehicle_image}</p>
+          {/* <p className="text-xs text-red-500">{bookError.vehicle_image}</p> */}
           <input
             type="file"
             className="hidden"

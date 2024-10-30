@@ -192,11 +192,13 @@ const Overview: React.FC = () => {
                 <h3 className="font-semibold text-lg mb-5">
                   {t("Client Request")}
                 </h3>
-                <img
-                  src={item?.vehicle_image}
-                  alt={item?.car_make}
-                  className="rounded-2xl h-52 w-full object-cover mb-2"
-                />
+                {item?.vehicle_image && (
+                  <img
+                    src={item?.vehicle_image}
+                    alt={item?.car_make}
+                    className="rounded-2xl h-52 w-full object-cover mb-2"
+                  />
+                )}
                 <h3 className="font-semibold text-lg">
                   {item?.user?.first_name} {item?.user?.last_name}
                 </h3>
