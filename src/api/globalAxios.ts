@@ -14,14 +14,19 @@ export const globalAxios = axios.create({
 });
 
 globalAxios.interceptors.request.use(async (config) => {
-  if (config?.url?.includes("/api/auth/token/refresh/")) {
+  if (
+    config?.url?.includes("/api/auth/token/refresh/") ||
+    config?.url?.includes("/api/auth/logout/")
+  ) {
     return config;
   }
-  const accessToken = getAccessToken();
+  let accessToken = getAccessToken();
+
   if (accessToken) {
     if (isTokenExpired(accessToken)) {
       await refreshToken();
     }
+    accessToken = getAccessToken();
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
   return config;

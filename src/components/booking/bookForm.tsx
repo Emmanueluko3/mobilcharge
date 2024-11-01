@@ -97,6 +97,8 @@ interface bookDataProps {
   car_make: string;
   battery_level: string;
   kilometers_left: string;
+  date: string;
+  time: string;
   vehicle_image: any;
   description: string;
 }
@@ -120,6 +122,8 @@ const BookForm: React.FC<bookFormProps> = ({
     car_make: "",
     battery_level: "",
     kilometers_left: "",
+    date: "",
+    time: "",
     vehicle_image: null,
     description: "",
   });
@@ -167,6 +171,8 @@ const BookForm: React.FC<bookFormProps> = ({
     const requiredStringFields: (keyof bookDataProps)[] = [
       "location",
       "car_make",
+      "date",
+      "time",
     ];
 
     requiredStringFields.forEach((field) => {
@@ -271,6 +277,32 @@ const BookForm: React.FC<bookFormProps> = ({
               onChange={handleChange}
               placeholder={`${t("Kilometres left")}: (${t("Optional")})`}
             />
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <h3 className="text-2xl font-semibold mb-2">
+            {t("Booking Date and Time")}
+          </h3>
+          <div className="mb-2">
+            <AppInput
+              name="date"
+              value={bookData.date}
+              type="date"
+              onChange={handleChange}
+              placeholder={t("Enter date")}
+            />
+            <p className="text-xs text-red-500">{bookError.date}</p>
+          </div>
+          <div className="mb-2">
+            <AppInput
+              name="time"
+              value={bookData.time}
+              type="time"
+              onChange={handleChange}
+              placeholder={t("Enter time")}
+            />
+            <p className="text-xs text-red-500">{bookError.time}</p>
           </div>
         </div>
 

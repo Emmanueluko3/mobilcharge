@@ -19,12 +19,18 @@ const Emergency: React.FC = () => {
       battery_level,
       kilometers_left,
       description,
+      date,
+      time,
     } = data;
+
+    const dateTimeString = `${date}T${time}:00Z`;
+    const scheduledDateAndTime = new Date(dateTimeString).toISOString();
 
     const formData = new FormData();
     formData.append("location", location);
     formData.append("car_make", car_make);
     formData.append("booking_type", booking_type);
+    formData.append("scheduled_date_and_time", scheduledDateAndTime);
     formData.append("description", description);
     formData.append("kilometers_left", kilometers_left);
     formData.append("battery_level", battery_level);
