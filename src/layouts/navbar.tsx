@@ -13,6 +13,13 @@ const Navbar: React.FC = () => {
   const user: any = useAppSelector((state) => state?.auth?.user);
   const isAuthenticated: any = localStorage.getItem("accessToken");
 
+  const role = () => {
+    if (user?.is_superuser) {
+      return "admin";
+    }
+    return "user";
+  };
+
   // Translate
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng: string) => {
@@ -88,12 +95,14 @@ const Navbar: React.FC = () => {
             {user || isAuthenticated ? (
               <>
                 <Link
-                  to="/dashboard"
+                  to={`/${role() === "admin" ? "admin" : "dashboard"}`}
                   className="rounded-md text-base text-white whitespace-nowrap bg-primary-500 transition-all flex items-center justify-center py-1.5 px-4 font-semibold border border-primary-500 hover:bg-primary-700"
                 >
                   {t("Go to Dashboard")}
                 </Link>
-                <Link to="/dashboard/settings">
+                <Link
+                  to={`/${role() === "admin" ? "admin" : "dashboard"}/settings`}
+                >
                   <img
                     src={user?.profile_image}
                     className="h-12 w-12 rounded-full object-cover"

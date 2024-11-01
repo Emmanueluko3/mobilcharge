@@ -85,9 +85,9 @@ const Sidebar: React.FC = () => {
     },
   ].filter((link) => link.roles.includes(role()));
 
-  const getRefreshToken = () => {
-    return localStorage.getItem("refreshToken");
-  };
+  // const getRefreshToken = () => {
+  //   return localStorage.getItem("refreshToken");
+  // };
 
   const handleLogout = async () => {
     const result = await Swal.fire({
@@ -102,10 +102,10 @@ const Sidebar: React.FC = () => {
     });
     if (result.isConfirmed) {
       try {
-        const response: any = await apiService("/api/auth/logout/", "POST", {
-          refresh: getRefreshToken(),
-        });
-        console.log(response);
+        // const response: any = await apiService("/api/auth/logout/", "POST", {
+        //   refresh: getRefreshToken(),
+        // });
+        // console.log(response);
         dispatch(logout());
       } catch (error: any) {
         if (error?.response?.data?.error) {
@@ -258,9 +258,9 @@ export const AppFooter = () => {
     },
   ].filter((link) => link.roles.includes(role()));
 
-  const getRefreshToken = () => {
-    return localStorage.getItem("refreshToken");
-  };
+  // const getRefreshToken = () => {
+  //   return localStorage.getItem("refreshToken");
+  // };
 
   const handleLogout = async () => {
     const result = await Swal.fire({
@@ -275,10 +275,10 @@ export const AppFooter = () => {
     });
     if (result.isConfirmed) {
       try {
-        const response: any = await apiService("/api/auth/logout/", "POST", {
-          refresh: getRefreshToken(),
-        });
-        console.log(response);
+        // const response: any = await apiService("/api/auth/logout/", "POST", {
+        //   refresh: getRefreshToken(),
+        // });
+        // console.log(response);
         dispatch(logout());
       } catch (error: any) {
         if (error?.response?.data?.error) {
