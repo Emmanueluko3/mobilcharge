@@ -122,8 +122,8 @@ const BookForm: React.FC<bookFormProps> = ({
     car_make: "",
     battery_level: "",
     kilometers_left: "",
-    date: "",
-    time: "",
+    date: new Date().toISOString().split("T")[0],
+    time: new Date().toTimeString().slice(0, 5),
     vehicle_image: null,
     description: "",
   });
@@ -197,6 +197,14 @@ const BookForm: React.FC<bookFormProps> = ({
       onSubmit(bookData);
     }
   };
+
+  // Calculate today's date and the max date (2 months from now)
+  const today = new Date();
+  const minDate = today.toISOString().split("T")[0];
+
+  const maxDate = new Date();
+  maxDate.setMonth(maxDate.getMonth() + 2);
+  const maxDateStr = maxDate.toISOString().split("T")[0];
 
   const [markerLocation, setMarkerLocation] = useState({
     lat: 43.65107,
@@ -289,6 +297,8 @@ const BookForm: React.FC<bookFormProps> = ({
               name="date"
               value={bookData.date}
               type="date"
+              min={minDate}
+              max={maxDateStr}
               onChange={handleChange}
               placeholder={t("Enter date")}
             />
