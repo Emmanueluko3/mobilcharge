@@ -345,11 +345,10 @@ const Service: React.FC = () => {
                 ),
                 features: [
                   t("Individuals price list"),
-                  t("Price per 20 min charge (max 20kWh) with membership $30"),
                   t(
-                    "Price per 20 min charge (max 20kWh) without membership $40"
+                    "Price per 20 min charge (max 25kWh) without membership $40"
                   ),
-                  t("Emergency charge (max 50kWh) $200"),
+                  t("Emergency charge 200$ (distance maximum of 50km)"),
 
                   t(
                     "Note : Vehicules must be accessible and unlocked to receive a charge"
@@ -364,11 +363,10 @@ const Service: React.FC = () => {
                 ),
                 features: [
                   t("All features of the VISITOR plan"),
-                  t("Extended charging time per session"),
                   t("Priority customer support"),
-                  t("Monthly subscription fee"),
-                  t("Discounts on additional services"),
-                  t("Price per 20 min charge (max 20kWh) with membership $30"),
+                  t("Monthly subscription fee $30 per month"),
+                  t("Emergency charge 200$ (distance maximum of 50km) 100$"),
+                  t("Price per 20 min charge (max 25kWh) with membership $30"),
                   t(
                     "Note : Vehicules must be accessible and unlocked to receive a charge"
                   ),
@@ -389,7 +387,7 @@ const Service: React.FC = () => {
                     "Price per half day (3 hrs) (max 9 charges - total 160kWh) $250"
                   ),
                   t("Price per hour (max 3 charges - total 60kWh) $90"),
-                  t("No membership for corporate clients $0"),
+                  t("Tailored commercial plans available, invoiced monthly"),
 
                   t(
                     "Note : Vehicules must be accessible and unlocked to receive a charge"

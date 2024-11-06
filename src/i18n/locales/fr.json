@@ -149,9 +149,10 @@
   "VISITOR": "Visiteur",
   "Electric vehicle owners seeking a quick charging solution": "Propriétaires de véhicules électriques à la recherche d'une solution de recharge rapide",
   "Individuals price list": "Liste de prix clients particuliers",
-  "Price per 20 min charge (max 20kWh) with membership $30": "Prix par 20 minutes de charge (max 20 kWh) avec abonnement 30$",
-  "Price per 20 min charge (max 20kWh) without membership $40": "Prix par 20 min de charge (max 20 kWh) sans abonnement 40$",
+  "Price per 20 min charge (max 25kWh) with membership $30": "Prix par 20 minutes de charge (max 25 kWh) avec abonnement 30$",
+  "Price per 20 min charge (max 25kWh) without membership $40": "Prix par 20 min de charge (max 25 kWh) sans abonnement 40$",
   "Emergency charge (max 50kWh) $200": "Frais d'urgence (max 50 kWh) 200$",
+  "Emergency charge 200$ (distance maximum of 50km)": "Frais d’urgence 200$ (distance maximum de 50km)",
   "Note : Vehicules must be accessible and unlocked to receive a charge": "Note : Les véhicules doivent être accessibles et débarrés affin de recevoir une charge",
 
   "Membership": "Adhésion",
@@ -161,6 +162,7 @@
   "Extended charging time per session": "Temps de recharge prolongé par session",
   "Priority customer support": "Support client prioritaire",
   "Discounts on additional services": "Réductions sur les services supplémentaires",
+  "Emergency charge 200$ (distance maximum of 50km) 100$": "Frais d’urgence (distance max. 50km) 100$",
 
   "Tailored Plan": "Plan Sur Mesure",
   "Hotels, event centers, fleets, dealerships, businesses, events, etc.": "Hôtels, centres événementiels, flottes, concessionnaires, entreprises, événements, etc.",
@@ -169,6 +171,7 @@
   "Price per half day (3 hrs) (max 9 charges - total 160kWh) $250": "Prix par demi-journée (3 heures) (max 9 charges - total 160 kWh) : 250 $",
   "Price per hour (max 3 charges - total 60kWh) $90": "Prix par heure (max 3 charges - total 60 kWh) : 90 $",
   "No membership for corporate clients $0": "Pas d'adhésion pour les clients commerciaux : 0 $",
+  "Tailored commercial plans available, invoiced monthly": "Ententes commerciales sur mesure facturées mensuellement",
   "JOIN US": "REJOIGNEZ-NOUS",
 
   "Choose sustainable and convenient mobility by booking your charging service with MobilCharge now": "Choisissez une mobilité durable et pratique en réservant dès maintenant votre service de recharge avec MobilCharge",
@@ -275,7 +278,7 @@
   "Electric vehicle owners seeking a recurring charge": "Les propriétaires de véhicules électriques recherchent une recharge récurrente",
   "All Visitors plan features": "Toutes les fonctionnalités du plan Visiteurs",
   "Extended charge time": "Temps de charge prolongé",
-  "Monthly subscription fee": "Frais d'abonnement mensuel",
+  "Monthly subscription fee $30 per month": "Frais d'abonnement mensuels 30 $ par mois",
   "Discount on additionals": "Remise sur les suppléments",
 
   "Price per half day (3hrs) 9 charges": "Tarif par demi-journée (3h) 9 charges",
