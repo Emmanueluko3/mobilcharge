@@ -8,7 +8,6 @@ import { Button } from "../../../components/common/button";
 import useFetch from "../../../components/hooks/useFetch";
 import apiService from "../../../api/apiServices";
 import Swal from "sweetalert2";
-import Spinner from "../../../components/common/spinner";
 import DetailsTemplate from "../../../templates/details";
 
 const RequestDetails: React.FC = () => {
