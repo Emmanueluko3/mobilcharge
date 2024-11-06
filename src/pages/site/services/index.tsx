@@ -348,7 +348,7 @@ const Service: React.FC = () => {
                   t(
                     "Price per 20 min charge (max 25kWh) without membership $40"
                   ),
-                  t("Emergency charge 200$ (distance maximum of 50km)"),
+                  t("Emergency charge 200$ (maximum distance of 50km)"),
 
                   t(
                     "Note : Vehicules must be accessible and unlocked to receive a charge"
@@ -365,7 +365,7 @@ const Service: React.FC = () => {
                   t("All features of the VISITOR plan"),
                   t("Priority customer support"),
                   t("Monthly subscription fee $30 per month"),
-                  t("Emergency charge (distance maximum of 50km) 100$"),
+                  t("Emergency charge (maximum distance of 50km) 100$"),
                   t("Price per 20 min charge (max 25kWh) with membership $32"),
                   t(
                     "Note : Vehicules must be accessible and unlocked to receive a charge"
