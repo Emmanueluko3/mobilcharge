@@ -345,11 +345,11 @@ const Service: React.FC = () => {
                 ),
                 features: [
                   t("Individuals price list"),
-                  t("Price per 20 min charge (max 20kWh) with membership $32"),
+                  t("Price per 20 min charge (max 20kWh) with membership $30"),
                   t(
                     "Price per 20 min charge (max 20kWh) without membership $40"
                   ),
-                  t("Emergency charge (max 50km) $200"),
+                  t("Emergency charge (max 50kWh) $200"),
 
                   t(
                     "Note : Vehicules must be accessible and unlocked to receive a charge"
@@ -368,7 +368,7 @@ const Service: React.FC = () => {
                   t("Priority customer support"),
                   t("Monthly subscription fee"),
                   t("Discounts on additional services"),
-                  t("Price per 20 min charge (max 20kWh) with membership $32"),
+                  t("Price per 20 min charge (max 20kWh) with membership $30"),
                   t(
                     "Note : Vehicules must be accessible and unlocked to receive a charge"
                   ),
@@ -399,7 +399,7 @@ const Service: React.FC = () => {
             ].map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center lg:h-[660px] lg:w-[600px]"
+                className="flex flex-col items-center lg:h-[660px] lg:w-[600px] mb-8"
               >
                 <div className="w-full bg-primary-500 text-white flex flex-col items-center py-8 lg:py-10">
                   <h3 className="font-medium text-3xl lg:text-4xl text-center mb-3 lg:mb-4 px-4">

@@ -141,13 +141,15 @@ const Overview: React.FC = () => {
               pendingRequest?.map((item: any, index: number) => (
                 <div
                   key={index}
-                  className="p-3 lg:p-4 rounded-2xl bg-white bg-opacity-50"
+                  className="p-3 lg:p-4 rounded-2xl bg-white bg-opacity-50 h-fit"
                 >
-                  <img
-                    src={item.vehicle_image}
-                    alt={item.car_make}
-                    className="rounded-2xl h-40 lg:h-48 w-full object-cover mb-2"
-                  />
+                  {item?.vehicle_image && (
+                    <img
+                      src={item.vehicle_image}
+                      alt={item.car_make}
+                      className="rounded-2xl h-40 lg:h-48 w-full object-cover mb-2"
+                    />
+                  )}
                   <h3 className="font-semibold text-lg">
                     {item.user.first_name + "  " + item.user.last_name}
                   </h3>
