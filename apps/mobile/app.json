@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "MobilCharge",
+    "slug": "mobilcharge",
+    "scheme": "mobilcharge",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "ca.mobilcharge.app"
+    },
+    "android": {
+      "package": "ca.mobilcharge.app"
+    },
+    "extra": {
+      "apiUrl": "http://localhost:4000/api"
+    }
+  }
+}

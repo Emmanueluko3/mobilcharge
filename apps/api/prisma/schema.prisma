@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  DRIVER
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  phoneNumber   String?
+  role          UserRole       @default(USER)
+  profileImage  String?
+  bookings      Booking[]      @relation("CustomerBookings")
+  driverJobs    Booking[]      @relation("DriverBookings")
+  driverProfile DriverProfile?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model DriverProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  truckName   String?
+  plateNumber String?
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Booking {
+  id                   String        @id @default(cuid())
+  invoiceId            String        @unique
+  customerId           String
+  customer             User          @relation("CustomerBookings", fields: [customerId], references: [id])
+  driverId             String?
+  driver               User?         @relation("DriverBookings", fields: [driverId], references: [id])
+  status               BookingStatus @default(PENDING)
+  isEmergency          Boolean       @default(false)
+  rechargeAddress      String
+  reservationAt        DateTime
+  carModel             String
+  batteryLevel         Int?
+  kilometresLeft       Int?
+  chargingTimeEstimate String?
+  comments             String?
+  vehicleImageUrl      String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+}
+
+model PricingPlan {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  description String
+  priceLabel  String
+  features    String[]
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+}

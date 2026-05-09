@@ -1,0 +1,26 @@
+{
+  "extends": "../../packages/config/tsconfig/base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "incremental": true,
+    "jsx": "preserve",
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@mobilcharge/types": ["../../packages/types/src"],
+      "@mobilcharge/ui": ["../../packages/ui/src"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
