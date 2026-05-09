@@ -1,75 +1,31 @@
 {
-  "name": "evcharging",
+  "name": "mobilcharge",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/free-regular-svg-icons": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "@mui/joy": "^5.0.0-beta.48",
-    "@mui/material": "^6.1.2",
-    "@reduxjs/toolkit": "^2.2.7",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.108",
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0",
-    "@vis.gl/react-google-maps": "^1.3.0",
-    "aos": "^2.3.4",
-    "axios": "^1.7.7",
-    "browser-image-compression": "^2.0.2",
-    "classnames": "^2.5.1",
-    "framer-motion": "^11.11.7",
-    "i18next": "^23.15.1",
-    "i18next-browser-languagedetector": "^8.0.0",
-    "jwt-decode": "^4.0.0",
-    "localforage": "^1.10.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-hot-toast": "^2.4.1",
-    "react-i18next": "^15.0.2",
-    "react-redux": "^9.1.2",
-    "react-router-dom": "^6.26.1",
-    "react-scripts": "5.0.1",
-    "redux-persist": "^6.0.0",
-    "sweetalert2": "^11.14.2",
-    "typescript": "^4.9.5",
-    "use-count-up": "^3.0.1",
-    "web-vitals": "^2.1.4"
-  },
+  "packageManager": "npm@11.3.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "TURBO_CACHE_DIR=.turbo/cache turbo dev",
+    "build": "TURBO_CACHE_DIR=.turbo/cache turbo build",
+    "lint": "TURBO_CACHE_DIR=.turbo/cache turbo lint",
+    "test": "TURBO_CACHE_DIR=.turbo/cache turbo test",
+    "db:generate": "npm --workspace @mobilcharge/api run db:generate",
+    "db:migrate": "npm --workspace @mobilcharge/api run db:migrate",
+    "db:seed": "npm --workspace @mobilcharge/api run db:seed",
+    "dev:web": "npm --workspace @mobilcharge/web run dev",
+    "dev:api": "npm --workspace @mobilcharge/api run dev",
+    "dev:mobile": "npm --workspace @mobilcharge/mobile run dev"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/aos": "^3.0.7",
-    "@types/react-i18next": "^8.1.0",
-    "tailwindcss": "^3.4.10"
+    "turbo": "^2.5.3",
+    "typescript": "^5.4.5",
+    "prettier": "^3.3.3"
   }
 }
