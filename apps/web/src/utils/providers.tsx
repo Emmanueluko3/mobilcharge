@@ -10,6 +10,9 @@ import { APIProvider } from "@vis.gl/react-google-maps";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+import { ApolloProvider } from "@apollo/client/react";
+import { apolloClient } from "../api/apolloClient";
+
 const persistor = persistStore(store);
 export function Providers({ children }: { children: React.ReactNode }) {
   const apiKey: any = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
@@ -25,10 +28,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <APIProvider apiKey={apiKey}>
-            <Toaster />
-            {children}
-          </APIProvider>
+          <ApolloProvider client={apolloClient}>
+            <APIProvider apiKey={apiKey}>
+              <Toaster />
+              {children}
+            </APIProvider>
+          </ApolloProvider>
         </PersistGate>
       </Provider>
     </I18nextProvider>

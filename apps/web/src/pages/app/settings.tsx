@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../../components/common/button";
 import { AppInput } from "../../components/common/input";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { globalAxios } from "../../api/globalAxios";
+import apiService from "../../api/apiServices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { getUserInfo } from "../../store/features/auth/authSlice";
 import Swal from "sweetalert2";
 import imageCompression from "browser-image-compression";
+import { fileToBase64 } from "../../utils/base64";
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -63,27 +64,33 @@ const Settings: React.FC = () => {
           new_password,
           confirm_new_password,
         } = profileData;
-        const formData = new FormData();
-        formData.append("profile_image", profile_image);
-        formData.append("first_name", first_name);
-        formData.append("last_name", last_name);
-        formData.append("phone", phone);
-        formData.append("email", email);
-        formData.append("old_password", old_password);
-        formData.append("new_password", new_password);
-        formData.append("confirm_new_password", confirm_new_password);
+        let profileImageBase64 = null;
+        if (profile_image && typeof profile_image !== "string") {
+          profileImageBase64 = await fileToBase64(profile_image);
+        }
 
-        const response: any = await globalAxios.patch(
+        const payload = {
+          firstName: first_name,
+          lastName: last_name,
+          phoneNumber: phone,
+          profileImageBase64,
+        };
+
+        const response: any = await apiService(
           "/api/auth/update-profile/",
-          formData,
-          {
-            headers: {
-              ...globalAxios.defaults.headers.common,
-              "Content-Type": "multipart/form-data",
-              Accept: "application/json",
-            },
-          }
+          "PATCH",
+          payload
         );
+
+        if (new_password || old_password) {
+          if (!old_password || !new_password || new_password !== confirm_new_password) {
+            throw new Error("Invalid password change input");
+          }
+          await apiService("/api/auth/update-password/", "PATCH", {
+            oldPassword: old_password,
+            newPassword: new_password,
+          });
+        }
         Swal.fire({
           title: "Success!",
           text: response?.data?.success,

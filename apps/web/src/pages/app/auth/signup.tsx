@@ -5,11 +5,11 @@ import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
-// import apiService from "../../../api/apiServices";
+import apiService from "../../../api/apiServices";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginSuccess } from "../../../store/features/auth/authSlice";
 import toast from "react-hot-toast";
-import { globalAxios } from "../../../api/globalAxios";
+import { fileToBase64 } from "../../../utils/base64";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 
@@ -117,30 +117,24 @@ const Signup: React.FC = () => {
           password,
           confirm_password,
         } = signupData;
-        const formData = new FormData();
-        formData.append("profile_image", profile_image);
-        formData.append("first_name", first_name);
-        formData.append("last_name", last_name);
-        formData.append("phone", phone);
-        formData.append("email", email);
-        formData.append("password", password);
-        formData.append("confirm_password", confirm_password);
+        let profileImageBase64 = null;
+        if (profile_image) {
+          profileImageBase64 = await fileToBase64(profile_image);
+        }
 
-        // const response: any = await apiService(
-        //   "/api/auth/signup/",
-        //   "POST",
-        //   signupData
-        // );
-        const response: any = await globalAxios.post(
+        const payload = {
+          firstName: first_name,
+          lastName: last_name,
+          phoneNumber: phone,
+          email,
+          password,
+          profileImageBase64,
+        };
+
+        const response: any = await apiService(
           "/api/auth/signup/",
-          formData,
-          {
-            headers: {
-              ...globalAxios.defaults.headers.common,
-              "Content-Type": "multipart/form-data",
-              Accept: "application/json",
-            },
-          }
+          "POST",
+          payload
         );
 
         dispatch(loginSuccess(response.data));

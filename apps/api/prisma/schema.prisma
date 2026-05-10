@@ -33,6 +33,7 @@ model User {
   bookings      Booking[]      @relation("CustomerBookings")
   driverJobs    Booking[]      @relation("DriverBookings")
   driverProfile DriverProfile?
+  otps          Otp[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
@@ -89,4 +90,13 @@ model ContactMessage {
   subject   String?
   message   String
   createdAt DateTime @default(now())
+}
+
+model Otp {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  user      User?    @relation(fields: [email], references: [email], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
 }

@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     disableStaticImages: true
   },
-  transpilePackages: ["@mobilcharge/types", "@mobilcharge/ui"],
+  transpilePackages: ["@mobilcharge/types", "@mobilcharge/ui", "@apollo/client", "graphql"],
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_API_KEY: process.env.NEXT_PUBLIC_API_KEY,

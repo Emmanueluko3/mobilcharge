@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { globalAxios } from "../../api/globalAxios";
+import apiService from "../../api/apiServices";
 import BookForm from "../../components/booking/bookForm";
+import { fileToBase64 } from "../../utils/base64";
 
 const Emergency: React.FC = () => {
   const navigate = useNavigate();
@@ -26,29 +27,28 @@ const Emergency: React.FC = () => {
     const dateTimeString = `${date}T${time}:00Z`;
     const scheduledDateAndTime = new Date(dateTimeString).toISOString();
 
-    const formData = new FormData();
-    formData.append("location", location);
-    formData.append("car_make", car_make);
-    formData.append("booking_type", booking_type);
-    formData.append("scheduled_date_and_time", scheduledDateAndTime);
-    formData.append("description", description);
-    formData.append("kilometers_left", kilometers_left);
-    formData.append("battery_level", battery_level);
-    formData.append("vehicle_image", vehicle_image);
-    formData.append("plan_id", "2");
-
     try {
       setIsLoading(true);
-      const response: any = await globalAxios.post(
+      let vehicleImageBase64 = null;
+      if (vehicle_image && typeof vehicle_image !== "string") {
+        vehicleImageBase64 = await fileToBase64(vehicle_image);
+      }
+
+      const payload = {
+        rechargeAddress: location,
+        carModel: car_make,
+        reservationAt: scheduledDateAndTime,
+        description,
+        kilometresLeft: Number(kilometers_left) || 0,
+        batteryLevel: Number(battery_level) || 0,
+        vehicleImageBase64,
+        isEmergency: true,
+      };
+
+      const response: any = await apiService(
         "/api/booking/create-booking/",
-        formData,
-        {
-          headers: {
-            ...globalAxios.defaults.headers.common,
-            "Content-Type": "multipart/form-data",
-            Accept: "application/json",
-          },
-        }
+        "POST",
+        payload
       );
       if (response) {
         navigate(

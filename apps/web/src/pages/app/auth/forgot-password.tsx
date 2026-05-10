@@ -80,7 +80,7 @@ const ForgotPassowrd: React.FC = () => {
   };
 
   const handleVerifycode = async (code: string) => {
-    const resetData = await { email: forgotPasswordData.email, code: code };
+    const resetData = { email: forgotPasswordData.email, code: code };
     if (validateForm()) {
       try {
         setIsLoading(true);
@@ -95,24 +95,19 @@ const ForgotPassowrd: React.FC = () => {
             text: "The OTP code is valid. You may now proceed to reset your password.",
             icon: "success",
           });
-          setNextStep(1);
-          setCountdown(30);
           navigate(`/reset-password`, {
             state: { resetData: resetData },
             replace: true,
           });
         }
       } catch (error: any) {
-        if (error?.response?.data?.error) {
-          Swal.fire({
-            title: "Error!",
-            text: error?.response?.data?.error,
-            icon: "error",
-          });
-        }
+        const errorMessage =
+          error?.response?.data?.message ||
+          error?.response?.data?.error ||
+          "Something went wrong. Please try again.";
         Swal.fire({
           title: "Error!",
-          text: "Something went wrong. Please try again.",
+          text: errorMessage,
           icon: "error",
         });
         console.log("error message", error);

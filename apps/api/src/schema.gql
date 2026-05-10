@@ -1,0 +1,180 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  access: String!
+  refresh: String!
+  user: User!
+}
+
+type Booking {
+  batteryLevel: Int
+  carModel: String!
+  chargingTimeEstimate: String
+  comments: String
+  createdAt: DateTime!
+  customer: User!
+  customerId: String!
+  driver: User
+  driverId: String
+  id: String!
+  invoiceId: String!
+  isEmergency: Boolean!
+  kilometresLeft: Int
+  rechargeAddress: String!
+  reservationAt: DateTime!
+  status: BookingStatus!
+  updatedAt: DateTime!
+  vehicleImageUrl: String
+}
+
+enum BookingStatus {
+  CANCELLED
+  COMPLETED
+  CONFIRMED
+  IN_PROGRESS
+  PENDING
+}
+
+input CreateBookingDto {
+  batteryLevel: Int
+  carModel: String!
+  chargingTimeEstimate: String
+  comments: String
+  isEmergency: Boolean
+  kilometresLeft: Int
+  rechargeAddress: String!
+  reservationAt: String!
+  vehicleImageBase64: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Driver {
+  createdAt: DateTime!
+  driverProfile: DriverProfile
+  email: String!
+  firstName: String!
+  id: String!
+  is_superuser: Boolean!
+  lastName: String!
+  phoneNumber: String
+  profileImage: String
+  role: UserRole!
+  updatedAt: DateTime!
+}
+
+type DriverProfile {
+  createdAt: DateTime!
+  id: String!
+  isAvailable: Boolean!
+  plateNumber: String
+  truckName: String
+  updatedAt: DateTime!
+  userId: String!
+}
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createBooking(input: CreateBookingDto!): Booking!
+  login(input: LoginDto!): AuthResponse!
+  register(input: RegisterDto!): AuthResponse!
+  requestPasswordReset(input: PasswordResetRequestDto!): String!
+  resetPassword(input: ResetPasswordDto!): String!
+  updateBookingStatus(id: String!, input: UpdateBookingStatusDto!): Booking!
+  updatePassword(input: UpdatePasswordDto!): User!
+  updateProfile(input: UpdateProfileDto!): User!
+  verifyResetCode(input: VerifyResetCodeDto!): String!
+}
+
+input PasswordResetRequestDto {
+  email: String!
+}
+
+type PricingPlan {
+  createdAt: DateTime!
+  description: String!
+  features: [String!]!
+  id: String!
+  isActive: Boolean!
+  key: String!
+  name: String!
+  price: String!
+  priceLabel: String!
+  sortOrder: Int!
+  title: String!
+  updatedAt: DateTime!
+}
+
+type Query {
+  availableDrivers: [Driver!]!
+  bookingByInvoice(invoiceId: String!): Booking
+  bookingsList: [Booking!]!
+  me: User!
+  pricingPlans: [PricingPlan!]!
+  usersList: [User!]!
+}
+
+input RegisterDto {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  phoneNumber: String
+  profileImageBase64: String
+}
+
+input ResetPasswordDto {
+  code: String!
+  confirm_password: String!
+  email: String!
+  password: String!
+}
+
+input UpdateBookingStatusDto {
+  status: BookingStatus!
+}
+
+input UpdatePasswordDto {
+  newPassword: String!
+  oldPassword: String!
+}
+
+input UpdateProfileDto {
+  firstName: String
+  lastName: String
+  phoneNumber: String
+  profileImageBase64: String
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  firstName: String!
+  id: String!
+  is_superuser: Boolean!
+  lastName: String!
+  phoneNumber: String
+  profileImage: String
+  role: UserRole!
+  updatedAt: DateTime!
+}
+
+enum UserRole {
+  ADMIN
+  DRIVER
+  USER
+}
+
+input VerifyResetCodeDto {
+  code: String!
+  email: String!
+}
