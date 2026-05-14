@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import apiService from "../../api/apiServices";
+import { useMutation } from "@apollo/client/react";
+import { CREATE_BOOKING_MUTATION } from "../../api/queries";
 import BookForm from "../../components/booking/bookForm";
 import { fileToBase64 } from "../../utils/base64";
 
 const Emergency: React.FC = () => {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [createBookingMutation, { loading: isLoading }] = useMutation<any>(CREATE_BOOKING_MUTATION);
 
   const booking_type = "Emergency";
 
@@ -28,7 +29,6 @@ const Emergency: React.FC = () => {
     const scheduledDateAndTime = new Date(dateTimeString).toISOString();
 
     try {
-      setIsLoading(true);
       let vehicleImageBase64 = null;
       if (vehicle_image && typeof vehicle_image !== "string") {
         vehicleImageBase64 = await fileToBase64(vehicle_image);
@@ -45,30 +45,18 @@ const Emergency: React.FC = () => {
         isEmergency: true,
       };
 
-      const response: any = await apiService(
-        "/api/booking/create-booking/",
-        "POST",
-        payload
-      );
-      if (response) {
+      const { data } = await createBookingMutation({ variables: { input: payload } });
+      if (data?.createBooking) {
         navigate(
-          `/dashboard/emergency/checkout?booking_invoice_id=${response?.data?.booking?.invoice_id}`,
-          {
-            state: { bookingData: response.data },
-            replace: true,
-          }
+          `/dashboard/emergency/checkout?booking_invoice_id=${data.createBooking.invoiceId}`,
+          { state: { bookingData: data.createBooking }, replace: true }
         );
-
-        toast.success(response?.data?.message);
+        toast.success("Emergency booking created successfully");
       }
     } catch (error: any) {
-      if (error?.response?.data?.error) {
-        return toast.error(error?.response?.data?.error);
-      }
-      toast.error("Unknown error occurred");
+      const msg = error.graphQLErrors?.[0]?.message || "Unknown error occurred";
+      toast.error(msg);
       console.log("error message", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 

@@ -5,7 +5,8 @@ import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
-import apiService from "../../../api/apiServices";
+import { useMutation } from "@apollo/client/react";
+import { LOGIN_MUTATION } from "../../../api/queries";
 import { loginSuccess } from "../../../store/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import toast from "react-hot-toast";
@@ -16,7 +17,7 @@ const Login: React.FC = () => {
   const location = useLocation();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [loginError, setLoginError] = useState({ email: "", password: "" });
-  const [isLoading, setIsLoading] = useState(false);
+  const [loginMutation, { loading: isLoading }] = useMutation<any>(LOGIN_MUTATION);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setLoginData({
@@ -55,22 +56,17 @@ const Login: React.FC = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        setIsLoading(true);
-        const response: any = await apiService(
-          "/api/auth/token/",
-          "POST",
-          loginData
-        );
+        const { data } = await loginMutation({
+          variables: { input: loginData }
+        });
 
-        dispatch(loginSuccess(response.data));
+        dispatch(loginSuccess(data.login));
       } catch (error: any) {
-        if (error?.response?.data?.error) {
-          return toast.error(error?.response?.data?.error);
+        if (error.graphQLErrors?.length > 0) {
+          return toast.error(error.graphQLErrors[0].message);
         }
         toast.error("Unknown error occurred");
         console.log("error message", error);
-      } finally {
-        setIsLoading(false);
       }
     }
   };

@@ -3,29 +3,31 @@ import { brand, colors } from "@mobilcharge/ui";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Screen } from "../components/Screen";
-
-const features = [
-  ["plug", "CONVENIENT EV CHARGING", "Charge your electric vehicle anytime, anywhere with our on-demand service."],
-  ["calendar-alt", "USER-FRIENDLY SCHEDULING", "Easily schedule and manage your charging sessions with our intuitive web and mobile planner."],
-  ["bolt", "LEVEL 3 CHARGING - 80KW (MAX 220A)", "Get a fast charge for your vehicle with our high-speed mobile charging service."],
-  ["headset", "24/7 CUSTOMER SUPPORT", "Our customer support team is available to assist you with any questions."]
-];
+import { useTranslation } from "react-i18next";
 
 export function HomeScreen() {
+  const { t } = useTranslation();
+
+  const features = [
+    ["plug", t("CONVENIENT EV CHARGING"), t("Charge your electric vehicle anytime, anywhere with our on-demand service.")],
+    ["calendar-alt", t("USER-FRIENDLY SCHEDULING"), t("Easily schedule and manage your charging sessions with our intuitive web and mobile planner.")],
+    ["bolt", t("LEVEL 3 CHARGING - 80KW (MAX 220A)"), t("Get a fast charge for your vehicle with our high-speed mobile charging service.")],
+    ["headset", t("24/7 CUSTOMER SUPPORT"), t("Our customer support team is available to assist you with any questions.")]
+  ];
+
   return (
     <Screen>
       <View style={styles.hero}>
         <Text style={styles.brand}>{brand.name}</Text>
-        <Text style={styles.title}>Free Your EV. MTL Mobile Charging.</Text>
+        <Text style={styles.title}>{t("Free Your EV. MTL Mobile Charging.")}</Text>
         <Text style={styles.copy}>
-          Say goodbye to the hassles of EV charging with MobilCharge, available throughout Montreal.
-          Whether you're at the office or at home, we'll come to you, providing a stress-free charging experience.
+          {t("Say goodbye to the hassles of EV charging with MobilCharge, available throughout Montreal. Whether you're at the office or at home, we'll come to you, providing a stress-free charging experience.")}
         </Text>
       </View>
       <View style={styles.grid}>
         {features.map(([icon, title, text]) => (
           <View key={title} style={styles.card}>
-            <FontAwesome5 name={icon} size={26} color={colors.primary} />
+            <FontAwesome5 name={icon as any} size={26} color={colors.primary} />
             <Text style={styles.cardTitle}>{title}</Text>
             <Text style={styles.cardText}>{text}</Text>
           </View>

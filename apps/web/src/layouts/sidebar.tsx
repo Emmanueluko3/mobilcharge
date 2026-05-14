@@ -18,7 +18,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { logout } from "../store/features/auth/authSlice";
-import apiService from "../api/apiServices";
 import Swal from "sweetalert2";
 // import { faRocketchat } from "@fortawesome/free-brands-svg-icons";
 

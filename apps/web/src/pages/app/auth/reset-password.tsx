@@ -5,7 +5,8 @@ import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
-import apiService from "../../../api/apiServices";
+import { useMutation } from "@apollo/client/react";
+import { RESET_PASSWORD_MUTATION } from "../../../api/queries";
 import { useAppSelector } from "../../../store/hooks";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
@@ -23,7 +24,7 @@ const ResetPassword: React.FC = () => {
     password: "",
     confirm_password: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [resetMutation, { loading: isLoading }] = useMutation<any>(RESET_PASSWORD_MUTATION);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setResetPasswordData({
@@ -79,16 +80,13 @@ const ResetPassword: React.FC = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        setIsLoading(true);
-        const response: any = await apiService(
-          "/api/auth/reset-password/",
-          "POST",
-          { ...resetData, ...resetPasswordData }
-        );
-        if (response) {
+        const { data } = await resetMutation({
+          variables: { input: { ...resetData, ...resetPasswordData } }
+        });
+        if (data.resetPassword) {
           Swal.fire({
             title: "Success!",
-            text: response?.data?.detail,
+            text: data.resetPassword,
             icon: "success",
           });
 
@@ -97,13 +95,11 @@ const ResetPassword: React.FC = () => {
           });
         }
       } catch (error: any) {
-        if (error?.response?.data?.error) {
-          return toast.error(error?.response?.data?.error);
+        if (error.graphQLErrors?.length > 0) {
+          return toast.error(error.graphQLErrors[0].message);
         }
         toast.error("Unknown error occurred");
         console.log("error message", error);
-      } finally {
-        setIsLoading(false);
       }
     }
   };

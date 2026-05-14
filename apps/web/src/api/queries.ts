@@ -116,13 +116,41 @@ export const GET_BOOKINGS = gql`
       invoiceId
       status
       rechargeAddress
+      originLat
+      originLng
+      destLat
+      destLng
       reservationAt
       carModel
       isEmergency
+      estimatedPrice
+      distance
       createdAt
       customer {
         firstName
         lastName
+      }
+      vehicle {
+        brand
+        model
+      }
+    }
+  }
+`;
+
+export const GET_BOOKING_BY_INVOICE = gql`
+  query BookingByInvoice($invoiceId: String!) {
+    bookingByInvoice(invoiceId: $invoiceId) {
+      id
+      invoiceId
+      status
+      booking_type: isEmergency
+      paid: status
+      rechargeAddress
+      vehicle_image: vehicleImageBase64
+      driver {
+        first_name: firstName
+        last_name: lastName
       }
     }
   }
@@ -138,6 +166,16 @@ export const CREATE_BOOKING_MUTATION = gql`
       reservationAt
       carModel
       isEmergency
+      estimatedPrice
+    }
+  }
+`;
+
+export const UPDATE_BOOKING_STATUS_MUTATION = gql`
+  mutation UpdateBookingStatus($id: String!, $input: UpdateBookingStatusDto!) {
+    updateBookingStatus(id: $id, input: $input) {
+      id
+      status
     }
   }
 `;
@@ -149,6 +187,8 @@ export const GET_AVAILABLE_DRIVERS = gql`
       isAvailable
       truckName
       plateNumber
+      latitude
+      longitude
       user {
         id
         firstName
@@ -156,6 +196,38 @@ export const GET_AVAILABLE_DRIVERS = gql`
         phoneNumber
         profileImage
       }
+    }
+  }
+`;
+
+export const GET_VEHICLES = gql`
+  query MyVehicles {
+    myVehicles {
+      id
+      brand
+      model
+      year
+      batteryCapacity
+      portType
+      plateNumber
+    }
+  }
+`;
+
+export const CREATE_VEHICLE_MUTATION = gql`
+  mutation CreateVehicle($input: CreateVehicleDto!) {
+    createVehicle(input: $input) {
+      id
+      brand
+      model
+    }
+  }
+`;
+
+export const REMOVE_VEHICLE_MUTATION = gql`
+  mutation RemoveVehicle($id: ID!) {
+    removeVehicle(id: $id) {
+      id
     }
   }
 `;

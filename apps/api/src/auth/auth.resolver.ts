@@ -9,7 +9,7 @@ import { AuthResponse } from "./auth.entity";
 import { User } from "../users/user.entity";
 import { GqlAuthGuard } from "./gql-auth.guard";
 import { CurrentUser } from "./current-user.decorator";
-import { JwtPayload } from "./jwt.strategy";
+import { AuthUser } from "@mobilcharge/types";
 
 @Resolver()
 export class AuthResolver {
@@ -48,7 +48,7 @@ export class AuthResolver {
 
   @UseGuards(GqlAuthGuard)
   @Query(() => User)
-  me(@CurrentUser() payload: JwtPayload) {
+  me(@CurrentUser() payload: AuthUser) {
     // Fetch the full database record so all fields — including role — are populated.
     // This prevents the `is_superuser` resolver from receiving a bare JWT payload object.
     return this.users.findById(payload.id);

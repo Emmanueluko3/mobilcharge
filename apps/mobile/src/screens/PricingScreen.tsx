@@ -2,25 +2,28 @@ import { colors } from "@mobilcharge/ui";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Screen } from "../components/Screen";
-
-const plans = [
-  ["VISITOR", "Electric vehicle owners seeking a quick charging solution"],
-  ["Membership", "Electric vehicle owners seeking a recurring charging solution"],
-  ["Tailored Plan", "Hotels, event centers, fleets, dealerships, businesses, events, etc."]
-];
+import { useTranslation } from "react-i18next";
 
 export function PricingScreen() {
+  const { t } = useTranslation();
+  
+  const plans = [
+    [t("VISITOR"), t("Electric vehicle owners seeking a quick charging solution")],
+    [t("Membership"), t("Electric vehicle owners seeking a recurring charging solution")],
+    [t("Tailored Plan"), t("Hotels, event centers, fleets, dealerships, businesses, events, etc.")]
+  ];
+
   return (
     <Screen>
       <View style={styles.header}>
-        <Text style={styles.title}>Choose the plan that fits your charging needs</Text>
+        <Text style={styles.title}>{t("Choose the plan that fits your charging needs")}</Text>
       </View>
       <View style={styles.list}>
         {plans.map(([name, description]) => (
           <View key={name} style={styles.card}>
             <Text style={styles.plan}>{name}</Text>
             <Text style={styles.description}>{description}</Text>
-            <Text style={styles.link}>JOIN US</Text>
+            <Text style={styles.link}>{t("JOIN US")}</Text>
           </View>
         ))}
       </View>

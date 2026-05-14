@@ -2,8 +2,9 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import apiService from "../../api/apiServices";
-import useFetch from "../../components/hooks/useFetch";
+import { useQuery } from "@apollo/client/react";
+import { GET_PRICING_PLANS } from "../../api/queries";
+import { globalAxios } from "../../api/globalAxios";
 import Swal from "sweetalert2";
 import { CircularProgress } from "@mui/joy";
 import Spinner from "../../components/common/spinner";
@@ -14,23 +15,18 @@ const Pricing: React.FC = () => {
   const [isSubscribeLoading, setIsSubscribeLoading] = useState(false);
   const [isUnsubscribeLoading, setIsUnsubscribeLoading] = useState(false);
 
-  const {
-    data: pricingPlans,
-    isLoading,
-    refetch,
-  } = useFetch(`/api/payment/pricing-plans/`);
+  const { data: plansData, loading: isLoading, refetch } = useQuery<any>(GET_PRICING_PLANS);
+  const pricingPlans = plansData?.pricingPlans;
 
   const handleSubcription = async (planId: string) => {
     try {
       setIsSubscribeLoading(true);
 
-      const response: any = await apiService(
-        "/api/payment/stripe/create-subscription/",
-        "POST",
-        {
-          plan_id: planId,
-        }
-      );
+      const response: any = await globalAxios({
+        url: "/api/payment/stripe/create-subscription/",
+        method: "POST",
+        data: { plan_id: planId }
+      });
       if (response.data) {
         window.location.href = response?.data?.checkout_url;
       }
@@ -68,10 +64,10 @@ const Pricing: React.FC = () => {
       try {
         setIsUnsubscribeLoading(true);
 
-        const response: any = await apiService(
-          "/api/payment/cancel-subscription/",
-          "POST"
-        );
+        const response: any = await globalAxios({
+          url: "/api/payment/cancel-subscription/",
+          method: "POST",
+        });
         if (response) {
           Swal.fire({
             title: "Success!",

@@ -5,7 +5,8 @@ import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
-import apiService from "../../../api/apiServices";
+import { useMutation } from "@apollo/client/react";
+import { REQUEST_PASSWORD_RESET_MUTATION, VERIFY_RESET_CODE_MUTATION } from "../../../api/queries";
 import { useAppSelector } from "../../../store/hooks";
 import toast from "react-hot-toast";
 import OTPInput from "../../../components/common/otpInput";
@@ -17,7 +18,9 @@ const ForgotPassowrd: React.FC = () => {
   const navigate = useNavigate();
   const [forgotPasswordData, setForgotPasswordData] = useState({ email: "" });
   const [loginError, setLoginError] = useState({ email: "" });
-  const [isLoading, setIsLoading] = useState(false);
+  const [requestResetMutation, { loading: isRequesting }] = useMutation<any>(REQUEST_PASSWORD_RESET_MUTATION);
+  const [verifyCodeMutation, { loading: isVerifying }] = useMutation<any>(VERIFY_RESET_CODE_MUTATION);
+  const isLoading = isRequesting || isVerifying;
   const [nextStep, setNextStep] = useState(0);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -52,13 +55,10 @@ const ForgotPassowrd: React.FC = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        setIsLoading(true);
-        const response: any = await apiService(
-          "/api/auth/password-reset/request/",
-          "POST",
-          forgotPasswordData
-        );
-        if (response) {
+        const { data } = await requestResetMutation({
+          variables: { input: forgotPasswordData }
+        });
+        if (data.requestPasswordReset) {
           Swal.fire({
             title: "Success!",
             text: "A reset password OTP has been sent to your email. Please check your inbox.",
@@ -68,13 +68,11 @@ const ForgotPassowrd: React.FC = () => {
           setCountdown(30);
         }
       } catch (error: any) {
-        if (error?.response?.data?.error) {
-          return toast.error(error?.response?.data?.error);
+        if (error.graphQLErrors?.length > 0) {
+          return toast.error(error.graphQLErrors[0].message);
         }
         toast.error("Unknown error occurred");
         console.log("error message", error);
-      } finally {
-        setIsLoading(false);
       }
     }
   };
@@ -83,13 +81,10 @@ const ForgotPassowrd: React.FC = () => {
     const resetData = { email: forgotPasswordData.email, code: code };
     if (validateForm()) {
       try {
-        setIsLoading(true);
-        const response: any = await apiService(
-          "/api/auth/verify-reset-code/",
-          "POST",
-          resetData
-        );
-        if (response) {
+        const { data } = await verifyCodeMutation({
+          variables: { input: resetData }
+        });
+        if (data.verifyResetCode) {
           Swal.fire({
             title: "Success!",
             text: "The OTP code is valid. You may now proceed to reset your password.",
@@ -102,8 +97,7 @@ const ForgotPassowrd: React.FC = () => {
         }
       } catch (error: any) {
         const errorMessage =
-          error?.response?.data?.message ||
-          error?.response?.data?.error ||
+          error.graphQLErrors?.[0]?.message ||
           "Something went wrong. Please try again.";
         Swal.fire({
           title: "Error!",
@@ -111,8 +105,6 @@ const ForgotPassowrd: React.FC = () => {
           icon: "error",
         });
         console.log("error message", error);
-      } finally {
-        setIsLoading(false);
       }
     }
   };

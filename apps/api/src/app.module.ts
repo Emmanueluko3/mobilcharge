@@ -12,6 +12,8 @@ import { HealthModule } from "./health/health.module";
 import { PricingModule } from "./pricing/pricing.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { UsersModule } from "./users/users.module";
+import { RealtimeModule } from "./realtime/realtime.module";
+import { VehiclesModule } from "./vehicles/vehicles.module";
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { UsersModule } from "./users/users.module";
     BookingsModule,
     DriversModule,
     PricingModule,
+    VehiclesModule,
+    RealtimeModule,
     HealthModule
   ]
 })

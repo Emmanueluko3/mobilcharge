@@ -3,7 +3,7 @@ import { BadRequestException, UseGuards } from "@nestjs/common";
 import * as bcrypt from "bcryptjs";
 import { GqlAuthGuard } from "../auth/gql-auth.guard";
 import { CurrentUser } from "../auth/current-user.decorator";
-import { JwtPayload } from "../auth/jwt.strategy";
+import { AuthUser } from "@mobilcharge/types";
 import { UsersService } from "./users.service";
 import { User } from "./user.entity";
 import { UserRole } from "@prisma/client";
@@ -26,7 +26,7 @@ export class UsersResolver {
    */
   @Mutation(() => User)
   updateProfile(
-    @CurrentUser() payload: JwtPayload,
+    @CurrentUser() payload: AuthUser,
     @Args("input") dto: UpdateProfileDto,
   ) {
     return this.users.updateProfile(payload.id, dto);
@@ -37,7 +37,7 @@ export class UsersResolver {
    */
   @Mutation(() => User)
   async updatePassword(
-    @CurrentUser() payload: JwtPayload,
+    @CurrentUser() payload: AuthUser,
     @Args("input") dto: UpdatePasswordDto,
   ) {
     const user = await this.users.findById(payload.id);

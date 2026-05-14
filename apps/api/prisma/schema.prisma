@@ -15,8 +15,9 @@ enum UserRole {
 
 enum BookingStatus {
   PENDING
-  CONFIRMED
-  IN_PROGRESS
+  ACCEPTED
+  EN_ROUTE
+  CHARGING
   COMPLETED
   CANCELLED
 }
@@ -33,20 +34,39 @@ model User {
   bookings      Booking[]      @relation("CustomerBookings")
   driverJobs    Booking[]      @relation("DriverBookings")
   driverProfile DriverProfile?
+  vehicles      Vehicle[]
   otps          Otp[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
 
 model DriverProfile {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  truckName   String?
-  plateNumber String?
-  isAvailable Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  truckName           String?
+  plateNumber         String?
+  isAvailable         Boolean  @default(true)
+  latitude            Float?
+  longitude           Float?
+  lastLocationUpdate  DateTime?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model Vehicle {
+  id              String   @id @default(cuid())
+  brand           String
+  model           String
+  year            Int
+  batteryCapacity Float
+  portType        String
+  plateNumber     String?
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookings        Booking[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Booking {
@@ -59,11 +79,22 @@ model Booking {
   status               BookingStatus @default(PENDING)
   isEmergency          Boolean       @default(false)
   rechargeAddress      String
+  originLat            Float?
+  originLng            Float?
+  destLat              Float?
+  destLng              Float?
   reservationAt        DateTime
   carModel             String
+  vehicleId            String?
+  vehicle              Vehicle?      @relation(fields: [vehicleId], references: [id])
   batteryLevel         Int?
+  batteryTarget        Int?
   kilometresLeft       Int?
   chargingTimeEstimate String?
+  estimatedPrice       Float?
+  actualPrice          Float?
+  distance             Float?
+  duration             Float?
   comments             String?
   vehicleImageUrl      String?
   createdAt            DateTime      @default(now())

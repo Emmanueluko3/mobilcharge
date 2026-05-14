@@ -9,44 +9,71 @@ type AuthResponse {
 }
 
 type Booking {
+  actualPrice: Float
   batteryLevel: Int
+  batteryTarget: Int
   carModel: String!
   chargingTimeEstimate: String
   comments: String
   createdAt: DateTime!
   customer: User!
   customerId: String!
+  destLat: Float
+  destLng: Float
+  distance: Float
   driver: User
   driverId: String
-  id: String!
+  duration: Float
+  estimatedPrice: Float
+  id: ID!
   invoiceId: String!
   isEmergency: Boolean!
   kilometresLeft: Int
+  originLat: Float
+  originLng: Float
   rechargeAddress: String!
   reservationAt: DateTime!
   status: BookingStatus!
   updatedAt: DateTime!
+  vehicle: Vehicle
+  vehicleId: String
   vehicleImageUrl: String
 }
 
 enum BookingStatus {
+  ACCEPTED
   CANCELLED
+  CHARGING
   COMPLETED
-  CONFIRMED
-  IN_PROGRESS
+  EN_ROUTE
   PENDING
 }
 
 input CreateBookingDto {
   batteryLevel: Int
+  batteryTarget: Int
   carModel: String!
   chargingTimeEstimate: String
   comments: String
+  destLat: Float
+  destLng: Float
   isEmergency: Boolean
   kilometresLeft: Int
+  originLat: Float!
+  originLng: Float!
   rechargeAddress: String!
   reservationAt: String!
+  vehicleId: String
   vehicleImageBase64: String
+}
+
+input CreateVehicleDto {
+  batteryCapacity: Float!
+  brand: String!
+  model: String!
+  plateNumber: String
+  portType: String!
+  year: Int!
 }
 
 """
@@ -85,8 +112,10 @@ input LoginDto {
 
 type Mutation {
   createBooking(input: CreateBookingDto!): Booking!
+  createVehicle(input: CreateVehicleDto!): Vehicle!
   login(input: LoginDto!): AuthResponse!
   register(input: RegisterDto!): AuthResponse!
+  removeVehicle(id: ID!): Vehicle!
   requestPasswordReset(input: PasswordResetRequestDto!): String!
   resetPassword(input: ResetPasswordDto!): String!
   updateBookingStatus(id: String!, input: UpdateBookingStatusDto!): Booking!
@@ -119,8 +148,10 @@ type Query {
   bookingByInvoice(invoiceId: String!): Booking
   bookingsList: [Booking!]!
   me: User!
+  myVehicles: [Vehicle!]!
   pricingPlans: [PricingPlan!]!
   usersList: [User!]!
+  vehicle(id: ID!): Vehicle!
 }
 
 input RegisterDto {
@@ -172,6 +203,19 @@ enum UserRole {
   ADMIN
   DRIVER
   USER
+}
+
+type Vehicle {
+  batteryCapacity: Float!
+  brand: String!
+  createdAt: DateTime!
+  id: ID!
+  model: String!
+  plateNumber: String
+  portType: String!
+  updatedAt: DateTime!
+  userId: String!
+  year: Int!
 }
 
 input VerifyResetCodeDto {

@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../../../components/common/button";
-import useFetch from "../../../components/hooks/useFetch";
-import apiService from "../../../api/apiServices";
+import { useQuery, useMutation } from "@apollo/client/react";
+import { GET_BOOKING_BY_INVOICE, UPDATE_BOOKING_STATUS_MUTATION } from "../../../api/queries";
 import Swal from "sweetalert2";
 import DetailsTemplate from "../../../templates/details";
 
@@ -16,14 +16,19 @@ const RequestDetails: React.FC = () => {
   const { invoice_id } = useParams();
 
   const {
-    data: booking,
-    isLoading,
+    data: bookingData,
+    loading: isLoading,
     error,
     refetch,
-  } = useFetch(`/api/booking/${invoice_id}/`);
+  } = useQuery<any>(GET_BOOKING_BY_INVOICE, {
+    variables: { invoiceId: invoice_id },
+    skip: !invoice_id
+  });
+
+  const booking = bookingData?.bookingByInvoice;
 
   const [status, setStatus] = useState<null | string>(null);
-  const [loading, setLoading] = useState(false);
+  const [updateStatusMutation, { loading }] = useMutation<any>(UPDATE_BOOKING_STATUS_MUTATION);
 
   const updateBooking = async () => {
     let confirmationMessage = "";
@@ -59,28 +64,26 @@ const RequestDetails: React.FC = () => {
     });
     if (result.isConfirmed) {
       try {
-        setLoading(true);
-        const response: any = await apiService(
-          `/api/booking/update-booking-status/${booking?.invoice_id}/`,
-          "PATCH",
-          {
-            status: status,
+        const { data } = await updateStatusMutation({
+          variables: {
+            id: booking?.id,
+            input: { status }
           }
-        );
+        });
 
-        if (response.data) {
+        if (data?.updateBookingStatus) {
           Swal.fire({
             title: "Success!",
-            text: response?.data?.message,
+            text: "Request updated successfully",
             icon: "success",
           });
           refetch();
         }
       } catch (error: any) {
-        if (error?.response?.data?.error) {
+        if (error.graphQLErrors?.length > 0) {
           return Swal.fire({
             title: t("Error!"),
-            text: error?.response?.data?.error,
+            text: error.graphQLErrors[0].message,
             icon: "error",
           });
         }
@@ -90,8 +93,6 @@ const RequestDetails: React.FC = () => {
           icon: "error",
         });
         console.log("error message", error);
-      } finally {
-        setLoading(false);
       }
     }
   };

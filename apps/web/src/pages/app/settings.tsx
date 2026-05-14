@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../../components/common/button";
 import { AppInput } from "../../components/common/input";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import apiService from "../../api/apiServices";
+import { useMutation } from "@apollo/client/react";
+import { UPDATE_PROFILE_MUTATION, UPDATE_PASSWORD_MUTATION } from "../../api/queries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { getUserInfo } from "../../store/features/auth/authSlice";
@@ -29,6 +30,8 @@ const Settings: React.FC = () => {
     confirm_new_password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [updateProfile] = useMutation<any>(UPDATE_PROFILE_MUTATION);
+  const [updatePassword] = useMutation<any>(UPDATE_PASSWORD_MUTATION);
 
   useEffect(() => {
     if (user) {
@@ -76,27 +79,15 @@ const Settings: React.FC = () => {
           profileImageBase64,
         };
 
-        const response: any = await apiService(
-          "/api/auth/update-profile/",
-          "PATCH",
-          payload
-        );
+        await updateProfile({ variables: { input: payload } });
 
         if (new_password || old_password) {
           if (!old_password || !new_password || new_password !== confirm_new_password) {
             throw new Error("Invalid password change input");
           }
-          await apiService("/api/auth/update-password/", "PATCH", {
-            oldPassword: old_password,
-            newPassword: new_password,
-          });
+          await updatePassword({ variables: { input: { oldPassword: old_password, newPassword: new_password } } });
         }
-        Swal.fire({
-          title: "Success!",
-          text: response?.data?.success,
-          icon: "success",
-        });
-
+        Swal.fire({ title: "Success!", text: "Profile updated successfully.", icon: "success" });
         dispatch(getUserInfo());
       } catch (error: any) {
         console.error(error);

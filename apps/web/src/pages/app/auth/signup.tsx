@@ -5,7 +5,8 @@ import Logo from "../../../assets/images/logo.png";
 import { Button } from "../../../components/common/button";
 import { InputIcon } from "../../../components/common/input";
 import { useTranslation } from "react-i18next";
-import apiService from "../../../api/apiServices";
+import { useMutation } from "@apollo/client/react";
+import { REGISTER_MUTATION } from "../../../api/queries";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginSuccess } from "../../../store/features/auth/authSlice";
 import toast from "react-hot-toast";
@@ -37,7 +38,7 @@ const Signup: React.FC = () => {
     confirm_password: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [registerMutation, { loading: isLoading }] = useMutation<any>(REGISTER_MUTATION);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
@@ -107,7 +108,6 @@ const Signup: React.FC = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        setIsLoading(true);
         const {
           profile_image,
           first_name,
@@ -115,7 +115,6 @@ const Signup: React.FC = () => {
           phone,
           email,
           password,
-          confirm_password,
         } = signupData;
         let profileImageBase64 = null;
         if (profile_image) {
@@ -131,22 +130,18 @@ const Signup: React.FC = () => {
           profileImageBase64,
         };
 
-        const response: any = await apiService(
-          "/api/auth/signup/",
-          "POST",
-          payload
-        );
+        const { data } = await registerMutation({
+          variables: { input: payload }
+        });
 
-        dispatch(loginSuccess(response.data));
-        toast.success(response?.data?.success);
+        dispatch(loginSuccess(data.register));
+        toast.success("Account created successfully");
       } catch (error: any) {
-        if (error?.response?.data?.error) {
-          return toast.error(error?.response?.data?.error);
+        if (error.graphQLErrors?.length > 0) {
+          return toast.error(error.graphQLErrors[0].message);
         }
         toast.error("Unknown error occurred");
         console.log("error message", error);
-      } finally {
-        setIsLoading(false);
       }
     }
   };

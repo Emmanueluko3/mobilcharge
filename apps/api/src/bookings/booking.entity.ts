@@ -1,6 +1,7 @@
-import { Field, Int, ObjectType, registerEnumType } from "@nestjs/graphql";
+import { Field, Int, Float, ObjectType, registerEnumType, ID } from "@nestjs/graphql";
 import { BookingStatus } from "@prisma/client";
 import { User } from "../users/user.entity";
+import { Vehicle } from "../vehicles/vehicle.entity";
 
 registerEnumType(BookingStatus, {
   name: "BookingStatus",
@@ -8,7 +9,7 @@ registerEnumType(BookingStatus, {
 
 @ObjectType()
 export class Booking {
-  @Field()
+  @Field(() => ID)
   id!: string;
 
   @Field()
@@ -35,20 +36,53 @@ export class Booking {
   @Field()
   rechargeAddress!: string;
 
+  @Field(() => Float, { nullable: true })
+  originLat?: number;
+
+  @Field(() => Float, { nullable: true })
+  originLng?: number;
+
+  @Field(() => Float, { nullable: true })
+  destLat?: number;
+
+  @Field(() => Float, { nullable: true })
+  destLng?: number;
+
   @Field()
   reservationAt!: Date;
 
   @Field()
   carModel!: string;
 
+  @Field({ nullable: true })
+  vehicleId?: string;
+
+  @Field(() => Vehicle, { nullable: true })
+  vehicle?: Vehicle;
+
   @Field(() => Int, { nullable: true })
   batteryLevel?: number;
+
+  @Field(() => Int, { nullable: true })
+  batteryTarget?: number;
 
   @Field(() => Int, { nullable: true })
   kilometresLeft?: number;
 
   @Field({ nullable: true })
   chargingTimeEstimate?: string;
+
+  @Field(() => Float, { nullable: true })
+  estimatedPrice?: number;
+
+  @Field(() => Float, { nullable: true })
+  actualPrice?: number;
+
+  @Field(() => Float, { nullable: true })
+  distance?: number;
+
+  @Field(() => Float, { nullable: true })
+  duration?: number;
 
   @Field({ nullable: true })
   comments?: string;

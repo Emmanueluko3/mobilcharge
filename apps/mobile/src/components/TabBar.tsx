@@ -2,6 +2,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { colors } from "@mobilcharge/ui";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
 
 export type AppTab = "home" | "booking" | "pricing";
 
@@ -10,13 +11,15 @@ interface TabBarProps {
   onChange: (tab: AppTab) => void;
 }
 
-const tabs: Array<{ key: AppTab; label: string; icon: string }> = [
-  { key: "home", label: "Home", icon: "home" },
-  { key: "booking", label: "Booking", icon: "calendar-alt" },
-  { key: "pricing", label: "Pricing", icon: "bolt" }
-];
-
 export function TabBar({ activeTab, onChange }: TabBarProps) {
+  const { t } = useTranslation();
+  
+  const tabs: Array<{ key: AppTab; label: string; icon: string }> = [
+    { key: "home", label: t("Home"), icon: "home" },
+    { key: "booking", label: t("Booking"), icon: "calendar-alt" },
+    { key: "pricing", label: t("Pricing"), icon: "bolt" }
+  ];
+
   return (
     <View style={styles.bar}>
       {tabs.map((tab) => {

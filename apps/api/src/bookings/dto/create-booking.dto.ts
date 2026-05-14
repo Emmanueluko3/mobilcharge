@@ -1,4 +1,4 @@
-import { Field, InputType, Int } from "@nestjs/graphql";
+import { Field, InputType, Int, Float } from "@nestjs/graphql";
 import {
   IsBoolean,
   IsDateString,
@@ -15,6 +15,24 @@ export class CreateBookingDto {
   @IsString()
   rechargeAddress!: string;
 
+  @Field(() => Float)
+  @IsNumber()
+  originLat!: number;
+
+  @Field(() => Float)
+  @IsNumber()
+  originLng!: number;
+
+  @Field(() => Float, { nullable: true })
+  @IsOptional()
+  @IsNumber()
+  destLat?: number;
+
+  @Field(() => Float, { nullable: true })
+  @IsOptional()
+  @IsNumber()
+  destLng?: number;
+
   @Field()
   @IsDateString()
   reservationAt!: string;
@@ -23,12 +41,24 @@ export class CreateBookingDto {
   @IsString()
   carModel!: string;
 
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  vehicleId?: string;
+
   @Field(() => Int, { nullable: true })
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
   batteryLevel?: number;
+
+  @Field(() => Int, { nullable: true })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  batteryTarget?: number;
 
   @Field(() => Int, { nullable: true })
   @IsOptional()

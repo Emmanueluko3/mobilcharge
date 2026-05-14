@@ -4,8 +4,9 @@ import { useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/common/button";
 import { useEffect, useState } from "react";
-import apiService from "../../../api/apiServices";
-import useFetch from "../../../components/hooks/useFetch";
+import { globalAxios } from "../../../api/globalAxios";
+import { useQuery } from "@apollo/client/react";
+import { GET_BOOKING_BY_INVOICE } from "../../../api/queries";
 import Swal from "sweetalert2";
 import DetailsTemplate from "../../../templates/details";
 
@@ -18,10 +19,15 @@ const CheckoutBooking: React.FC = () => {
   const { message = "" } = location?.state?.bookingData || {};
 
   const {
-    data: booking,
-    isLoading: isBookingLoading,
+    data: bookingData,
+    loading: isBookingLoading,
     error,
-  } = useFetch(`/api/booking/${invoiceId}/`);
+  } = useQuery<any>(GET_BOOKING_BY_INVOICE, {
+    variables: { invoiceId },
+    skip: !invoiceId
+  });
+  
+  const booking = bookingData?.bookingByInvoice;
 
   const [drivers_note, setDrivers_note] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -35,15 +41,15 @@ const CheckoutBooking: React.FC = () => {
   const handlePayment = async () => {
     try {
       setIsLoading(true);
-      const response: any = await apiService(
-        "/api/payment/stripe/create-checkout-session/",
-        "POST",
-        {
+      const response: any = await globalAxios({
+        url: "/api/payment/stripe/create-checkout-session/",
+        method: "POST",
+        data: {
           plan_id: "2",
           booking_id: booking?.id,
           drivers_note: drivers_note,
         }
-      );
+      });
 
       if (response.data) {
         window.location.href = response?.data?.checkout_url;

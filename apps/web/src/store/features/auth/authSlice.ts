@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import apiService from "../../../api/apiServices";
+import { apolloClient } from "../../../api/apolloClient";
+import { GET_USER_INFO } from "../../../api/queries";
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -17,10 +18,16 @@ export const getUserInfo = createAsyncThunk(
   "auth/getUserInfo",
   async (data, { rejectWithValue }) => {
     try {
-      const response: any = await apiService("api/auth/get-user-info/", "GET");
-      return response.data;
-    } catch (err: any) {
-      return rejectWithValue(err.response.data);
+      const { data } = await apolloClient.query<any>({
+        query: GET_USER_INFO,
+        fetchPolicy: "network-only"
+      });
+      return data.me;
+    } catch (error: any) {
+      if (error.graphQLErrors?.length > 0) {
+        return rejectWithValue({ error: error.graphQLErrors[0].message });
+      }
+      return rejectWithValue({ error: error.message });
     }
   }
 );

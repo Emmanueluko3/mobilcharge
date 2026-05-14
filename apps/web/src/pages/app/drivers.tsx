@@ -1,31 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import apiService from "../../api/apiServices";
+import { useQuery } from "@apollo/client/react";
+import { GET_AVAILABLE_DRIVERS } from "../../api/queries";
 import { Skeleton } from "@mui/joy";
 
 const Drivers: React.FC = () => {
   const { t } = useTranslation();
-  const [drivers, setDrivers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchedDrivers = async () => {
-    try {
-      setIsLoading(true);
-      const response: any = await apiService("/api/driver/get-drivers/", "GET");
-      if (response) {
-        setDrivers(response?.data);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchedDrivers();
-  }, []);
+  const { data, loading: isLoading } = useQuery<any>(GET_AVAILABLE_DRIVERS, { fetchPolicy: "network-only" });
+  const drivers = data?.availableDrivers ?? [];
 
   return (
     <div className="w-full h-screen">
@@ -52,7 +35,7 @@ const Drivers: React.FC = () => {
           ) : drivers?.filter((item: any) => item?.user?.is_active === true) ? (
             drivers
               ?.filter((item: any) => item?.user?.is_active === true)
-              .map((item: any, index) => (
+              .map((item: any, index: number) => (
                 <div
                   key={index}
                   className="flex justify-between items-center bg-white rounded-lg p-4"
@@ -106,7 +89,7 @@ const Drivers: React.FC = () => {
               </div>
             </div>
           ) : drivers?.length > 0 ? (
-            drivers?.map((item: any, index) => (
+            drivers?.map((item: any, index: number) => (
               <div
                 key={index}
                 className="flex justify-between items-center bg-white rounded-lg p-4"

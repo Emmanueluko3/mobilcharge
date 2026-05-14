@@ -1,4 +1,4 @@
-export type UserRole = "user" | "admin" | "driver";
+export type UserRole = "USER" | "ADMIN" | "DRIVER";
 
 export interface AuthUser {
   id: string;
@@ -17,39 +17,69 @@ export interface AuthTokens {
 
 export type BookingStatus =
   | "PENDING"
-  | "CONFIRMED"
-  | "IN_PROGRESS"
+  | "ACCEPTED"
+  | "EN_ROUTE"
+  | "CHARGING"
   | "COMPLETED"
   | "CANCELLED";
 
-export interface VehicleDetails {
-  make?: string;
+export interface Vehicle {
+  id: string;
+  brand: string;
   model: string;
-  batteryLevel?: number;
-  kilometresLeft?: number;
-  imageUrl?: string;
+  year: number;
+  batteryCapacity: number;
+  portType: string;
+  plateNumber?: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface BookingRequest {
   id: string;
   invoiceId: string;
   customerId: string;
+  customer?: AuthUser;
   driverId?: string;
+  driver?: AuthUser;
   status: BookingStatus;
   isEmergency: boolean;
   rechargeAddress: string;
+  originLat?: number;
+  originLng?: number;
+  destLat?: number;
+  destLng?: number;
   reservationAt: string;
+  carModel: string;
+  vehicleId?: string;
+  vehicle?: Vehicle;
+  batteryLevel?: number;
+  batteryTarget?: number;
+  kilometresLeft?: number;
   chargingTimeEstimate?: string;
+  estimatedPrice?: number;
+  actualPrice?: number;
+  distance?: number;
+  duration?: number;
   comments?: string;
-  vehicle: VehicleDetails;
+  vehicleImageUrl?: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface PricingPlan {
   id: string;
-  name: "VISITOR" | "MEMBERSHIP" | "TAILORED";
+  key: string;
+  name: string;
   description: string;
   features: string[];
   priceLabel: string;
+}
+
+export interface DriverLocation {
+  driverId: string;
+  latitude: number;
+  longitude: number;
+  heading?: number;
 }
